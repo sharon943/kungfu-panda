@@ -1,0 +1,64 @@
+<!--pages/coupon/coupon.wxml-->
+<view class="pClass" style='background: #f2f2f2;'>
+  <block wx:if = "{{couponPro.length > 0}}">
+  <scroll-view class="scroll" scroll-y="true">
+    <block wx:for="{{couponPro}}">
+      <view class="coupon">
+        <view class="content">
+          <view class="price">
+            <text class="cp"><text style='font-size: 25px;'>¥</text>{{item.gifts}}</text>
+            <text class="fullCut">{{item.constraint}}</text>
+            <view style="clear:both;"></view>
+          </view>
+          <view class="nameView">
+            <text class="name">{{item.name}}</text>
+            <block wx:if="{{item.nextDay > 0}}">
+              <text class="date">还有{{item.nextDay}}天到期</text>
+            </block>
+            <block wx:else>
+              <text class="date">已过期</text>
+            </block>
+          </view>
+          <block wx:if="{{item.state == 1 || item.status == 1}}">
+            <image class="rightTopImage" src='../../images/h.png' mode='widthFix'></image>
+          </block>
+          <block wx:if = "{{item.state == 1 || item.status == 1}}">
+          <view class="go_user" hover-class='go_user_' bindtap='btn_go_user' data-item = "{{item}}">去使用</view>
+          </block>
+          <block wx:else>
+             <view class="go_user" hover-class='go_user_' bindtap='btn_go_user_' data-item = "{{item}}" style='background: #ff9600;color: white;'>立即使用</view>
+          </block>
+          <!-- 2个圆弧 !-->
+          <!-- <view class="left_bottom_h"></view>
+          <view class="right_bottom_h"></view> -->
+          <view style="clear:both;"></view>
+        </view>
+        <view class="present">
+          <text>{{item.remark}}</text>
+          <!-- <image src='../../images/address/bottom.png'></image> -->
+          <view style="clear:both;"></view>
+          <!-- 2个圆弧 !-->
+          <!-- <view class="left_top_h"></view>
+          <view class="right_top_h"></view> -->
+        </view>
+        <view style="clear:both;"></view>
+      </view>
+    </block>
+  </scroll-view>
+    </block>
+    <block wx:else>
+            <view class="gapViewClass">
+              <image src='../../images/gap/gap1.png'></image>
+              <text>暂无数据</text>
+            </view>
+          </block>
+  <navigator url='../myCoupon/myCoupon'>
+    <image class="couponLib" src='../../images/yh.png'></image>
+  </navigator>
+</view>
+
+<view class= "toast" hidden='{{isToast}}'>
+    <text class = "content">{{toastData}}</text>
+    <view style="clear:both;"></view>
+</view>
+<view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>

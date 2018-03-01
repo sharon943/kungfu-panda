@@ -1,0 +1,70 @@
+/* pages/locationAddress/locationAddress.wxss */
+
+.city{
+  width: 100%;height: 40px;background: white;border-bottom: 1px solid #f2f2f2;
+}
+.city .name{
+  display: block;float: left;line-height: 40px;height: 40px;margin-left: 10px;font-size: 14px;color: #333;
+}
+.city .cityName{
+  display: block;float: right;line-height: 40px;height: 40px;margin-left: 10px;font-size: 14px;color: #333;margin-right: 5px;
+}
+.city image{
+  width: 14px;height: 14px;float: right;margin-right: 10px;margin-top: 13px;
+}
+
+
+
+
+
+
+.search{
+  float: left;width: 100%;height: 50px;background: white;
+}
+.searchInput .icon{
+  padding-top: 8px;padding-bottom: 7px;padding-left: 8px;padding-right: 8px;float: left;
+}
+.searchInput{
+  width: calc(100% - 90px);height: 30px;border: 1px solid #f2f2f2;border-radius: 5px;float: left;margin-top: 10px;background: #f2f2f2;margin-left: 10px;
+}
+.search .searchInput input{
+  width: calc(100% - 41px);float: left;line-height: 30px;font-size: 13px;height: 30px;
+}
+.search .name{
+  display: block;float: left;width: 65px;margin-left: 8px;margin-right: 5px;text-align: center;line-height: 30px;background: #221e1a;color: white;font-size: 13px;border-radius: 5px;margin-top: 10px;
+}
+.mapAddress{
+  width: 100%;height: calc(100% - 91px);background: #f0f0f0;float: left;
+}
+.mapAddress .scrollMap{
+  width: 100%;height: 100%;
+}
+.mapAddress .scrollMap .mapView{
+  width: 100%;float: left;border-bottom: 1px solid #eaeaea;
+}
+.mapAddress .scrollMap .mapView .title{
+  display: block;float: left;font-size: 14px;color: #333;margin-left: 15px;margin-right: 15px;width: calc(100% - 30px);padding-top: 5px;line-height: 20px;
+} 
+.mapAddress .scrollMap .mapView .name{
+  display: block;float: left;font-size: 13px;color: #666;margin-left: 15px;margin-right: 15px;
+  width: calc(100% - 30px);padding-bottom: 5px;line-height: 20px;
+}
+
+
+
+
+.cityView{
+  width: 100%;height: 50%;top: 41px;background: white;position: absolute;
+}
+.scrollCity{
+  width: 100%;height: 100%;
+}
+.scrollCity .contentView{
+  width: 100%;height: 38px;border-bottom: 1px solid #f2f2f2;
+}
+.scrollCity .contentView text{
+  display: block;float: left;font-size: 14px;color: #666;line-height: 38px;margin-left: 10px;
+}
+.scrollCity .contentView image{
+  float: right;width: 24px;height: 24px;margin-top: 4px;margin-right: 13px;
+}

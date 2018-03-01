@@ -1,0 +1,81 @@
+/* pages/searchAddress/searchAddress.wxss */
+page{
+  background: #f2f2f2;
+}
+
+.locationAddress{
+  width: 100%;height: 40px;background: #F6EDE3;float: left;
+}
+.locationAddress .address{
+  display: block;float: left;font-size: 13px;line-height: 40px;margin-left: 10px;width: calc(100% - 90px);overflow: hidden;text-overflow:ellipsis;white-space: nowrap;color: #412820;
+}
+.locationAddress .order{
+  display: block;float: right;width: 68px;height: 24px;background: #D2C1AF;text-align: center;line-height: 24px;margin-top: 7px;font-size: 11px;color: white;border-radius:5px;margin-right: 10px;
+
+}
+
+.search{
+  float: left;width: 100%;margin-bottom: 30px;
+}
+.searchView .icon{
+  padding-top: 10px;padding-bottom: 10px;padding-left: 8px;padding-right: 8px;float: left;
+}
+.searchView{
+  width: calc(100% - 100px);height: 35px;border: 1px solid #f2f2f2;background: white;border-radius: 5px;float: left;margin-left: 10px;
+}
+.search .searchView input{
+  width: calc(100% - 41px);background: white;float: left;line-height: 35px;font-size: 13px;height: 35px;
+}
+.search .so{
+  display: block;float: right;width: 68px;margin-left: 8px;margin-right: 10px;text-align: center;line-height: 35px;background: #FF9600;color: white;font-size: 13px;border-radius: 5px;
+}
+.foodAddress{
+  width: 100%;float: left;
+}
+.foodAddress .name{
+  display: block;float: left;margin-left: 10px;font-size: 16px;color: #3d231a;margin-bottom:12px;margin-top: 11px;
+}
+.foodAddress .adressView{
+ width: 100%;background: white;height: 40px;float: left;border-bottom:1px solid #F2F2F2;
+}
+.foodAddress .addressView_{
+  width: 100%;background: #aaa;height: 31px;float: left;
+}
+.foodAddress .adressView .addressName{
+  display: block;float: left;width: calc(100% - 30px);background: #fff;line-height: 37px;font-size: 15px;padding-left: 10px;color: #3d231a;height: 37px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+
+
+
+
+
+.addressLib{
+  position: fixed;top: 85px;width: 100%;background: #f2f2f2;
+}
+.addressLib .cancel{
+  display: block;float: left;line-height: 30px;height: 30px;border-bottom: 1px solid #ccc;font-size: 13px;margin-left: 10px;width: calc(100% - 10px);
+}
+.lib{
+  width: 100%;float: left;
+}
+.addressLib .address-name{
+  display: block;float: left;line-height: 30px;height: 30px;border-bottom: 1px solid #ccc;font-size: 13px;margin-left: 10px;width: calc(100% - 10px);overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+
+
+
+.notAddress{
+  width: 70%;margin-left: 15%;background: white;position: fixed;top: 40%;z-index: 20;
+}
+.title{
+  width: 100%;height: 40px;text-align: center;font-size: 13px;line-height: 40px;display: block;float: left;color: #3D231A;
+}
+.content{
+  width: calc(100% - 20px);margin-left: 10px;float: left;padding-top: 5px;padding-bottom: 5px;
+}
+.content text{
+  display: block;float: left;font-size: 13px;color: #666;
+}
+.confirm{
+  width: calc(100% - 20px);margin-left: 10px;height: 35px;text-align: center;font-size: 16px;color: #FF9600;display: block;float: left;line-height: 35px;margin-bottom: 8px;margin-top: 10px;border-top:1px solid #f2f2f2;
+}

@@ -1,0 +1,112 @@
+/* pages/homepage/homepage.wxss */
+
+.HeaderViewClass{
+  position: absolute;top: 0px;left: 0px;height: 40px;width: 100%;
+}
+.HeaderViewClass .imageAdressClass{
+  width: 25px;height: 25px;margin-top: 10px;margin-left: 15px;float: left;background:rgba(33,30,25,0.5);padding:5px;border-radius:5px;
+
+}
+.HeaderViewClass .textAdressClass{
+  display: inline-block;line-height: 25px;font-size: 14px;margin-left: 10px;color: white;word-break:keep-all;/* 不换行 */
+white-space:nowrap;/* 不换行 */overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */text-overflow:ellipsis;
+}
+.HeaderViewClass .imageRightClass{
+  width: 25px;height: 25px;float: right;
+}
+.HeaderViewClass .bgtextAdress{
+  width: calc(100% - 100px);height: 25px;margin-top: 10px;margin-left: 15px;float: left;background:rgba(33,30,25,0.5);padding:5px 10px;border-radius:5px;
+}
+
+
+
+
+.goodsLibViewClass{
+  width: 100%;height: 100px;background: white;float: left;padding-bottom: 5px;padding-top: 5px;
+}
+.goodsLibViewClass .view1{
+  width: 25%;height: 100%;float: left;
+}
+.goodsLibViewClass .view1 image{
+  width: 60px;height: 60px;margin-left: calc(50% - 30px);margin-top: 10px;
+}
+.goodsLibViewClass .view1 text{
+  display: block;float: left;width: 100%;height: 20px;line-height: 20px;font-size: 14px;color: #333;text-align: center;
+}
+
+
+
+.goodsLibView1Class{
+  width: 100%;background: white;float: left;padding-bottom: 13px;padding-top: 5px;margin-top: 5px;
+}
+.goodsLibView1Class .view2{
+  width: calc(50% - 12px);margin-left: 8px;float: left; margin-top: 8px;
+}
+/* .goodsLibView1Class .view2 text{
+  display: block;float: left;width: 100%;position: absolute;height: 24px;color: white;font-size: 13px;text-align: center;line-height: 24px;bottom: 0px;background:rgba(33,30,25,0.5);
+} */
+
+
+.shopViewClass{
+  width: 100%;padding-top: 8px;background: white;
+}
+.shopViewClass .nameViewClass{
+  width: 100%;height: 40px;line-height: 40px;text-align: center;float: left;border-bottom: 1px solid #f0f0f0;
+}
+.shopViewClass .nameViewClass text{
+  
+}
+.shopViewClass .scrollViewClass{
+  width: 100%;float: left;
+}
+.shopViewClass .scrollViewClass .dataViewClass{
+  width: 100%;padding-top: 8px;padding-bottom: 8px;
+}
+.shopViewClass .scrollViewClass .dataViewClass .image1{
+  float: left;width: calc(50% - 40px);padding-left: 15px;padding-right: 15px;padding-top: 10px;padding-bottom: 10px;
+}
+.shopViewClass .scrollViewClass .dataViewClass .shopNameClass{
+  width: calc(50% + 10px);height: 100%;float: left;position: relative;
+}
+.shopViewClass .scrollViewClass .dataViewClass .shopNameClass .text1{
+  display: block;float: left;width: 100%;padding-top: 10px;font-size: 16px;color: #333;line-height: 30px;
+}
+.shopViewClass .scrollViewClass .dataViewClass .shopNameClass .text2{
+  display: block;float: left;width: 100%;font-size: 12px;color: #999;
+}
+.shopViewClass .scrollViewClass .dataViewClass .shopNameClass .text3{
+  display: block;float: left;width: 100%;font-size: 13px;color: #999;bottom: 10px;position: absolute;line-height: 20px;
+}
+.shopViewClass .scrollViewClass .dataViewClass .shopNameClass .shopFavourable{
+  float: left;padding-bottom: 8px;padding-top: 8px;padding-right:10px;
+
+}
+.shopViewClass .scrollViewClass .dataViewClass .shopNameClass .shopFavourable .favourable{
+  width: 100%;height: 22px;float: left;
+
+}
+.shopViewClass .scrollViewClass .dataViewClass .shopNameClass .shopFavourable .favourable image{
+  width: 18px;height: 18px;float: left;margin-top: 2px;
+}
+.shopViewClass .scrollViewClass .dataViewClass .shopNameClass .shopFavourable .favourable text{
+  display: block;float: left;line-height: 22px;font-size: 12px;color: #666;margin-left: 5px;
+}
+
+
+
+.notAddress{
+  width: 70%;margin-left: 15%;background: white;position: fixed;top: 40%;z-index: 20;
+}
+.title{
+  width: 100%;height: 40px;text-align: center;font-size: 13px;line-height: 40px;display: block;float: left;color: #3D231A;
+}
+.content{
+  width: calc(100% - 20px);margin-left: 10px;float: left;padding-top: 5px;padding-bottom: 5px;
+}
+.content text{
+  display: block;float: left;font-size: 13px;color: #666;
+}
+.confirm{
+  width: calc(100% - 20px);margin-left: 10px;height: 35px;text-align: center;font-size: 14px;color: #FF9600;display: block;float: left;line-height: 35px;margin-bottom: 8px;margin-top: 10px;border-top:1px solid #f2f2f2;
+
+}

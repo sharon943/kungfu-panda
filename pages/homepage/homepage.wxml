@@ -1,0 +1,69 @@
+<!--pages/homepage/homepage.wxml-->
+
+<view class ="pClass" style='background: #f0f0f0;'>
+    <swiper style="width:100%;height:{{systWidth/2}}px;float:left;" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+    <block wx:for="{{dataPro.runBanner}}" wx:for-index="index">
+      <swiper-item>
+        <image src="{{item.bannerUrl}}" style="width:100%;height:100%;vertical-align: middle;" mode="aspectFill" bindtap='btn_shop' data-item='{{item}}'/>
+      </swiper-item>
+    </block>
+  </swiper>
+
+    <view class = "goodsLibViewClass">
+      <block wx:for = "{{dataPro.fixedBanner}}" wx:if = "{{index < 4}}">
+          <view class= "view1">
+            <image src='{{item.bannerUrl}}' mode = "widthFix" bindtap='btn_shop' data-item='{{item}}' data-info = "{{1}}" data-index = "{{index}}"></image>
+            <!-- <text style='color:#3d231a'>{{item.jumpName}}</text> -->
+        </view>
+       
+      </block>
+        
+    </view>
+    <view style='width: 100%;height:8px;background:#f0f0f0;float:left;'></view>
+    <view class = "goodsLibView1Class" style='calc(height: {{(systWidth/2 - 12)}}px + 16px);'>
+        <block wx:for = "{{dataPro.fixedBanner}}" wx:if = "{{index > 3 & index < 8}}">
+        
+            <image src='{{item.bannerUrl}}' mode = "widthFix" class = "view2" style='height: calc({{(systWidth/2 - 12)/2}}px);'  bindtap='btn_shop' data-item='{{item}}'></image>
+        </block>
+    </view>
+    <view style='width: 100%;height:8px;background:#f0f0f0;float:left;'></view>
+    
+</view>
+
+
+<view class="HeaderViewClass" bindtap="btn_location">
+  <image class="imageAdressClass" src="../../images/menu/b.png"></image>
+  <view class='bgtextAdress'>
+  <image src='../../images/menu/search-icon.png' style='width: 25px;height: 25px;margin-right: 5px;float: left;'></image>
+  <text class="textAdressClass" >{{address}}</text>
+  
+  </view>
+  
+
+</view>
+
+
+
+
+<view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>
+
+<view class = "commodityScreenClass" hidden='{{isLoading1&isLoading2&isNotAddress}}'></view>
+<block>
+   <block wx:if="{{loadingView}}">
+      <view class = "loading1" style="background-image:url('{{loadingIMG}}');background-size:100% 100%;background-repeat:no-repeat;position: fixed;height: 100vh;width:100%;top: 0;left:0;z-index: 9989;" hidden='{{isLoading1&isLoading2}}'>
+      </view>
+   </block>
+   <block wx:else>
+      <view class = "loading" hidden='{{isLoading1&isLoading2}}'>
+       <text>Loading...</text> 
+    </view>
+    </block>
+</block>
+<view class = "notAddress" style='border-radius:10px;' hidden='{{isNotAddress}}'>
+    <text class = "title">提示</text>
+    <view class = "content">
+      <text>该地址附近没有外卖的餐厅，请重新输入地址</text>
+    </view>
+    <text class = "confirm" bindtap='btn_addres_confirm'>确认</text>
+    <view style="clear:both;"></view>
+</view>

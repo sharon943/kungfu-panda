@@ -1,0 +1,11 @@
+<!--pages/detailUrl/detailUrl.wxml-->
+<!-- <text>pages/detailUrl/detailUrl.wxml</text> -->
+<view class = "goodsLibViewClass" style='width:100%;height:200%;'>
+     <block  wx:for="{{dataPro.runBanner}}" wx:key="{{item.jump}}" wx:for-index="index"> 
+         <!-- <image class="{{dataPro.runBanner[index].jump == ''?'appear':'disappear'}}" src="{{item.detailUrl}}" mode="aspectFill"  data-item='{{item}}'/>  -->
+         <image wx:if="{{typejump == item.jump}}"  src="{{item.detailUrl}}" class='appear'></image> 
+         <text>{{typejump}}</text>
+     </block>   
+     <view> </view> 
+</view>
+

@@ -1,0 +1,9 @@
+
+<view class ="confirmViewClass">
+    
+        <image class = "confirmImagesClass" src="../../images/payconfirm.png"></image>
+        <text class = "confirmSuccessTextClass">订单提交成功</text>
+
+        <text class = "confirmBtnClass" bindtap="BtnGoTo">查看订单详情</text>
+       
+</view>

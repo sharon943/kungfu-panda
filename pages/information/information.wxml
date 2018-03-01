@@ -1,0 +1,269 @@
+<scroll-view class="pageInfo" scroll-y = "true">
+
+  <view class="shopName">
+             <block wx:if="{{iconPath.length>0}}">
+                 <image src="{{iconPath}}"></image>
+           </block>
+            <block wx:else>
+                  <image src="../../images/order/s.png"></image>
+             </block>
+    
+    <text style='color: #3d231a;font-size: 16px;'>{{orderInfo.name1}}<text style='color: #3d231a;font-size: 16px;'>{{orderInfo.name1_}}</text></text>
+  </view>
+ 
+  <view class="orderStates">
+    <view class="title_n" catchtap='btn_refurbish'>
+      <text class="states_title">订单状态</text>
+    </view>
+    <scroll-view class='order_local' scroll-y="true">
+    <view class='order-status'>
+            <view>
+            <block>
+               <block wx:if="{{orderInfo.progress[0].status==1}}">
+                   <text class="active">待支付</text>
+               </block>
+               <block wx:else>
+                    <text>待支付</text>
+               </block>
+               <!-- <text class='{{orderInfo.progress[0].statusName=="待支付" ? active : }}'>待支付</text> -->
+            </block>
+            <block>
+               <block wx:if="{{orderInfo.progress[0].status==7}}">
+                   <text class="active">已发送</text>
+               </block>
+               <block wx:else>
+                    <text>已发送</text>
+               </block>
+            </block>
+            <block>
+               <block wx:if="{{orderInfo.progress[0].status==10}}">
+                   <text class="active">已确认</text>
+               </block>
+               <block wx:else>
+                    <text>已确认</text>
+               </block>
+            </block>
+            <block>
+               <block wx:if="{{orderInfo.progress[0].status==14}}">
+                   <text class="active">配送中</text>
+               </block>
+               <block wx:else>
+                    <text>配送中</text>
+               </block>
+            </block>
+            <block>
+               <block wx:if="{{orderInfo.progress[0].status==100}}">
+                   <text class="active">订单完成</text>
+               </block>
+               <block wx:else>
+                    <text>订单完成</text>
+               </block>
+            </block>
+            </view>
+            <view>
+             <block>
+                  <block wx:if="{{orderInfo.progress[0].status==1}}">
+                        <view class="act"></view>
+                   </block>
+                  <block wx:else>
+                        <view></view>
+                   </block>
+            </block>
+            <block>
+                  <block wx:if="{{orderInfo.progress[0].status==7}}">
+                        <view class="act"></view>
+                   </block>
+                  <block wx:else>
+                        <view></view>
+                   </block>
+            </block>
+            <block>
+                  <block wx:if="{{orderInfo.progress[0].status==10}}">
+                        <view class="act"></view>
+                   </block>
+                  <block wx:else>
+                        <view></view>
+                   </block>
+            </block>
+            <block>
+                  <block wx:if="{{orderInfo.progress[0].status==14}}">
+                        <view class="act"></view>
+                   </block>
+                  <block wx:else>
+                        <view></view>
+                   </block>
+            </block>
+            <block>
+                  <block wx:if="{{orderInfo.progress[0].status==100}}">
+                        <view class="act"></view>
+                   </block>
+                  <block wx:else>
+                        <view></view>
+                   </block>
+            </block>
+            </view>
+            <view class='hengx'></view>
+    </view>
+      <!-- <block wx:for="{{orderInfo.progress}}"> -->
+        <view class='type1'>
+        
+          <view class="order_in">
+            <view class="order_title">
+              <text class="order_n">{{orderInfo.progress[0].statusName}}</text>
+              <text class="order_time">{{orderInfo.progress[0].time}}</text>
+            </view>
+            <text class="order_content">{{orderInfo.progress[0].tips}}</text>
+            <block wx:if="{{orderInfo.progress[0].status == 1}}">
+            <text class='order_btn1' bindtap='btn_go_pay'>立即支付</text>
+              <text class='order_btn1' bindtap='btn_go_cancel' >取消订单</text>
+              
+            </block>
+            <block wx:if = "{{orderInfo.progress[0].status == 7}}">
+            <text class='order_btn' bindtap='btn_go_cancel'>取消订单</text>
+            </block>
+            
+            <block wx:if = "{{orderInfo.progress[0].status == 16}}">
+            <text class='order_btn' bindtap='btn_go_confirm'>订单完成</text>
+            </block>
+            
+            <view style="clear:both;"></view>
+          </view>
+      
+          <view style="clear:both;"></view>
+        </view>
+      <!-- </block> -->
+
+      <view style="clear:both;"></view>
+    </scroll-view>
+    <view style="clear:both;"></view>
+  </view>
+
+
+
+
+  <view class="goodsViewClass">
+    <view class="zfClass">
+      <text>订单明细</text>
+    </view>
+    <view class="orderNameClass">
+      <text class="text1">餐品名称</text>
+      <text class="text2">数量</text>
+      <text class="text3">价格</text>
+    </view>
+    <view class="orderGoodsClass">
+      <block wx:for="{{orderMenu.data}}">
+        <view class="orderViewClass">
+          <text class="text1">{{item.name}}</text>
+          <text class="text2">x {{item.num}}</text>
+          <text class="text3">¥{{item.price * item.num}}</text>
+        </view>
+        <text class="text4"><block wx:if="{{item.listRequirements}}"><block wx:for = "{{item.listRequirements[0].propertys}}" wx:for-item="j"><block wx:for = "{{j.items}}" wx:for-item = "i">{{i.name + '¥'+i.price}}</block></block></block> 
+          </text>
+        <view style="clear:both;"></view>
+      </block>
+      <view style="clear:both;"></view>
+    </view>
+    <view style="clear:both;"></view>
+  </view>
+
+  <view class="typeViewClass">
+    <view class="view1">
+      <text class="text1">餐饮费</text>
+      <text class="text2">¥ {{orderMenu.price}}</text>
+    </view>
+    <view class="view1">
+      <text class="text1">餐盒费</text>
+      <text class="text2">¥ {{orderMenu.mealFee}}</text>
+    </view>
+    <view class="view1">
+      <text class="text1">外送费</text>
+      <text class="text2">¥ {{orderMenu.deliveryFee}}</text>
+    </view>
+    <block wx:if = "{{orderF.length > 0}}">
+    
+  <view class="goodsViewClass">
+    <view class="zfClass">
+      <text>已享受优惠</text>
+    </view>
+     <!-- <text class="zfClass" style="display:block;float:left;font-size: 13px;margin-left: 15px;width:calc(100% - 15px);">已享受优惠</text>  -->
+    <block wx:for = "{{orderF}}">
+    <view class="view1">
+      <block wx:if = "{{item.preferentialContent == 'promotions'}}">
+          <text class="text1" style='width:calc(100% - 15px);'>{{'优惠活动 ¥ '+item.preferentialPrice}}</text>
+      </block>
+      <block wx:elif = "{{item.preferentialContent == 'levelDiscount'}}">
+          <text class="text1" style='width:calc(100% - 15px);'>{{'会员等级折扣 ¥ '+item.preferentialPrice}}</text>
+      </block>
+      <block wx:elif = "{{item.preferentialContent == 'card'}}">
+          <text class="text1" style='width:calc(100% - 15px);'>{{'余额支付 ¥ '+item.preferentialPrice}}</text>
+      </block>
+      <block wx:elif = "{{item.preferentialContent == '0'}}">
+          <text class="text1" style='width:calc(100% - 15px);'>{{'现金券 ¥ '+item.preferentialPrice}}</text>
+      </block>
+       <block wx:elif = "{{item.preferentialContent == '2'}}">
+          <text class="text1" style='width:calc(100% - 15px);'>{{'商品券 ¥ '+item.preferentialPrice}}</text>
+      </block>
+      <block wx:elif = "{{item.preferentialContent == '3'}}">
+          <text class="text1" style='width:calc(100% - 15px);'>{{'买N送M券 ¥ '+item.preferentialPrice}}</text>
+      </block>
+      <!-- <text class="text2">¥ {{orderMenu.deliveryFee}}</text> -->
+    </view>
+    </block>
+    </view>    
+</block>
+
+    <view class="view2">
+      <text class="text2">总额 <text style='color: #333;font-size: 15px;font-weight: bold;'>¥ {{orderMenu.totalPrice}}</text></text>
+      <text class="text1">{{orderInfo.counts}}份餐</text>
+
+    </view>
+    <view style="clear:both;"></view>
+  </view>
+
+  <view class="otherViewClass" style='position:relative;'>
+    <view class="zfClass">
+      <text>订单信息(<block wx:if = "{{orderInfo.sendType == 1}}">外卖</block><block wx:elif = "{{orderInfo.sendType == 2}}">自取</block><block wx:elif = "{{orderInfo.sendType == 4}}">预约</block>)</text>
+    </view>
+    <view class="view3">
+      <text>联系人：{{orderInfo.name}}</text>
+    </view>
+    <view class="view3">
+      <text>电话: {{orderInfo.phone}}</text>
+    </view>
+    <view class="view3" style='height: auto;'>
+      <text style='line-height: 20px;'>送餐地址：{{orderInfo.address}}</text>
+      <view style="clear:both;"></view>
+    </view>
+    <view class="view3">
+      <text>订单编号: {{orderInfo.orderNo}}</text>
+    </view>
+  
+    <block wx:if = "{{orderInfo.sendType == 2}}">
+        <view class="view3">
+      <text>自取时间: {{orderInfo.selfGetTime}}</text>
+    </view>
+    </block>
+    <block wx:elif = "{{orderInfo.sendType == 4}}">
+      <view class="view3">
+      <text>预约时间: {{orderInfo.selfGetTime}}</text>
+      </view>
+     
+    </block>
+    <view class="view3">
+      <text>预送达时间: {{orderInfo.sendTime}}</text>
+    </view>
+     <view class="view3" wx:if="{{senderName}}">
+      <text>骑手姓名: {{senderName}}</text>
+      </view>
+      <view class="view3" wx:if="{{senderMobile}}">
+      <text>骑手电话: {{senderMobile}}</text>
+      </view>
+        <view wx:if='{{orderInfo.progress[0].status==14}}' class='states_refurbish' style='position:absolute;top:190px;right:0;' bindtap='btn_sender_position'>骑手位置</view>
+        
+    
+     
+    <view style="clear:both;"></view>
+  </view>
+  
+  <view style="clear:both;"></view>
+</scroll-view>

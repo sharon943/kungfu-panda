@@ -1,0 +1,289 @@
+<view class="pClass" style='background: #f2f2f2;'>
+  <view class="title">
+    <text class="name">送餐信息</text>
+    <!-- <view class="address">
+      <text>更换地址</text>
+      <image src='../../images/send/right.png'></image>
+    </view> -->
+  </view>
+  <!-- <view style='width:100%;height:5px;float:left;background:f2f2f2;'></view> -->
+    <block wx:if = "{{typeValue != 2}}">
+    <view class="addressInformation" bindtap='btn_address'>
+      <!-- <view style='width:100%;height:3px;background: #b19d7d;'></view> -->
+      <view class="ac">
+        <block wx:if="{{addressObj}}">
+          <text class="ad">{{addressObj.receiverAddress + addressObj.appendReceiverAddress}}</text>
+          <text class="name">{{addressObj.receiverName}}  {{addressObj.receiverPhone}}</text>
+        </block>
+        <block wx:else>
+          <text class="ad1" style='line-height: 60px;'>当前无可配送的地址</text>
+        </block>
+      </view>
+      <view class="editAddress" style='margin-right:5px;'>更换地址</view>
+      <image src='../../images/send/right.png' style='width:12px;height:18px;margin-right:10px;margin-top:21px;float:left;'></image>
+    </view>
+  </block>
+  <block wx:else>
+    <view class = "z_sendClass">
+        <input placeholder='请输入联系人姓名' bindinput='inputName' value='{{personName}}'></input>
+        <input placeholder='请输入联系人电话' maxlength='11' type='number' bindinput='inputPhone' value='{{personPhone}}'></input>
+        <text >取餐地址: {{shopAddress}}</text>
+        <view style="clear:both;"></view>
+    </view>
+  </block>
+    <view style='width:100%;height:5px;float:left;background:f2f2f2;'></view>
+ 
+  <scroll-view class="scroll" scroll-y="true">
+    <block wx:for="{{menuPro}}">
+      <view class="menu">
+        <view class="goods">
+          <block wx:if="{{item.menuNature}}">
+            <text class="name1">{{item.menuName}}</text>
+            <text class="nature">{{item.menuNature.natureName}}</text>
+          </block>
+          <block wx:else>
+            <text class="name">{{item.menuName}}</text>
+          </block>
+
+          <text class="num">x {{item.num}}</text>
+
+        </view>
+        <view class="price">
+          <text class="unit">单品价格 ¥ {{item.price/100}}</text>
+          <text class="small">小计 ¥ {{item.price*item.num/100}}</text>
+        </view>
+        <view style="clear:both;"></view>
+      </view>
+    </block>
+
+     <block wx:for = "{{discountNamePro}}">
+        <view class="coupon" style='position:relative;border-bottom: 1px solid #f2f2f2;' >
+          
+ 
+       <text class="couponPrice" style='margin-right: 15px;color:#FF9600;float:left;'>赠：{{item.productName}}X{{item.count}}</text>
+       <text class="name" style='float:right;position:absolute;right:10px;bottom:0;'>{{item.title}}</text>
+  </view>
+    </block>
+
+    <view style="clear:both;"></view>
+  </scroll-view>
+  <view class="all_price">
+    <text class="a_price textName">¥ {{goodsMoney/100}}</text>
+    <text class="a_price textName">餐饮费</text>
+  </view>
+  <view class="all_price" style='border-top: none;' hidden='{{typeValue == 2}}'>
+    <text class="a_price textName">¥ {{sendMoney/100}}</text>
+    <text class="a_price textName">配送费</text>
+  </view>
+  <view class="all_price" style='border-top: none;' >
+    <text class="a_price textName">¥ {{meailFeeMoney/100}}</text>
+    <text class="a_price textName">餐盒费</text>
+  </view>
+  
+
+
+<view class="coupon" hidden='{{discountObj.price != 0 ? false : true}}'>
+    <block wx:if = "{{discountObj.type == 5}}">
+       <text class="name">{{discountObj.title}}</text>
+    </block>
+    <block wx:else>
+        <text class="name">{{discountObj.name}}</text>
+    </block>
+    <!-- <image src='../../images/send/right.png'></image> !-->
+    <text class="couponPrice" style='margin-right: 15px;color:#FF9600'>¥ -{{discountObj.price/100}}</text>
+
+  </view>
+  <block wx:if = "{{discountObj.price > 0}}">
+    <block wx:if = "{{discountObj.type !=5}}">
+  <!-- <view style='width:100%;height:5px;float:left;background:f2f2f2;'></view> -->
+  <picker bindchange="bindCouponChange" value="{{couponIndex}}" range="{{couponPro}}" class="coupon" range-key="name">
+  
+    <block wx:if = "{{couponIndex > 0}}">
+    <text class="name">{{couponObj.name}}</text>
+    <image src='../../images/send/right.png'></image>
+    <text class="couponPrice" style='color:#FF9600'>¥ -{{couponObj.couponPrice}}</text>
+    </block>
+    <block wx:else>
+    <text class="name">优惠券</text>
+    <image src='../../images/send/right.png'></image>
+    <text class="couponPrice">选择优惠券</text>
+    </block>
+    
+  </picker>
+  </block>
+  </block>
+  <block wx:else>
+    <view style='width:100%;height:5px;float:left;background:f2f2f2;'></view>
+  <picker bindchange="bindCouponChange" value="{{couponIndex}}" range="{{couponPro}}" class="coupon" range-key="name">
+  
+    <block wx:if = "{{couponIndex > 0}}">
+    <text class="name">{{couponObj.name}}</text>
+    <image src='../../images/send/right.png'></image>
+    <text class="couponPrice" style='color:#FF9600'>¥ -{{couponObj.couponPrice}}</text>
+    </block>
+    <block wx:else>
+    <text class="name">优惠券</text>
+    <image src='../../images/send/right.png'></image>
+    <text class="couponPrice">选择优惠券</text>
+    </block>
+    
+  </picker>
+  </block>
+
+
+
+  <view class="payMethod">
+    <text class="name">支付方式</text>
+    <view class="pay1">
+      <text>餐到支付</text>
+      <block wx:if="{{onlinePay == 1 || onlinePay == 3}}">
+        <image src="{{payId == 1 ? '../../images/send/gou.png' : '../../images/send/yuan.png'}}" bindtap='btn_pay_method' data-info = "{{1}}"></image>
+      </block>
+      <block wx:else>
+        <text style='float:right;margin-right: 10px;'>暂不支持</text>
+      </block>
+    </view>
+    <view class="pay1">
+      <text>线上支付</text>
+      <block wx:if="{{onlinePay == 2 || onlinePay == 3}}">
+        <image src="{{payId == 2 ? '../../images/send/gou.png' : '../../images/send/yuan.png'}}" bindtap='btn_pay_method' data-info = "{{2}}"></image>
+      </block>
+      <block wx:else>
+        <text style='float:right;margin-right: 10px;'>暂不支持</text>
+      </block>
+    </view>
+  </view>
+  <!-- <view style='width:100%;height:5px;float:left;background:f2f2f2;'></view> -->
+  <block wx:if = "{{typeValue == 2}}">
+  <view class="coupon">
+    <text class="name">自取时间</text>
+    <text class="couponPrice" style='margin-right: 15px;color:#FF9600'>{{timeValue}}</text>
+  </view>
+  </block>
+  <block wx:elif = "{{typeValue == 4}}">
+  <view class="coupon">
+    <text class="name">预定时间</text>
+    <text class="couponPrice" style='margin-right: 15px;color:#FF9600'>{{timeValue}}</text>
+  </view>
+ 
+  </block>
+
+
+
+  
+
+   
+  <!-- <view style='width:100%;height:5px;float:left;background:f2f2f2;'></view> -->
+  <view class="discount" hidden='{{!memberInformation}}'>
+    <view class = "discountMoney">
+    <text class="discount_text">会员折扣：{{memberInformation.discount}}折</text>
+    <block wx:if = "{{memberInformation.discountPrice > 0}}">
+    <text class = "discount_price">¥ -{{memberInformation.discountPrice/100}}</text>
+    </block>
+    </view>
+   
+    <view class="member">
+      <text class="name">使用会员余额支付</text>
+      <block wx:if="{{memberInformation.balance != 0}}">
+        <image src="{{isYE ? '../../images/send/gou.png' : '../../images/send/yuan.png'}}" bindtap='btn_h_p'></image>
+        <block wx:if = "{{isYE}}">
+              <text class="money" style='margin-right: 10px;'>已用金额¥ {{memberInformation.yh_price/100}}</text>
+        </block>
+        <block wx:else>
+          <text class="money" style='margin-right: 10px;'>可用余额¥ {{memberInformation.balances/100}}</text>
+        </block> 
+       
+      </block>
+      <block wx:else>
+           <text class="money">可用余额¥ {{memberInformation.balances/100}}</text>
+        
+      </block>
+
+    </view>
+
+  </view>
+  <!-- <view style='width:100%;height:5px;float:left;background:f2f2f2;'></view> -->
+  <block wx:if="{{isInvoice}}">
+    <view class="invoice">
+      <text>发票</text>
+      <switch checked='{{isInvoiceName}}' bindchange="btn_open" color="#ff9600"></switch>
+      <block wx:for="{{invoiceType}}" wx:if = "{{!item.isChecks}}">
+        <view class="invoice_lib"  bindtap='btn_k_p' data-item = "{{item}}" data-index = "{{index}}">
+            <block wx:if = "{{item.type == 1}}">
+            <text>定额发票</text>
+            </block>
+            <block wx:if = "{{item.type == 2}}">
+            <text>机打发票</text>
+            </block>
+            <block wx:if = "{{item.type == 3}}">
+            <text>电子发票</text>
+            </block>
+            <image src="{{item.isInvoice ? '../../images/send/yuan.png' : '../../images/send/gou.png'}}"></image>
+        </view>
+      </block>
+      <block wx:if = "{{isJD}}">
+          <input placeholder='请输入个人或公司的抬头' class = "j_d_input" bindinput='input_f_1'></input>
+        <input placeholder='请输入税号或社会信用代码' maxlength='30' class = "j_d_input" style='border-top:none' bindinput='input_f_2'></input>
+      </block>
+      <view style="clear:both;"></view>
+    </view>
+  </block>
+  <!-- <view style='width:100%;height:5px;float:left;background:f2f2f2;'></view> -->
+
+  <!-- <view class="remarks">
+    <textarea placeholder='请输入你对商品的要求' placeholder-style='color: #ccc;' bindinput='input_remarks'></textarea>
+  </view> -->
+
+
+<!--  20180110 yly添加位置 上边注释了  -->
+
+<view style="display:flex;flex-direction:row; justify-content:space-between;align-items:center;box-sizing:border-box;padding-left:10px;padding-right:10px;height:40px;font-size:13px;background:#fff;" bindtap="showWrite">
+  <view style="color:#9F9F9F;">订单备注</view>
+  <view style="display:flex;flex-direction:row; justify-content:flex-start;align-items:center;box-sizing:border-box;">
+    <view style="max-width:150px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;margin-right:8px;font-size:16px;color:#848484">{{beizhu}}</view>
+    <image src='../../images/send/right.png' style="width:12px;height:18px;"></image>
+  </view>
+</view>
+
+<view style="width:100%;height:100%;position:fixed;z-index:999;top:0;left:0;display:flex;justify-content:center;align-items:center;flex-direction:row;"wx:if="{{remarkBox}}">
+  <view style="width:1px;height:100%;"></view>
+  <view style="width:90%;background:#fff;left:5%;border:1px solid #aaa;">
+    <textarea placeholder='请输入你对商品的要求' auto-focus='true' focus='true' placeholder-style='color: #ccc;font-size:13px;' cursor-spacing="150" bindinput='input_remarks' style="width:100%;padding:10px;box-sizing:border-box;color:#8D8D8D;"></textarea>
+    <view style="display:flex;flex-direction:row; justify-content:space-around;margin-top:10px;border-top:1px solid #ccc;">
+      <view style="font-size:13px;color:#9F9F9F;text-align:center;width:50%;padding:10px 0;" bindtap="hideWrite">取消</view>
+      <view style="font-size:13px;background:#FF9600;color:white;text-align:center;width:50%;padding:10px 0;" bindtap="sureWrite">确定</view>
+    </view>
+  </view>
+</view>
+
+<!--  ＊＊＊  -->
+
+
+  <view style='width:100%;height: 55px;float:left;'></view>
+
+  <view class="bottom">
+
+      
+    <text class="price"><text style='font-size: 12px;'>¥</text> {{(syGoodsPrice)/100}}<block wx:if="{{specialOfferPrice > 0}}"><text style='color:#959494;text-decoration: line-through;font-size: 12px;margin-left:10px;'>¥ {{specialOfferPrice/100}}</text></block><text style='color: #aaa;font-size: 11px;'> | {{allMenu.menuNum}}份餐</text></text>
+    
+
+    
+    <text class="confirm" bindtap='btn_send'>确认</text>
+  </view>
+</view>
+
+
+<view class="toast" hidden='{{isToast}}'>
+  <text class="content">{{toastData}}</text>
+  <view style="clear:both;"></view>
+</view>
+
+<view class="commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0'></view>
+
+
+
+
+<view class = "commodityScreenClass" hidden='{{isLoading}}'></view>
+<view class = "loading" hidden='{{isLoading}}'>
+    <text>Loading...</text>
+</view>

@@ -1,0 +1,38 @@
+<!--pages/order/order.wxml-->
+<view class = "pClass" style='background: #f0f0f0;'>
+    <block wx:if = "{{orderPro}}">
+    <scroll-view class = "scroll" scroll-y ="true">
+        <block wx:for = "{{orderPro}}">
+            <view class = "orderViewClass" bindtap='btn_information' data-item = "{{item}}">
+            <block wx:if="{{iconPath.length>0}}">
+                 <image class = "image1" src='{{iconPath}}'></image>
+            </block>
+            <block wx:else>
+                  <image class = "image1" src='../../images/order/s.png'></image>
+             </block>
+                  
+                  <view class = "shopNamClass">
+                      <text class = "text1">{{item.name_}}<text style='color: #999;font-size: 13px;'>{{item.name}}</text></text>
+                      <text class = "text2">{{item.orderDate}}</text>
+                      <text class = "text3">总额<text style='color: #333;font-size: 16px;'> ¥ {{item.price}}</text></text>
+                      <text class = "text4">{{item.statusName}}</text>
+                  </view>
+            </view>
+        </block>
+    </scroll-view>
+    </block>
+    <block wx:else>
+            <view class="gapViewClass">
+              <image src='../../images/gap/gap1.png'></image>
+              <text>暂无数据</text>
+            </view>
+          </block>
+</view>
+
+
+<view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>
+
+<view class = "commodityScreenClass" hidden='{{isLoading}}'></view>
+<view class = "loading" hidden='{{isLoading}}'>
+    <text>Loading...</text>
+</view>

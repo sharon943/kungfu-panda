@@ -1,0 +1,71 @@
+<!--pages/personal/personal.wxml-->
+<view class="pClass" style='background: #f2f2f2;'>
+  <view class="avatarViewClass" bindtap='btn_login'>
+
+    
+    <block wx:if="{{isLogin == 1}}">
+    <image class="nameImageClass" src="../../images/order/s-1.png"></image>
+      <text class="text1"><text >{{userPro.nickName}}</text>
+      <text class="text2">{{memberInformation.discount}}折</text></text>
+    </block>
+   
+    <block wx:else>
+    <image class="nameImageClass" src="../../images/order/s-2.png"></image>
+      <text class="text1">登录/注册</text>
+    </block>
+  </view>
+ <image class="headImageClass" src='../../images/personal/head.png' mode='widthFix'></image>
+
+  <view class="numDataViewClass">
+    <view class="numView1">
+      <text class='text1'>金额</text>
+      <text class='text2'>{{memberInformation.balance ? memberInformation.balance : 0}}</text>
+      <view style="clear:both;"></view>
+    </view>
+    <view class="numView1">
+      <text class='text1'>积分</text>
+      <text class='text2'>{{memberInformation.point ? memberInformation.point : 0}}</text>
+      <view style="clear:both;"></view>
+    </view>
+    <view class="numView1">
+      <text class='text1'>等级</text>
+      <text class='text2'>{{memberInformation.levelName ? memberInformation.levelName : 0}}</text>
+      <view style="clear:both;"></view>
+    </view>
+    <view style="clear:both;"></view>
+  </view>
+
+  <view class="typeViewClass">
+    <view class="type1" hover-class='type_hover' bindtap='btn_coupon'>
+      <image class="image1" src='../../images/personal/y.png'></image>
+      <text class="text1">优惠券</text>
+      <image class="image2" src='../../images/personal/right.png'></image>
+    </view>
+    <view class="type1" bindtap='btn_address'>
+      <image class="image1" src='../../images/personal/d.png'></image>
+      <text class="text1">送餐地址库</text>
+      <image class="image2" src='../../images/personal/right.png'></image>
+    </view>
+    <view class="type1" bindtap='btn_revise'>
+      <image class="image1" src='../../images/personal/x.png'></image>
+      <text class="text1">修改密码</text>
+      <image class="image2" src='../../images/personal/right.png'></image>
+    </view>
+    <view class="type1" bindtap='btn_contact'>
+      <image class="image1" src='../../images/personal/w.png'></image>
+      <text class="text1">联系我们</text>
+      <image class="image2" src='../../images/personal/right.png'></image>
+    </view>
+    <!-- <view class="type1" bindtap='btn_userKnows'>
+      <image class="image1" src='../../images/personal/w.png'></image>
+      <text class="text1">用户须知</text>
+      <image class="image2" src='../../images/personal/right.png'></image>
+    </view> -->
+    <view style="clear:both;"></view>
+  </view>
+  <block wx:if = "{{isLogin == 1}}">
+  <button class="button1" bindtap='btn_exit'>退出登录</button>
+  </block>
+</view>
+
+<view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>

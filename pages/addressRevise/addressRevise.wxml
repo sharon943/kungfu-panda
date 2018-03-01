@@ -1,0 +1,39 @@
+<!--pages/addressRevise/addressRevise.wxml-->
+<view class="pClass" style='background: #f2f2f2;'>
+  <view style='width:100%;height: 8px;background: #f2f2f2;'></view>
+  <form bindsubmit='btn_submit'>
+    <view class="add">
+      <view class="inputView">
+        <text>订餐人</text>
+        <input placeholder='请输入您的姓名' name = "name" value="{{revisePro ? revisePro.receiverName : ''}}" bindinput='input_name'></input>
+         
+          
+      </view>
+      <view class="inputView">
+        <text>电话</text>
+        <input placeholder='请输入您的电话' name = "phone" maxlength='11' type='number' value="{{revisePro ? revisePro.receiverPhone : ''}}" bindinput='input_phone'></input>
+        
+      </view>
+      <view class="city" bindtap='btn_location_address'>
+        <text class="name">送餐地址</text>
+        <text class="address">{{locationAddress ? locationAddress : revisePro.receiverAddress}}</text>
+        <image src='../../images/send/right.png'></image>
+      </view>
+      <view class="inputView">
+        <text>具体地址</text>
+        <input placeholder='地址请补充详细，如xx大楼xx室' name = "address" value="{{revisePro ? revisePro.appendReceiverAddress : ''}}" bindinput='input_address'></input>
+        
+      </view>
+    </view>
+
+
+    <button class="editAdress" form-type='submit'>确认</button>
+  </form>
+</view>
+
+<view class= "toast" hidden='{{isToast}}'>
+    <text class = "content">{{toastData}}</text>
+    <view style="clear:both;"></view>
+</view>
+
+<view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>

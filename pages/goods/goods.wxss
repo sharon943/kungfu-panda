@@ -1,0 +1,60 @@
+/* pages/goods/goods.wxss */
+.title{
+  width: calc(100% - 10px);padding-left: 10px;background: #e8e7e0;display: block;float: left;line-height: 40px;height: 40px;
+}
+.scroll{
+  width: 100%;float: left;margin-bottom: 13px;
+}
+.menu{
+  width: 100%;background: white;margin-top: 5px;
+}
+.menu .goods{
+  width: calc(100% - 10px);margin-left: 10px;border-bottom: 1px solid #f2f2f2;height: 39px;position: relative;
+}
+.menu .goods .name{
+  width: calc(100% - 100px);float: left;height: 39px;line-height: 39px;display: block;color: #666;font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+.menu .goods .name1{
+  width: calc(100% - 100px);float: left;height: 26px;line-height: 26px;display: block;color: #666;font-size: 13px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+.menu .goods .nature{
+  width: calc(100% - 100px);float: left;height: 13px;line-height: 13px;display: block;color: #999;font-size: 10px;position: absolute;bottom: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+.menu .goods .num{
+  float: right;height: 39px;line-height: 39px;display: block;color: #666;font-size: 14px;max-width: 90px;margin-right: 10px;
+}
+.menu .price{
+  width: calc(100% - 10px);margin-left: 10px;height: 30px;
+}
+.menu .price .unit{
+  float: left;height: 30px;line-height: 30px;display: block;color: #666;font-size: 13px;
+}
+.menu .price .small{
+  float: right;height: 30px;line-height: 30px;display: block;color: #666;font-size: 13px;margin-right: 10px;
+}
+
+.other{
+  width: 100%;background: white;float: left;margin-bottom: 60px;
+}
+.money{
+  width: calc(100% - 10px);height: 40px;margin-left: 10px;border-bottom: 1px solid #f2f2f2;
+}
+.money .name{
+  display: block;float: left;line-height: 40px;font-size: 14px;color: #666;
+}
+.money .price{
+  float: right;height: 40px;line-height: 40px;display: block;color: #666;font-size: 13px;margin-right: 10px;
+}
+
+
+
+
+.bottom{
+  width: 100%;position: fixed;bottom: 0px;background: #201f18;height: 50px;
+}
+.bottom .price{
+  width: calc(100% - 90px);height: 100%;display: block;float: left;color: white;font-size: 15px;padding-left: 10px;line-height: 50px;
+}
+.bottom .confirm{
+  width: 80px;background: #b19d7d;color: white;display: block;float: left;font-size: 14px;line-height: 50px;height: 50px;text-align: center;
+}

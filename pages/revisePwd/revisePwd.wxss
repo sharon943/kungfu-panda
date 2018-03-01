@@ -1,0 +1,24 @@
+/* pages/revisePwd/revisePwd.wxss */
+
+.inbputOld{
+  width: calc(100% - 44px);margin-left: 15px;border: 1px solid #eaeaea;line-height: 42px;height: 42px;font-size: 13px;padding: 0 0 0 12px;background: white;
+}
+.inbputNew{
+  width: calc(100% - 44px);margin-left: 15px;border: 1px solid #eaeaea;line-height: 42px;height: 42px;font-size: 13px;padding: 0 0 0 12px;background: white;
+}
+/* .pwdOk{
+  width: 80%;margin-left: 10%;height: 40px;text-align: center;font-size: 14px;line-height: 40px;border-radius: 4px;background: #FF9600;color: white;margin-top: 20px;
+}
+.pwdOk_{
+  width: 80%;margin-left: 10%;height: 40px;text-align: center;font-size: 14px;line-height: 40px;border-radius: 4px;background: #aaa;color: white;margin-top: 20px;
+} */
+.pwdOk{
+  width:calc(100% - 44px);margin-left: 15px;height: 40px;text-align: center;font-size: 14px;line-height: 40px;border-radius: 4px;background: #FF9600;color: white;margin-top: 20px;padding:0px 6px;
+}
+.pwdOk_{
+  width:calc(100% - 44px);margin-left: 15px;height: 40px;text-align: center;font-size: 14px;line-height: 40px;border-radius: 4px;background: #aaa;color: white;margin-top: 20px;padding:0px 6px;
+}
+.pwdOk1{
+  margin-left: 15px;height: 40px;text-align: center;font-size: 14px;line-height: 40px;border-radius: 4px;background: #C5C5C5;color: white;margin-top: 20px;width:calc(100% - 44px);padding:0px 6px;
+
+}

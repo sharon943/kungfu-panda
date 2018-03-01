@@ -1,0 +1,198 @@
+page{
+  background: #f0eeec;
+}
+.title{
+  width: 100%;height: 40px;background: #F0EEEC;float: left;
+}
+.title .name{
+  display: block;float: left;font-size: 14px;line-height: 40px;color: #58423B;margin-left: 10px;
+}
+.title .address{
+  float: right;
+}
+.title .address text{
+  display: block;float: left;font-size: 13px;color: #666;line-height: 40px;
+}
+.title .address image{
+  width: 18px;height: 18px;margin-top: 11px;margin-right: 10px;float: left;
+}
+
+.z_sendClass{
+  width: 100%;float: left;
+}
+.z_sendClass input{
+  width: calc(100% - 35px);border: 1px solid #eaeaea;float: left;height: 30px;line-height: 30px;border-radius: 4px;margin-left: 15px;font-size: 13px;background: white;padding-left: 3px;margin-top: 5px;
+}
+.z_sendClass text{
+  display: block;float: left;line-height: 30px;margin-top: 8px;background: white;padding-left: 15px;width: calc(100% - 15px);font-size: 13px;color: #666;
+}
+
+
+.addressInformation{
+  width: 100%;background: white;float: left;height: 60px;
+}
+
+.ac{
+  width: calc(100% - 90px);height: 60px;float: left;margin-left: 10px;
+}
+.ac .ad{
+  width: 100%;height: 24px;line-height: 26px;font-size: 13px;color: #848484;display: block;float: left;margin-top: 3px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+.ac .ad1{
+  width: 100%;height: 24px;line-height: 26px;font-size: 13px;color: #848484;display: block;float: left;margin-top: 3px;
+}
+.ac .name{
+  width: 100%;height: 24px;line-height: 24px;font-size: 13px;color: #848484;display: block;float: left;
+}
+.editAddress{
+  display: block;float: left;font-size: 13px;color: #848484;line-height: 60px;
+}
+.payMethod{
+  width: 100%;background: white;float: left;
+}
+.payMethod .name{
+  width: calc(100% - 10px);padding-left: 10px;background: #f0eeec;color: #3d231a;font-size: 13px;line-height: 30px;height: 30px;display: block;float: left;
+}
+.payMethod .pay1{
+  width: calc(100% - 10px);margin-left: 10px;height: 40px;border-bottom: 1px solid #f0eeec;float: left;
+}
+.payMethod .pay1 text{
+  display: block;float: left;line-height: 40px;font-size: 13px;color: #848484;
+}
+.payMethod .pay1 image{
+  width: 24px;height: 24px;margin-top: 8px;float: right;margin-right: 10px;
+}
+
+
+.scroll{
+  width: 100%;float: left;padding-bottom: 5px;
+}
+.menu{
+  width: 100%;background: white;margin-top: 5px;
+}
+.menu .goods{
+  width: calc(100% - 10px);margin-left: 10px;border-bottom: 1px solid #f0eeec;height: 39px;position: relative;
+}
+.menu .goods .name{
+  width: calc(100% - 100px);float: left;height: 39px;line-height: 39px;display: block;color: #848484;font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+.menu .goods .name1{
+  width: calc(100% - 100px);float: left;height: 26px;line-height: 26px;display: block;color: #848484;font-size: 13px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+.menu .goods .nature{
+  width: calc(100% - 100px);float: left;height: 13px;line-height: 13px;display: block;color: #999;font-size: 10px;position: absolute;bottom: 0px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+}
+.menu .goods .num{
+  float: right;height: 39px;line-height: 39px;display: block;color: #848484;font-size: 14px;max-width: 90px;margin-right: 10px;
+}
+.menu .price{
+  width: calc(100% - 10px);margin-left: 10px;height: 30px;
+}
+.menu .price .unit{
+  float: left;height: 30px;line-height: 30px;display: block;color: #848484;font-size: 13px;
+}
+.menu .price .small{
+  float: right;height: 30px;line-height: 30px;display: block;color: #848484;font-size: 13px;margin-right: 10px;
+}
+.all_price{
+  width: 100%;height: 30px;float: left;background: white;border-top: 2px solid #f0eeec;
+}
+.a_price{
+  min-width: 60px;float: right;line-height: 30px;font-size: 13px; color: #848484;text-align: right;margin-right: 10px;
+}
+
+
+.coupon{
+  width: 100%;height: 40px;background: white;float: left;
+}
+.coupon .name{
+  display: block;float: left;margin-left: 10px;font-size: 13px;line-height: 40px;color: #848484;
+}
+.coupon .couponPrice{
+  display: block;float: right;margin-left: 10px;font-size: 13px;line-height: 40px;color: #848484;margin-right: 5px;
+}
+.coupon image{
+  width: 12px;height: 18px;float: right;margin-right: 10px;margin-top: 11px;
+}
+
+
+.discount{
+  width: 100%;height: 81px;background: white;float: left;
+}
+.discount .discountMoney{
+  width: calc(100% - 10px);margin-left: 10px;height: 40px;border-bottom: 1px solid #f0eeec;
+}
+.discount .discountMoney .discount_text{
+  display: block;float: left;font-size: 13px;color: #848484;line-height: 40px;
+}
+.discount .discountMoney .discount_price{
+  display: block;float: right;font-size: 13px;color: red;line-height: 40px;margin-right: 10px;
+}
+.member{
+  width: 100%;height: 40px;float: left;
+}
+.member .name{
+  display: block;float: left;font-size: 13px;color: #848484;line-height: 40px;margin-left: 10px;
+}
+.member .money{
+  display: block;float: right;font-size: 13px;color: #848484;line-height: 40px;margin-left: 10px;margin-right: 5px;
+}
+.member image{
+  width: 24px;height: 24px;margin-top: 8px;float: right;margin-right: 10px;
+}
+.j_d_input{
+  width: calc(100% - 20px);padding-left: 10px;line-height: 30px;height: 30px;border-bottom: 1px solid #f0f0f0; padding-right: 10px;font-size: 13px;margin-top: 5px;border-top: 1px solid #f0f0f0;float: left;
+}
+
+
+.invoice{
+  width: 100%;background: white;float: left;
+}
+.invoice text{
+  display: block;float: left;font-size: 13px;color: #848484;line-height: 40px;margin-left: 10px;
+}
+.invoice switch{
+  float: right;margin-top: 9px;margin-right: 5px;
+}
+.invoice_lib{
+  width: 100%;background: white;float: left;height: 30px;border-top: 1px solid #f0eeec;
+}
+.invoice_lib text{
+  display: block;float: left;font-size: 13px;color: #666;line-height: 30px;margin-left: 10px;
+}
+.invoice_lib image{
+  width: 20px;height: 20px;margin-top: 5px;float: right;margin-right: 10px;
+
+}
+.invoice switch .wx-switch-input{width:42px;height:22px;}
+.invoice switch .wx-switch-input::before{width:40px;height: 20px;}
+.invoice switch .wx-switch-input::after{width: 20px;height: 20px;}
+/* .invoice image{
+  width: 24px;height: 24px;margin-top: 8px;float: right;margin-right: 10px;
+} */
+
+
+.remarks{
+  width: 100%;height: 100px;background: white;float: left;
+}
+.remarks textarea{
+  width: calc(100% - 30px);margin-left: 15px;margin-top: 10px;height: 80px;font-size: 13px;color: #999;
+}
+
+
+
+.bottom{
+  width: 100%;position: fixed;bottom: 0px;background: #FAF5F0;height: 50px;z-index:9999;
+}
+.bottom .price{
+  width: calc(100% - 90px);height: 100%;display: block;float: left;color: DED7D2;font-size: 15px;padding-left: 10px;line-height: 50px;
+}
+.bottom .confirm{
+  width: 80px;background: #FF9600;color: white;display: block;float: left;font-size: 14px;line-height: 50px;height: 50px;text-align: center;
+}
+
+
+.textName{
+  display: block;
+}
+

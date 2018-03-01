@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/homepage/homepage",
+    "pages/ForgetPwd/ForgetPwd",
+    
+    "pages/payconfirm/payconfirm",
+    "pages/menu/menu",
+    "pages/send/send",
+    "pages/information/information",
+    "pages/order/order",
+    "pages/personal/personal",
+    "pages/login/login",
+    "pages/goods/goods",
+    "pages/searchAddress/searchAddress",
+    "pages/coupon/coupon",
+    "pages/address/address",
+    "pages/register/register",
+    "pages/addAddress/addAddress",
+    "pages/locationAddress/locationAddress",
+    "pages/addressRevise/addressRevise",
+    "pages/userInfromation/userInfromation",
+    "pages/revisePwd/revisePwd",
+    "pages/myCoupon/myCoupon",
+    "pages/contactUs/contactUs",
+    "pages/detailUrl/detailUrl",
+    "pages/map/map",
+    "pages/senderPosition/senderPosition",
+    "pages/pushNew/pushNew",
+    "pages/mall/mall"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#211e19",
+    "navigationBarTitleText": "功夫订餐",
+    "navigationBarTextStyle": "#211e19"
+  },
+  "tabBar": {
+    "color": "#3D231A",
+    "selectedColor": "#3D231A",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "selectedIconPath": "images/tabbar/home.png",
+        "iconPath": "images/tabbar/home_1.png",
+        "pagePath": "pages/homepage/homepage",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/tabbar/order.png",
+        "iconPath": "images/tabbar/order_1.png",
+        "pagePath": "pages/order/order",
+        "text": "订单"
+      },
+      {
+        "selectedIconPath": "images/tabbar/my.png",
+        "iconPath": "images/tabbar/my_1.png",
+        "pagePath": "pages/personal/personal",
+        "text": "我的"
+      }
+    ]
+  }
+}

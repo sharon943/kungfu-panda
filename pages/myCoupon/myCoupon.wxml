@@ -1,0 +1,56 @@
+<view class="pClass" style='background: #f0eeec;'>
+  <block wx:if = "{{couponPro.length > 0}}">
+  <scroll-view class="scroll" scroll-y="true">
+    <block wx:for="{{couponPro}}">
+      <view class="coupon">
+        <view class="content">
+          <view class="price">
+            <text class="cp"><text style='font-size: 26px;'>¥</text>{{item.gifts}}</text>
+            <text class="fullCut">{{item.constraint}}</text>
+            <view style="clear:both;"></view>
+          </view>
+          <view class="nameView">
+            <text class="name">{{item.name}}</text>
+            <block wx:if="{{item.nextDay >= 0}}">
+              <block wx:if = "{{item.nextDay == 0}}">
+                  <text class="date">今天到期</text>
+              </block>
+              <block wx:else>
+                <text class="date">还有{{item.nextDay}}天到期</text>
+              </block>
+              
+            </block>
+            <block wx:else>
+              <text class="date">已过期</text>
+            </block>
+          </view>
+          <!-- 2个圆弧 !-->
+           <!-- <view class="left_bottom_h"></view>
+          <view class="right_bottom_h"></view>  -->
+          <view style="clear:both;"></view>
+        </view>
+        <view class="present">
+          
+           <!-- <image bindtap='couponview' src='{{couponView ? open : close}}' data-item="{{item}}"></image>  -->
+           <!-- <image src='../../images/coupon/hidden.png' hidden='{{item.showid.length>0 ? flase:true}}' data-item="{{item}}"></image> -->
+             <text>{{item.remark}}</text>
+          <!-- <text>抗日根据而过后仍然竣工日竣工日额交易统计一个通融国际</text> -->
+          <view style="clear:both;"></view>
+          <!-- 2个圆弧 !-->
+           <!-- <view class="left_top_h"></view>
+          <view class="right_top_h"></view>  -->
+        </view>
+        <view style="clear:both;"></view>
+      </view>
+    </block>
+
+  </scroll-view>
+    </block>
+    <block wx:else>
+            <view class="gapViewClass">
+              <image src='../../images/gap/gap1.png'></image>
+              <text>暂无数据</text>
+            </view>
+          </block>
+
+</view>

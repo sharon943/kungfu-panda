@@ -1,0 +1,53 @@
+/* pages/login/login.wxss */
+.headViewClass{
+  width: 100%;height: 41px;
+}
+.headViewClass .text1{
+  display: block;float: left;width: 30%;margin: 0px 10%;color: #49322A;font-size: 13px;height: 40px;line-height: 40px;text-align: center;font-weight: lighter;
+}
+.headViewClass .text2{
+  display: block;float: left;width: 30%;margin: 0px 10%;color: #49322A;font-size: 13px;height: 40px;line-height: 40px;text-align: center;font-weight: lighter;
+}
+
+.type1{
+  width: 100%;height: calc(100% - 41px);
+}
+.phoneViewClass{
+  width: calc(100% - 30px);height: 60px;margin-left: 15px;padding-top: 35%;
+}
+.phoneViewClass image{
+  width: 30px;height: 30px;margin-top: 15px;float: left;padding-left: 5px;padding-right: 5px;
+}
+.phoneViewClass .phoneClass{
+  width: calc(100% - 55px);margin-left: 15px;float: left;border-bottom:1px solid #C5C5C5;
+}
+.phoneViewClass .phoneClass text{
+  display: block;float: left;font-size: 13px;color: #FF9600;line-height: 20px;height: 20px;margin-top: 10px;
+}
+.phoneViewClass .phoneClass input{
+  width: 100%;height: 30px;line-height: 30px;font-size: 12px;color: #4F3830;
+}
+.phoneViewClass .phoneClass button{
+    color: #FF9600;font-size: 12px;margin-top: 3px;padding-left: 0px;padding-right: 0px;height: 24px;width: 70px;line-height: 24px;
+}
+.phoneViewClass .phoneClass button::after{
+  content: none;
+}
+
+
+.loginViewClass{
+  width: 90%;margin-left: 5%;color: white;background: #FF9600;font-size: 14px;height: 50px;border-radius: 10px;line-height: 50px;
+}
+.loginViewClass::after{
+  content: none;
+}
+
+.bottomViewClass{
+  width: 90%;margin-left: 5%;height: 30px;padding-top: 8px;
+}
+.bottomViewClass .text1{
+  display: block;float: left;color: #4B342D;font-size: 11px;line-height: 30px;margin-left: 20px;
+}
+.bottomViewClass .text2{
+  display: block;float: right;color: #4B342D;font-size: 11px;line-height: 30px;
+}

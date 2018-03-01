@@ -1,0 +1,17 @@
+<!--pages/senderPosition/senderPosition.wxml-->
+<!-- <block wx:if="{{markers.length == 2}}">
+<map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" include-points="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 100vh;">
+</map>
+  <view style='position:fixed;top:0;left:0;z-index:99'>
+       <text>商家正在准备食物...</text>
+  </view> 
+</block>
+<block wx:else> -->
+   <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" include-points="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 100vh;">
+</map>
+  <!-- <view style='position:fixed;top:0;left:0;z-index:99'>
+       <text>骑手距您还有{{distance}}米</text>
+  </view>  -->
+<!-- </block> -->
+
+

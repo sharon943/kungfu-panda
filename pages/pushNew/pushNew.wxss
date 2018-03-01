@@ -1,0 +1,20 @@
+/* pages/pushNew/pushNew.wxss */
+.coupon text{
+   display: block;
+   color:#dcdcdc;
+   font-size: 14px;
+   margin-bottom: 5px;
+}
+.coupon > view{
+  position:absolute;width:70px;height:25px;top:25%;right:10px;font-size:14px;border-radius:20px;border:1px solid #888;text-align: center;line-height: 25px;
+}
+.fengexian{
+  width:85%;margin:0 auto;padding:10px;display:flex;justify-content: space-between; margin-top: 10px;
+}
+.fengexian > view{
+  width: 35%;
+  height: 1px;
+  background: #808080;
+  margin-top: 10px;
+ 
+}

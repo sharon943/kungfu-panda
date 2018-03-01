@@ -1,0 +1,59 @@
+<!--pages/login/login.wxml-->
+<view class="pClass" style='background: #fff'>
+  <view class="headViewClass">
+    <text class="text1" style="{{typeNum == 1 ? 'border-bottom: 1px solid #FF9600;' : ''}}" bindtap='btn_type' data-info="{{1}}">快捷登录</text>
+    <text class="text2" bindtap='btn_type' data-info="{{2}}" style="{{typeNum == 2 ? 'border-bottom: 1px solid #FF9600;' : ''}}">账号密码登录</text>
+  </view>
+  <view class="type1">
+    <form bindsubmit='btn_submit'>
+    <view class="phoneViewClass">
+      <image src='../../images/login/phone.png'></image>
+      <view class="phoneClass" style='position:relative;'>
+        <text style='width:100%;'>手机号</text>
+        <input placeholder='请输入手机号' style='width: calc(100% - 90px);float:left;' bindinput='input_phone' maxlength='11' type='number' name = "phone" value='{{phone}}'></input>
+          <button style='float:right;margin-right:10px;' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权使用</button>
+        <block wx:if="{{phone.length>0}}">
+          <image src='../../images/personal/del.png' style='position:absolute;bottom:5px;right:80px;width:20px;height:20px;z-index:9999;' bindtap='btn_get_del'></image>
+          </block>
+      </view>
+    </view>
+    <view class="phoneViewClass" style='padding-top: 10px;margin-bottom: 10%;'>
+      <block wx:if="{{typeNum == 1}}">
+        <image src='../../images/login/mes.png' style='width:30px;height:30px;padding-left: 5px;padding-right: 3px;'></image>
+        <view class="phoneClass">
+          <text style='width:100%;'>验证码</text>
+          <input placeholder='请输入验证码' style='width: calc(100% - 90px);float:left;' maxlength='6' type='number' name = "code"></input>
+          <button bindtap='btn_get_code' disabled='{{isCode}}'>{{timeData}}</button>
+        </view>
+      </block>
+      <block wx:else>
+        <image src='../../images/login/pwd.png' ></image>
+        <view class="phoneClass" style='position:relative;'>
+          <text style='width:100%;'>密码</text>
+          <block wx:if="{{passSee}}">
+          <input placeholder='请输入密码' name="pwd" password='true'></input>          
+          <image src='../../images/personal/passNot.png' style='position:absolute;bottom:5px;right:0;width:20px;height:20px;z-index:9999;' bindtap='btn_pass_see'></image>
+          </block>
+          <block wx:else>
+          <input placeholder='请输入密码' name="pwd" text='true'></input>          
+          <image src='../../images/personal/passSee.png' style='position:absolute;bottom:5px;right:0;width:20px;height:20px;z-index:9999;' bindtap='btn_pass_see'></image>
+          </block>
+        </view>
+      </block>
+    </view>
+
+    <button class="loginViewClass" form-type='submit'>登录</button>
+    </form>
+    <view class="bottomViewClass">
+     
+      <text class="text2" bindtap='btn_register'>新用户注册</text>
+    </view>
+  </view>
+</view>
+
+<view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>
+
+<view class= "toast" hidden='{{isToast}}'>
+    <text class = "content">{{toastData}}</text>
+    <view style="clear:both;"></view>
+</view>

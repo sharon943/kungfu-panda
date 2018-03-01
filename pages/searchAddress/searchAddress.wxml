@@ -1,0 +1,87 @@
+<!--pages/searchAddress/searchAddress.wxml-->
+<view class="pClass">
+  <view class="locationAddress">
+    <text class="address">猜你在: {{address}}</text>
+    <text class="order" bindtap='btn_order'>点击订餐</text>
+  </view>
+  <view style='width:100%;height:10px;float:left;background:f2f2f2;'></view>
+  <view class="search">
+    <view class="searchView">
+      <icon type='search' size="15" color="#FF9600" class='icon'></icon>
+      <input placeholder='输入您所在的详细地址' bindinput='btn_address_input'></input>
+    </view>
+    <text class = "so" bindtap='btn_search_one'>搜索</text>
+  </view>
+  <view class="foodAddress">
+    <text class="name" style='margin-top:0;'>送餐地址库</text>
+    <block wx:if = "{{addresObj}}">
+    <!-- <view style='width:100%;height:10px;float:left;background:white;'></view> -->
+    <block wx:if="{{isLogin}}">
+    <block wx:for="{{addresObj}}">
+      <view class = "adressView"  bindtap='btn_address_local' data-item = "{{item}}">
+      <text class="addressName">{{item.receiverAddress + item.appendReceiverAddress}}</text>
+      </view>
+      <view style="clear:both;"></view>
+    </block>
+    </block>
+    <block wx:else>
+        <view class = "adressView">
+      <text class="addressName">登录</text>
+      </view>
+    </block>
+    <!-- <view style='width:100%;height:10px;float:left;background:white;'></view> -->
+    
+    </block>
+    
+  </view>
+  <view class="foodAddress">
+    <text class="name" style='color:#848484;font-size:14px'>您可以通过以下历史地址快速设置</text>
+    <block wx:if = "{{locationAddress.address}}">
+    <!-- <view style='width:100%;height:10px;float:left;background:white;'></view> -->
+    <block wx:for="{{1}}">
+      <view class = "adressView" bindtap='btn_histroy_address' style='position:relative' >
+      <text class="addressName">{{locationAddress.address}}</text>
+      <!-- <image src='../../images/personal/del.png' style='position:absolute;top:10px;right:10px;width:20px;height:20px;z-index:9999;' bindtap='btn_get_del'></image> -->
+      </view>
+      <view style="clear:both;"></view>
+    </block>
+    
+    <!-- <view style='width:100%;height:10px;float:left;background:white;'></view> -->
+    </block>
+  </view>
+</view>
+
+
+<view class = "addressLib" hidden='{{isAddressLib&&addressPro.length==0}}'>
+    <text class = "cancel" bindtap='btn_cancel'>取消联想</text>
+    <scroll-view class = "lib" scroll-y="true">
+        <block wx:for = "{{addressPro}}">
+          <text class = "address-name" bindtap='btn_address_database' data-item = "{{item}}">{{item.address}}</text>
+        </block>
+        <view style="clear:both;"></view>
+    </scroll-view>
+</view>
+
+<!-- <view class = "modelViewClass" hidden='{{isModelView}}'>
+    <text class = "title">提示</text>
+    <text class = "content">十打开看到卡刷卡口袋宽松开衫大咖看看打卡看到</text>
+    <text class = "confirm">确认</text>
+</view> -->
+
+
+
+<view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>
+
+<view class = "commodityScreenClass" hidden='{{isLoading&isNotAddress}}'></view>
+<view class = "loading" hidden='{{isLoading}}'>
+    <text>Loading...</text>
+</view>
+
+<view class = "notAddress" style='border-radius:10px;' hidden='{{isNotAddress}}'>
+    <text class = "title">提示</text>
+    <view class = "content">
+      <text>该地址附近没有外卖的餐厅，请重新输入地址</text>
+    </view>
+    <text class = "confirm" bindtap='btn_addres_confirm'>确认</text>
+    <view style="clear:both;"></view>
+</view>

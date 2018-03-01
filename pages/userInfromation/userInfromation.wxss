@@ -1,0 +1,16 @@
+/* pages/userInfromation/userInfromation.wxss */
+.view1{
+  width: 100%;height: auto;background: white;
+}
+.view1 .type2{
+  width: calc(100% - 15px);height: 40px;margin-left: 15px;border-bottom: 1px solid #f0f0f0;
+}
+.view1 .type2 .text1{
+  display: block;float: left;line-height: 40px;font-size: 14px;color: #3d231a;
+}
+.view1 .type2 .text2{
+  display: block;float: left;font-size: 14px;color: #3d231a;margin-left:14px;height: 20px;margin-top: 6px;
+}
+.view1 .type2 .rightClass{
+  width: 12px;height: 20px;float: right;margin-top: 10px;margin-right: 10px;
+}

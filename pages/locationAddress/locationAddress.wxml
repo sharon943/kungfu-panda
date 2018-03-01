@@ -1,0 +1,42 @@
+<!--pages/locationAddress/locationAddress.wxml-->
+<view class='pClass' style='background: #f2f2f2;'>
+  <view class="city">
+    <text class = "name">城市</text>
+    <image src='../../images/address/bottom.png'></image>
+    <text class = "cityName">广州市</text>
+    
+  </view>
+  <view class="search">
+    <view class="searchInput">
+      <icon type='search' size="15" color="#666" class='icon'></icon>
+      <input placeholder='输入您所在的详细地址' bindinput='btn_address_input'></input>
+    </view>
+    <text class="name" bindtap='btn_search'>搜索</text>
+  </view>
+
+  <view class = "mapAddress">
+    <scroll-view scroll-y = "true" class = "scrollMap">
+        <block wx:for = "{{addressPro}}">
+            <view class = "mapView" bindtap='btn_address_location' data-item = "{{item}}">
+                <text class = "title">{{item.title}}</text>
+                <text class = "name">{{item.address}}</text>
+                <view style="clear:both;"></view>            
+            </view>
+        </block>
+    </scroll-view>
+</view>
+</view>
+
+
+
+<view class = "cityView" hidden='{{isCity}}'>
+    <scroll-view scroll-y = "true" class = "scrollCity">
+        <block wx:for = "{{cityPro}}">
+          <view class = "contentView">
+              <text>{{item.cityName}}</text>
+              <image src='../../images/address/gou.png'></image>
+          </view>
+        </block>
+    </scroll-view>
+
+</view>
