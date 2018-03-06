@@ -11,8 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    jumptype:'',
-    typejump:1,
+    jumptype: '',
+    typejump: 1,
     ak: "DA64usSVp77iVLCcC9pf5w1m9GeRhYey", //填写申请到的ak  
     markers: [],
     systWidth: 0,
@@ -31,7 +31,9 @@ Page({
     isLogin: 1,
     isAddressOne: true,
     isLocation: false,
-    actictyText: ''
+    actictyText: '',
+    width: '',
+    height: ''
   },
 
   /**
@@ -39,22 +41,28 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log(options)
 
-    app.globalData.isAddressOne = false
     wx.getSystemInfo({
       success: function (res) {
+        console.log(res)
         that.setData({
           systWidth: res.screenWidth,
-          typejump: options.jump,
+          systHeight: res.screenHeight,
+          typejump: options.bannerUrl,
         })
       },
     })
-
   
-    that.getAuthLocation();
-    // that.setCacheData();
-    // that.getLocationData();
     that.getOpenIdData();
+  },
+  imageLoad: function (e) {
+    console.log(e.detail)
+
+    this.setData({
+      width: e.detail.width,
+      height: e.detail.height
+    })
   },
 
   /**
@@ -74,39 +82,6 @@ Page({
       isViewDisabled: true
     })
 
-    // that.getUserInfoData();
-    if (app.globalData.isAddressOne) {
-
-      wx.getStorage({
-        key: 'LocationAddress',
-        success: function (res) {
-          // console.log(res)
-
-          that.setData({
-            addressStorage: res.data,
-            address: res.data.address,
-            latitude: res.data.latitude,
-            longitude: res.data.longitude
-          })
-
-          that.setCacheData(app.globalData.openId, res.data.city, app.globalData.JSESSIONID, res.data.latitude, res.data.longitude);
-        },
-        fail: function () {
-          that.setData({
-            isLoading2: true,
-            isNotAddress: false,
-            isAddress: 1
-          })
-        }
-      })
-    } else {
-      if (that.data.isLocation) {
-        that.setData({
-          isLoading2: false
-        })
-        that.getOpenIdData();
-      }
-    }
 
   },
 
@@ -246,24 +221,18 @@ Page({
       method: 'POST',
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
-        // console.log(res);
-
-        // if (!JSESSIONID) {
-        //   JSESSIONID = res.header["Set-Cookie"].match(/JSESSIONID=(.*)?;/)[1];
-        // }
-
+      
         app.globalData.cityName = city;
         app.globalData.JSESSIONID = JSESSIONID;
         that.getShopData(JSESSIONID, latitude, longitude);
         that.getPageData(JSESSIONID);
         that.getUserInfoData(JSESSIONID);
 
-        //   that.getCacheData(JSESSIONID);
 
       }
     })
   },
-  getPageData: function (JSESSIONID,jump) {
+  getPageData: function (JSESSIONID, jump) {
     var that = this;
 
 
@@ -279,7 +248,7 @@ Page({
           that.setData({
             dataPro: res.data.data,
             isLoading1: true,
-          
+
           })
 
         }
@@ -394,32 +363,7 @@ Page({
       }
     })
   },
-  getAuthLocation: function () {
-    var that = this;
-    wx.authorize({
-      scope: 'scope.userLocation',
-      success: function () {
-        // console.log('+++成功+++++');
-        //wx.startRecord()
-      },
-      fail: function () {
-        // console.log('+++++++55555555+');
-        wx.openSetting({
-          success: function (res) {
-            // console.log(res);
-            if (res.authSetting['scope.userLocation']) {
-              // console.log(res);
-            } else {
-              that.getAuthLocation();
-            }
-          },
-          fail: function () {
-            // console.log(1111);
-          }
-        })
-      }
-    })
-  },
+
   //获取满减活动
   getActivityData: function (memberId) {
 

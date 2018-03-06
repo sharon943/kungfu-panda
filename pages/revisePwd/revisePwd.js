@@ -11,8 +11,7 @@ Page({
     pwd1: null,
     pwd2: null,
     isToast: true,
-    toastData: '',
-    inputVIew:true,
+    toastData: ''
   },
 
   /**
@@ -22,7 +21,6 @@ Page({
     wx.setNavigationBarTitle({
       title: '修改密码',
     })
-   
   },
 
   /**
@@ -83,16 +81,7 @@ Page({
 
     this.setData({
       pwd2: e.detail.value
-    }) 
-    if (this.data.pwd1 != '' | this.data.pwd2 != '') {
-      this.setData({
-        inputVIew: false
-      })
-    } else if (this.data.pwd1 == '' & this.data.pwd2 == '') {
-      this.setData({
-        inputVIew: true
-      })
-    }
+    })
   },
   revisePwd:function(){
     var that = this;
@@ -160,11 +149,5 @@ Page({
       })
     }
    
-  },
-  ForgetPwd:function(){
-    wx.navigateTo({
-      url: '../ForgetPwd/ForgetPwd',
-    })
-    console.log(app.globalData.ForgetPhone)
   }
 })

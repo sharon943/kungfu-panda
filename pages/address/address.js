@@ -16,8 +16,7 @@ Page({
     toastData: '',
     isLoading: false,
     typeNum: 0,
-    isNotAddress: true,
-    Rewite:false,
+    isNotAddress: true
   },
 
   /**
@@ -160,7 +159,7 @@ Page({
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success:function(res){
         console.log(res);
-        // res.data.data[0].isDefault=1
+
         if (res.data.status == 1){
           if(!res.data.data){
             that.setData({
@@ -199,25 +198,8 @@ Page({
       url: '../addAddress/addAddress',
     })
   },
-  btn_get_write:function(){
-    var that = this;
-
-    that.setData({
-      Rewite: true,
-    })
-  },
-  btn_get_finish:function(){
-    var that = this;
-
-    that.setData({
-      Rewite: false,
-    })
-    console.log(that.data.Rewrite)
-  },
-  btn_get_cancel:function(){
-    
-  },
   btn_delete: function(e){
+
     var that = this;
     var JSESSIONID = app.globalData.JSESSIONID;
 
@@ -225,38 +207,24 @@ Page({
     that.setData({
       isViewDisabled: false
     })
-    wx.showModal({
-      title: '删除地址',
-      content: '确认要删除改地址',
-      confirmColor: '#ffc600',
-      // cancelColor:'#3d231a',
-      confirmText: '确认',
-      success: function (res) {
-        console.log(res);
-        if (res.confirm) {
-        
-          wx.request({
-            url: url.deleteAddress,
-            data: { addressId: e.currentTarget.dataset.info.aid },
-            method: 'POST',
-            header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
-            success: function (res) {
-              that.setData({
-                isViewDisabled: true
-              })
-              if (res.data.status == 1) {
-                console.log('+++++++++++++++++++++++++++++++');
-                that.getAllAdress(JSESSIONID);
-              } else if (res.data.status == 9) {
-                wx.navigateTo({
-                  url: '../login/login',
-                })
-              } else if (res.data.status == 11) {
-                that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
-              }
-            }
+    wx.request({
+      url: url.deleteAddress,
+      data: { addressId: e.currentTarget.dataset.info.aid},
+      method: 'POST',
+      header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
+      success:function(res){
+          that.setData({
+            isViewDisabled: true
           })
-
+        if(res.data.status == 1){
+          console.log('+++++++++++++++++++++++++++++++');
+          that.getAllAdress(JSESSIONID);
+        } else if (res.data.status == 9) {
+          wx.navigateTo({
+            url: '../login/login',
+          })
+        } else if (res.data.status == 11) {
+          that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
         }
       }
     })

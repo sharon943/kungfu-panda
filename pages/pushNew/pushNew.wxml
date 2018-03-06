@@ -1,25 +1,46 @@
 <!--pages/pushNew/pushNew.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>  
+<block wx:if="{{dataView}}">
 <view style='background:white'>
     <view class='topImg' style='width:100%;height:{{systWidth*0.7}}px;position:relative;margin-bottom:20px;'>
-       <image src='../../images/pushNew/backPanda.png' style='width:100%;height:100%'></image>
-       <view style='position:absolute;top:15px;right:0;width:50px;height:40px'></view>
+       <image src='{{ShareInfo.participateImageUrl}}' style='width:100%;height:100%'></image>
+       <view style='position:absolute;top:15px;right:0;width:50px;height:40px' bindtap='get_rules'></view>
+       <view class='rule' hidden='{{RulesView}}'>
+        <view style='position:relative;width:100%;height:100%;'>
+              <image src='../../images/pushNew/cha.png' style='width:25px;height:25px;position:absolute;top:-30px;right:-15px;z-index:100' catchtap='dis_rules'></image> 
+             <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+              <!-- <text>{{ShareInfo.remark}}</text> -->
+        </view> 
+      </view>
     </view>
     
-     <view class='coupon' style='width:85%;margin:0 auto;box-shadow:0 0 6px rgba(0,0,0,0.2);padding:10px;position:relative;'>
-       <text style='color:#000;'>全场通用5元代金券</text> 
-       <text>· 还有30天到期</text>
+     <view class='coupon' style='width:85%;margin:0 auto;box-shadow:0 0 6px rgba(0,0,0,0.2);padding:10px;position:relative;margin-bottom:15px;' wx:for='{{ShareInfo.ticketTemplatesList}}'>
+       <text style='color:#000;font-weight:bold;font-size: 14px;'>{{item.name}}</text> 
+       <text>· 有效期至{{item.endTime}}</text>
        <text>· 全场满30元可用，不闲任何菜品以及及喝牛奶</text>
-       <view>立即使用</view>
+       <view bindtap='useIt'>立即使用</view>
      </view> 
-       
+    
        <view class='fengexian'>
            <view></view>
            <text style='font-size:16px;color:#000;'>领取名单</text>  
            <view></view> 
        </view>
-       <view class='list' style='width:85%;margin:0 auto;padding:10px;'>
-            <image src=''></image>
-       
+       <view class='list' style='width:85%;height:50px;margin:0 auto;padding:10px;display:flex;justify-content:space-between;font-size:18px;line-height:50px;' wx:for="{{sharePeopleistList}}">
+          <view style='display:flex;justify-content:space-between;width:30%;'>
+            <image src='{{item.headUrl}}' style='width:50px;height:50px;'></image>
+            <text style='font-size:16px;'>{{item.name}}</text>
+          </view>
+          <text style='color:#a0a0a0;font-size:14px;'>{{item.createdString}}</text>
        </view>
-    
+</view>
+</block>
+<block wx:else>
+    <view class = "loading" hidden='{{isLoading1&isLoading2}}'>
+       <text>Loading...</text> 
+    </view> 
+</block>
+<view class= "toast" hidden='{{isToast}}'>
+    <text class = "content">{{toastData}}</text>
+    <view style="clear:both;"></view>
 </view>

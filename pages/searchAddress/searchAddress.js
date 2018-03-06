@@ -303,7 +303,7 @@ Page({
   getStorageData:function(){
     
     var that = this;
-// console.log()
+
     wx.getStorage({
       key: 'LocationAddress',
       success: function (res) {
@@ -315,9 +315,6 @@ Page({
 
       }
     })
-  },
-  btn_get_del:function(){
-
   },
   btn_histroy_address:function(){
     var that = this;
@@ -335,8 +332,21 @@ Page({
       var region='广州'
       if (that.data.isLogin) {
       if (searchName != ''){
-        var that = this;      
-      
+
+        var that = this;
+        
+        // wx.request({
+        //   url: 'http://api.map.baidu.com/geocoder?address=' + searchName +'&output=json&key=qULkkI8CLAY1HTeHXNcynLXduqeydaLk&city='+region,
+        //   method: 'GET',
+       
+        //   success: function (res) {
+        //     console.log(res);
+        //     // app.globalData.cityName = city;
+        //     // that.getShopData(city, JSESSIONID, latitude, longitude, address);
+        //     //   that.getCacheData(JSESSIONID);
+
+        //   }
+        // })
         qqmapsdk.getSuggestion({
           keyword: searchName,
           policy: 1,

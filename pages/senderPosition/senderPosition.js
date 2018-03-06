@@ -60,7 +60,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(options)
+    console.log(options.latitude, options.longitude)
     app.globalData.isAddressOne = false
     wx.getSystemInfo({
       success: function (res) {
@@ -74,17 +74,16 @@ Page({
         })
       },
     })
-    if (that.data.storeId != '' & that.data.storeId != undefined) {
-        that.getShopPosition();
-    }
-    
+    that.getShopPosition();
     that.getSenderPosition(); 
     console.log(options.latitude, options.longitude)
     console.log(app.globalData.shopId);
-   
+    
+    // that.getCityAddress();
     that.getAuthLocation();  
-  
-
+    // that.setCacheData();
+    // that.getLocationData();
+    that.getOpenIdData();
   },
 
   /**
@@ -133,7 +132,7 @@ Page({
         that.setData({
           isLoading2: false
         })
-      
+        that.getOpenIdData();
       }
     }
 
@@ -178,7 +177,58 @@ Page({
     }
 
   },
+  getOpenIdData: function () {
+    var openId;
+    if (app.globalData.openId) {
+      openId = app.globalData.openId;
+      this.setData({
+        openId: app.globalData.openId
+      })
+      console.log(this.data.openId)
+      this.getLocationData(openId);
+    } else {
+      app.openIdReadyCallback = res => {
+        // console.log(res);
+        openId = res.openId
+        this.setData({
+          openId: res.openId
+        })
 
+        this.getLocationData(openId);
+      }
+
+    }
+  },
+  getLocationData: function (openId) {
+    var that = this;
+  
+    wx.getLocation({
+      success: function (res) {
+        console.log(res);
+        app.globalData.longitude = res.longitude;
+        app.globalData.latitude = res.latitude;
+
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude,
+          addressStorage: null,
+          
+        })
+        // that.getCityAddress(openId, res.latitude, res.longitude)
+        console.log(that.data.markers);
+      },
+      fail: function () {
+        that.setData({
+          isLoading2: true,
+          isLoading1: true,
+          isNotAddress: false,
+          isAddress: 1,
+          address: '无法获取当前位置',
+          isLocation: true
+        })
+      }
+    })
+  },
  
   setCacheData: function (openId, city, JSESSIONID, latitude, longitude) {
     var that = this;
@@ -289,7 +339,7 @@ Page({
   },
   getSenderPosition() {
     var that = this;
- 
+    // that.getShopPosition()
     var JSESSIONID = app.globalData.JSESSIONID;
     var orderId = that.data.orderId
     console.log(orderId)
@@ -341,22 +391,22 @@ Page({
             }
           },
         })
-        console.log(that.data.marker2)
-        if (that.data.storeId == ''|that.data.storeId ==undefined){
+        console.log(that.data.marker3)
+        if ((that.data.marker2.latitude == 0 & that.data.marker2.longitude == 0) | (that.data.marker2.longitude == undefined & that.data.marker2.latitude == undefined) | (that.data.marker2.latitude == null & that.data.marker2.longitude == null)){
         that.setData({
-          markers: [that.data.marker2, that.data.marker3],
+          markers: [that.data.marker1, that.data.marker3],
         });
       }else{
         that.setData({
           markers: [that.data.marker1, that.data.marker2, that.data.marker3],
         });
       }
-        console.log(that.data.markers)
+
         
       }
       
     })  
-    
+    console.log(that.data.marker3)
     // setTimeout(function(){
     //   that.getSenderPosition()
     // },1000*60)

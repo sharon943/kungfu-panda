@@ -1,0 +1,4 @@
+<!--pages/WebView/webview.wxml-->
+
+<uses-permission android:name="android.permission.INTERNET"/>
+<web-view src="{{path}}" bindtap='getUrl'>123</web-view>

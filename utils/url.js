@@ -10,7 +10,7 @@ var key ='&key=b8396b24f70ae5c3'//测试
 var urlk = 'https://api.vi-ni.com/';
 // var urlk = 'https://api.v-ka.com/';//正式
 var storeID='376';
-// var storeID = '5771';//正式
+// var storeID='5771';//正式
 module.exports = {
   getSenderPosition: url +'Action?actionId=1&serviceId=17'+key,
   getShopPosition: url +'Action?actionId=1&serviceId=3'+key,
@@ -20,9 +20,7 @@ module.exports = {
   getCache: url + 'Cache?actionId=2',
   setCache: url + 'Cache?actionId=1',
   getStoreId: url + 'Action?actionId=95&serviceId=3' + key,
-
   getMenu: url + 'Action?actionId=1&serviceId=5' + key,
-
   getAddressDataBase: url +'SecretAction?actionId=3&serviceId=4' + key,
   codeLogin: url + 'Action?actionId=59&serviceId=4' + key,
   phoneLogin: url + 'Action?actionId=10&serviceId=4' + key,
@@ -79,6 +77,11 @@ module.exports = {
   cancelOrderVk: urlk + 'openapi/v4_2/order/cancel/',
 
   confirmOrderVk: urlk + 'openapi/v4_2/order/complete/',
-   getloadingImg: urlk + 'webapi/v4_1/getParentStartImg/' + storeID
-
+  getloadingImg: urlk + 'webapi/v4_1/getParentStartImg/' + storeID,
+  GetSharepersoninfo: urlk +'webapi/v4_1/activity/participation/information/', 
+  getActivityList: urlk +'webapi/v4_1/activity/',
+  getActivity: urlk +'webapi/v4_1/activity/getBrandActivity/',
+  getUseIt: urlk +'webapi/v4_1/activity/participate',
+  fastRegister: urlk +'openapi/v4_2/card/fastRegister',
+  refund: url + 'SecretAction?actionId=14&serviceId=7' + key,
 }

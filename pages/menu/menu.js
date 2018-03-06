@@ -8,9 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    Discounttype: 0,
+    Discounttype:0,
     menuDataPro: [],
-    discountMenu: [],
+    discountMenu:[],
     // activityProMenu:[],
     typeId: '1',
     goodsIndex: 0,
@@ -66,7 +66,7 @@ Page({
     menuId: null,
     noticePro: null,
     isNoticeShop: true,
-    typeNum: 1,
+    typeNum: 0,
     address: null,
     index: 0,
     typeNamePro: null,
@@ -81,7 +81,7 @@ Page({
     isBusiness: true,
     deliveryNum: 1,
     actictyText: '2121',
-    productActicty: {},
+    productActicty:{},
     mealFeeMoney: 0,
     natureMealFee: 0,
     appinTimePro: [],
@@ -93,8 +93,7 @@ Page({
     isLogin: 0,
     typeName: '',
     typePro_: [],
-    nameHH: '',
-    iconPath: ''
+    nameHH:''
   },
 
   /**
@@ -108,20 +107,14 @@ Page({
     //   console.log(openId)
 
     // })
-    that.setData({
-      iconPath: app.globalData.iconPath,
-
-    })
-    console.log(app.globalData.iconPath)
-    console.log(that.data.iconPath)
-    if (options.jump == undefined | options.jump == null | options.jump == "") {
+    if (options.jump==undefined | options.jump==null | options.jump==""){
       app.globalData.typeValue = null;
       app.globalData.timeValue = null;
     }
 
-    if (app.globalData.typeValue != undefined & app.globalData.typeValue != null) {
+    if (app.globalData.typeValue != undefined & app.globalData.typeValue!=null){
       that.setData({
-        typeValue: app.globalData.typeValue
+        typeValue : app.globalData.typeValue
       })
     }
     if (app.globalData.timeValue != undefined & app.globalData.timeValue != null) {
@@ -129,8 +122,8 @@ Page({
         timeValue: app.globalData.timeValue
       })
     }
-    console.log(options)
-    console.log(options.typeNum)
+console.log(options)
+   console.log(options.typeNum)
     if (options.typeNum == 1) {
       wx.getSystemInfo({
         success: function (res) {
@@ -146,13 +139,8 @@ Page({
           })
         }
       })
-      if (that.data.address.length>10){
-        that.setData({       
-          address: that.data.address.substring(0,10)+'...',
-        })
-      }
       that.getActivityData();
-      that.GetData(app.globalData.JSESSIONID, that, options.shopId, options.jump, that.data.typeValue, that.data.timeValue);
+      that.GetData(app.globalData.JSESSIONID, that, options.shopId, options.jump,that.data.typeValue,that.data.timeValue);
       that.getShopData(app.globalData.JSESSIONID, options.latitude, options.longitude);
       that.getNoticeData(app.globalData.JSESSIONID, options.shopId);
     } else {
@@ -170,7 +158,7 @@ Page({
       that.getMenuIdData(app.globalData.JSESSIONID, that.data.typeValue);
     }
 
-
+   
     that.getNoticeData();
   },
 
@@ -178,7 +166,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
 
   /**
@@ -196,12 +184,12 @@ Page({
       // that.getActivityData();
       // that.GetData(app.globalData.JSESSIONID, that, shopId, jump, app.globalData.typeValue);
       //  that.getShopData(app.globalData.JSESSIONID, latitude, longitude);
-      that.getNoticeData(app.globalData.JSESSIONID, shopId);
+      // that.getNoticeData(app.globalData.JSESSIONID, shopId);
 
-
-
+     
+      
     } else {
-      that.getMenuIdData(app.globalData.JSESSIONID, TYPEVALUE);
+      // that.getMenuIdData(app.globalData.JSESSIONID, TYPEVALUE);
       that.setData({
         isNotAddress: true,
       })
@@ -221,6 +209,8 @@ Page({
       tIndex: app.globalData.tIndex,
       sIndex: app.globalData.tIndex,
     })
+    console.log(this.data.menuPro)
+    console.log(app.globalData.menuPro)
 
   },
 
@@ -258,9 +248,9 @@ Page({
   onShareAppMessage: function () {
 
   },
-
+  
   GetData: function (JSESSIONID, that, id, jump, typeValue, reserveDate) {
-
+    
     console.log(jump);
     console.log(typeValue);
     wx.request({
@@ -273,7 +263,7 @@ Page({
       method: 'POST',
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
-
+        
         console.log(res);
 
         //   app.globalData.XHNum = res.data.data.tableName;
@@ -281,8 +271,8 @@ Page({
         //   app.globalData.shopName = res.data.data.storeImg;
 
         if (res.data.status == 1) {
-
-
+       
+         
           var jumptemp = jump;
           var goodsIndex = 0;
 
@@ -305,7 +295,7 @@ Page({
             menuId: res.data.data.menuId,
             isLoading1: true,
           })
-
+         
           that.getActivityData();
           // console.log(that.data.menuDataPro)
           console.log(that.data.menuDataPro)
@@ -320,22 +310,24 @@ Page({
     })
   },
   btnType: function (res) {
+    console.log(res.currentTarget.dataset.item.uid)
     // console.log(res);
     this.setData({
       goodsIndex: res.currentTarget.dataset.index,
       typeId: res.currentTarget.dataset.item.uid,
-      Discounttype: 0,
+      Discounttype:0,
     })
   },
-  btnDiscount: function () {
+  btnDiscount:function(){
     this.setData({
-      Discounttype: 1,
+      Discounttype:1,
       typeId: 1,
     })
   },
   btnImageAdd: function (res) {
     // console.log(res);
-
+    // console.log(this.data.menuPro)
+    console.log(this.data.typeId)
     if (res.currentTarget.dataset.item.requirements) {
       var naturePrice = 0;
       var naturePro = res.currentTarget.dataset.item.requirements;
@@ -365,6 +357,7 @@ Page({
 
 
     } else {
+      console.log(this.data.menuPro)
       var menuPro = this.data.menuPro;
       var typePro = this.data.typePro;
       var menuProArray = this.data.menuProArray;
@@ -428,6 +421,7 @@ Page({
     })
   },
   modal_image_add_click: function () {
+    console.log(this.data.typeId)
     var menuPro = this.data.menuPro;
     var typePro = this.data.typePro;
     var menuName = this.data.menuName;
@@ -591,6 +585,7 @@ Page({
   },
   btnImageSub: function (e) {
     // console.log(e);
+    console.log(this.data.typeId)
     var item = e.currentTarget.dataset.item;
     var typeId = this.data.typeId;
     var specialOfferPrice = this.data.specialOfferPrice;
@@ -657,8 +652,8 @@ Page({
       return;
     }
 
-    if (this.data.allMenu['menuNum'] == 0) {
-      return;
+    if (this.data.allMenu['menuNum'] == 0){
+      return ;
     }
 
     var animation = wx.createAnimation({ duration: 400, timingFunction: "ease" });
@@ -726,13 +721,13 @@ Page({
     app.globalData.sendMoney = this.data.shopPro.deliveryFee * 100;
     var money = allMenu['menuPrice'] + this.data.shopPro.deliveryFee * 100;
     app.globalData.meailFee = this.data.mealFeeMoney;
-    if (isNaN(app.globalData.meailFee)) {
-      app.globalData.meailFee = 0;
+    if (isNaN(app.globalData.meailFee)){
+      app.globalData.meailFee=0;
     }
     if (isNaN(app.globalData.sendMoney)) {
       app.globalData.sendMoney = 0;
     }
-
+   
     app.globalData.typePro = this.data.typePro;
 
     if (typeName == '外卖(繁忙)' || typeName == '自取(繁忙)' || typeName == '预约(繁忙)') {
@@ -740,65 +735,52 @@ Page({
       wx.showModal({
         title: '提示',
         content: '当前门店处于繁忙状态，请稍后下单',
-        confirmColor: '#ffc600',
-        confirmText: '确认',
       })
       return;
     }
-    if (this.data.typeValue == 2) {
-      if (this.data.timeValue == 0) {
+    if (this.data.typeValue == 2){
+      if (this.data.timeValue == 0){
         wx.showModal({
           title: '提示',
           content: '请选择自取时间',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
         })
         return;
       }
-    } else if (this.data.typeValue == 4) {
+    } else if (this.data.typeValue == 4){
       if (this.data.timeValue == 0) {
         wx.showModal({
           title: '提示',
           content: '请选择预约时间',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
         })
 
         return;
       }
     }
 
-    console.log(allMenu['menuNum'])
-    console.log(allMenu['menuPrice'])
-    console.log(this.data.mealFeeMoney)
-    console.log(allMenu['menuPrice'] / 100 + this.data.mealFeeMoney / 100)
+    // console.log(this.data.isLogin)
+    // console.log(this.data.shopPro.isServiceTime)
     if (this.data.isLogin == 1) {
-      console.log(allMenu['menuNum'])
-      // if (allMenu['menuNum'] > 0) {
-      if (allMenu['menuPrice'] / 100 + this.data.mealFeeMoney / 100 > 19 & allMenu['menuNum'] > 0){
+      console.log(this.data.shopPro.isServiceTime)
+      if (allMenu['menuNum'] > 0) {
         this.setData({
           isViewDisabled: false
         })
-
+        console.log(this.data.menuDataPro)
+        var a = JSON.stringify(this.data.menuDataPro)
         wx.navigateTo({
-          url: '../send/send?shopId=' + this.data.shopId + '&menuId=' + this.data.menuId + '&money=' + money + '&goodsMoney=' + allMenu['menuPrice'],
+          url: '../send/send?shopId=' + this.data.shopId + '&menuId=' + this.data.menuId + '&money=' + money + '&goodsMoney=' + allMenu['menuPrice'] + '&menuDataPro=' + a,
         })
-      }else if (!this.data.shopPro.isServiceTime) {
+      } else if (!this.data.shopPro.isServiceTime) {
         return
-      } else if (allMenu['menuPrice'] / 100 + this.data.mealFeeMoney / 100 < 20 & allMenu['menuNum'] > 0){
-        return
-      }
-       else if (allMenu['menuNum'] <1) {
+      } else {
         wx.showModal({
           title: '提示',
           content: '您还没有点餐哦～',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
         })
       }
-    }else if (this.data.isNotAddress){
+    } else if (this.data.isNotAddress){
        return
-    }else {
+    } else {
       wx.navigateTo({
         url: '../login/login',
       })
@@ -993,19 +975,6 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.data.status == 1) {
-          if (res.data.data.iconPath != undefined | res.data.data.iconPath != null) {
-            app.globalData.iconPath = res.data.data.iconPath;
-            
-            that.setData({
-              iconPath:app.globalData.iconPath
-            })
-
-          } else {
-            app.globalData.iconPath = ''
-            that.setData({
-              iconPath: app.globalData.iconPath
-            })
-          }
           var typeNamePro = [];
           app.globalData.extId = res.data.data.extId;
           app.globalData.shopId = res.data.data.storeId;
@@ -1095,17 +1064,17 @@ Page({
           var appointTimes = res.data.data.appointTimes;
           var takeSelfTimes = res.data.data.takeSelfTimes;
           for (var i = 0; i < appointTimes.length; i++) {
-
-            res.data.data.appointTimes[i].times = that.setTimeQuantun(res.data.data.appointTimes[i].date, appointTimes[i].times[0], 45);
+            
+            res.data.data.appointTimes[i].times = that.setTimeQuantun(res.data.data.appointTimes[i].date, appointTimes[i].times[0],45);
             res.data.data.appointTimes[i].times.reverse();
           }
           for (var i = 0; i < takeSelfTimes.length; i++) {
-
-            res.data.data.takeSelfTimes[i].times = that.setTimeQuantun(res.data.data.takeSelfTimes[i].date, takeSelfTimes[i].times[0], 15);
+            
+            res.data.data.takeSelfTimes[i].times = that.setTimeQuantun(res.data.data.takeSelfTimes[i].date, takeSelfTimes[i].times[0],15);
             res.data.data.takeSelfTimes[i].times.reverse();
 
           }
-          if (typePro_.length > 0) {
+          if (typePro_.length > 0){
             if (typePro_[0].id == 2) {
               var takeSelfTimes1 = [];
               var takeSelfTimes2 = [];
@@ -1167,26 +1136,30 @@ Page({
                 timeValue = 0;
               }
             }
-          }
+          }  
           if (app.globalData.timeValue == undefined | app.globalData.timeValue == null | app.globalData.timeValue == 0) {
             app.globalData.timeValue = timeValue;
-          } else {
-            timeValue = app.globalData.timeValue;
+          }else{
+            timeValue = app.globalData.timeValue ;
           }
-
-          if (app.globalData.typeValue == undefined | app.globalData.typeValue == null | app.globalData.typeValue == 0) {
+          
+          if (app.globalData.typeValue == undefined | app.globalData.typeValue == null | app.globalData.typeValue==0){
             app.globalData.typeValue = res.data.data.deliveryType[0];
           }
           app.globalData.shopLongitude = longitude;
           app.globalData.shopLatitude = latitude;
           app.globalData.isInvoice = res.data.data.isInvoice;
           app.globalData.invoiceType = res.data.data.invoiceType;
-          // app.globalData.invoiceType = [1, 2];
+          // app.globalData.invoiceType = [1,2];
 
           // for(var i = 0 ; i < )
           that.judgeShopBusiness(res.data.data.serviceTime);
           // console.log(typeNamePro);
-          that.setData({
+          // if (res.data.data.isServiceTime=true){
+          //   res.data.data.isServiceTime = false
+          // }
+          // res.data.data.isServiceTime=false
+          that.setData({      
             shopPro: res.data.data,
             typeNamePro: typeNamePro,
             appointTimes: res.data.data.appointTimes,
@@ -1261,7 +1234,7 @@ Page({
     if (time3 >= time4) {
       if (time3 > time5) {
 
-
+        
 
         if (minutes == '0') {
           minutes = '00'
@@ -1278,7 +1251,7 @@ Page({
         var hour = endTime.getHours();
         var minutes = endTime.getMinutes();
         time2 = dateName + ' ' + hour + ':' + minutes;
-
+       
         this.getTimeData(dateName, time2, pushPro, timeQuantunBefore, minuteNum);
 
       } else {
@@ -1328,7 +1301,7 @@ Page({
         var minutes = endTime.getMinutes();
 
         time2 = endTime.getFullYear() + '-' + (endTime.getMonth() + 1) + '-' + endTime.getDate() + ' ' + hour + ':' + minutes;
-
+       
         this.getNextTimeData(dateName, time2, pushPro, timeQuantunBefore);
       } else {
         this.setData({
@@ -1371,6 +1344,7 @@ Page({
     })
   },
   btn_image: function (e) {
+    console.log(e)
     var that = this;
     var item = e.currentTarget.dataset.item;
 
@@ -1441,9 +1415,10 @@ Page({
       method: 'POST',
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
-        // console.log(res);
+        console.log(res);
 
         if (res.data.status == 1) {
+          // res.data.data.appTip = '实付10元减1元，20元减3元，30元减5元。哎哎哎哎哎哎哎哎啦啦啦啦啦啦嗯嗯嗯嗯嗯额'
           // if (res.data.data.appTip.length > 20) {
           //   that.setData({
           //     text: res.data.data.appTip.substring(0,20)+'...'
@@ -1455,6 +1430,8 @@ Page({
             noticePro: res.data.data,
             isLogin: 1
           })
+          console.log(that.data.text)
+          
         } else if (res.data.status == 9) {
           that.setData({
             isLogin: -1
@@ -1471,7 +1448,7 @@ Page({
     })
   },
   //地址错误时展示的商品界面
-  getMenuIdData: function (JSESSIONID, TYPEVALUE) {
+  getMenuIdData: function (JSESSIONID,TYPEVALUE) {
     var that = this;
 
     wx.request({
@@ -1506,7 +1483,7 @@ Page({
             isLoading2: true,
             isLoading1: true,
             typeValue: TYPEVALUE,
-            isBusiness: false
+            isBusiness:false
           })
         } else if (res.data.status == 9) {
           wx.navigateTo({
@@ -1554,36 +1531,32 @@ Page({
     console.log(e);
 
     var that = this;
+    
     var appointTimes = that.data.appointTimes;
     var takeSelfTimes = that.data.takeSelfTimes;
     var item = e.detail;
     var typeNamePro = that.data.typeNamePro;
-    // console.log(takeSelfTimes);
+    console.log(takeSelfTimes);
     var oIndex = that.data.oIndex;
     var tIndex = that.data.tIndex;
     var typeValue = that.data.typeValue;
     var typePro_ = that.data.typePro_;
-    // console.log(appointTimes);
-    console.log(item.column)
+    
+    console.log(appointTimes);
+    console.log(typePro_ )
     switch (item.column) {
-
-
       case 0:
-        // oIndex: 0,
-        //   tIndex: 0,
-        //     sIndex: 0
-
         if (typePro_[item.value].id == 1) {
 
-          typeNamePro[1] = [];
-          typeNamePro[2] = [];
+            typeNamePro[1] = [];
+            typeNamePro[2] = [];
 
-          that.setData({
-            typeNamePro: typeNamePro,
-            oIndex: item.value
-          })
-
-        } else if (typePro_[item.value].id == 2) {
+            that.setData({
+              typeNamePro: typeNamePro,
+              oIndex: item.value
+            })
+         
+        } else if (typePro_[item.value].id == 2){
 
           var takeSelfTimes1 = [];
           var takeSelfTimes2 = [];
@@ -1609,7 +1582,7 @@ Page({
             sIndex: 0
           })
 
-        } else if (typePro_[item.value].id == 4) {
+        } else if (typePro_[item.value].id == 4){
           var appointTimes1 = [];
           var appointTimes2 = [];
           for (var i = 0; i < appointTimes.length; i++) {
@@ -1635,10 +1608,31 @@ Page({
             sIndex: 0
           })
         }
-        break;
+          break;
 
       case 1:
+      
+        app.globalData.menuPro = {};
+        app.globalData.allpro = { 'menuNum': 0, 'menuPrice': 0 };
+        app.globalData.menuProArray = {};
+        app.globalData.sendAddress = null;
+        app.globalData.specialOfferPrice = 0; 
+        app.globalData.typePro = {};
+        app.globalData.meailFee = 0;
 
+        that.setData({
+          menuPro: {},
+          typePro: {},
+          menuProArray: {},
+          allMenu: { 'menuNum': 0, 'menuPrice': 0 },
+          isShopCarCommodity: true,
+          hiddenBuyCarStatus: true,
+          hiddenMenuPro: true,
+          isHiddenModal: true,
+          isHiddenScreenStatus: true,
+          specialOfferPrice: 0,
+          mealFeeMoney: 0
+        })
         if (typePro_[oIndex].id == 2) {
           var takeSelfTimes1 = [];
           for (var i = 0; i < takeSelfTimes[item.value].times.length; i++) {
@@ -1677,6 +1671,27 @@ Page({
         break;
 
       case 2:
+        app.globalData.menuPro = {};
+        app.globalData.allpro = { 'menuNum': 0, 'menuPrice': 0 };
+        app.globalData.menuProArray = {};
+        app.globalData.sendAddress = null;
+        app.globalData.specialOfferPrice = 0;
+        app.globalData.typePro = {};
+        app.globalData.meailFee = 0;
+
+        that.setData({
+          menuPro: {},
+          typePro: {},
+          menuProArray: {},
+          allMenu: { 'menuNum': 0, 'menuPrice': 0 },
+          isShopCarCommodity: true,
+          hiddenBuyCarStatus: true,
+          hiddenMenuPro: true,
+          isHiddenModal: true,
+          isHiddenScreenStatus: true,
+          specialOfferPrice: 0,
+          mealFeeMoney: 0
+        })
         that.setData({
           sIndex: item.value
         })
@@ -1721,7 +1736,7 @@ Page({
     } else if (oIndex == 0) {
       timeValue = 0;
     }
-
+    
 
     if (app.globalData.typeValue != typeValue) {
 
@@ -1855,7 +1870,7 @@ Page({
                 that.setData({
                   actictyText: res.data.data[k].ruleDetail
                 })
-              } else if (res.data.data[k].type == 5) {
+              }else if (res.data.data[k].type == 5) {
                 that.setData({
                   productActicty: res.data.data[k]
                 })
@@ -1866,20 +1881,20 @@ Page({
                 for (var i = 0; i < menuPro1.length; i++) {
                   for (var j = 0; j < menuPro1[i].products.length; j++) {
                     for (var h = 0; h < activityPro1.productsBonus.bonusProducts.length; h++) {
-
+                      
                       if (activityPro1.productsBonus.bonusProducts[h].productPosId == menuPro1[i].products[j].uid) {
                         if (activityPro1.productsBonus.bonusProducts[h].discountType == 2) {
-
+                 
                           activityPro1.productsBonus.bonusProducts[h].activityPrice = activityPro1.productsBonus.bonusProducts[h].value;
-
+                    
                         } else if (activityPro1.productsBonus.bonusProducts[h].discountType == 1) {
-                          var price = menuPro1.price - activityPro1.productsBonus.bonusProducts[h].value;
+                          var price = menuPro1[i].products[j].price - activityPro1.productsBonus.bonusProducts[h].value;
                           activityPro1.productsBonus.bonusProducts[h].activityPrice = price;
                         } else if (activityPro1.productsBonus.bonusProducts[h].discountType == 0) {
-                          var price = menuPro1.price * (activityPro1.productsBonus.bonusProducts[h].value) / 10;
+                          var price = menuPro1[i].products[j].price * (activityPro1.productsBonus.bonusProducts[h].value) / 10;
                           activityPro1.productsBonus.bonusProducts[h].activityPrice = price.toFixed(2);
                         }
-
+                        
                         activityPro1.productsBonus.bonusProducts[h].Vprice = menuPro1[i].products[j].price;
                         activityPro1.productsBonus.bonusProducts[h].price = menuPro1[i].products[j].price;
                         activityPro1.productsBonus.bonusProducts[h].image1 = menuPro1[i].products[j].image1;
@@ -1891,7 +1906,7 @@ Page({
                         activityPro1.productsBonus.bonusProducts[h].isInServiceTime = menuPro1[i].products[j].isInServiceTime;
                         activityPro1.productsBonus.bonusProducts[h].mealFee = menuPro1[i].products[j].mealFee
                         activityPro1.productsBonus.bonusProducts[h].isFirstOrder = menuPro1[i].products[j].isFirstOrder;
-                        activityPro1.productsBonus.bonusProducts[h].isSoldOut = menuPro1[i].products[j].isSoldOut;
+                        activityPro1.productsBonus.bonusProducts[h].isSoldOut = menuPro1[i].products[j].isSoldOut;              
                         console.log(that.data.productActicty.isFirstOrder);
                       }
                       if (activityPro1.isFirstOrder == 1) {
@@ -1904,8 +1919,8 @@ Page({
 
                   }
                 }
-
-
+                
+                
                 console.log(activityPro1)
                 that.setData({
                   discountMenu: that.discountMenu(activityPro1)
@@ -1930,10 +1945,12 @@ Page({
                     if (activityPro.productsBonus.bonusProducts[h].discountType == 2) {
                       menuPro[i].products[j].activityPrice = activityPro.productsBonus.bonusProducts[h].value
                     } else if (activityPro.productsBonus.bonusProducts[h].discountType == 1) {
-                      var price = menuPro.price - activityPro.productsBonus.bonusProducts[h].value;
+                      var price = menuPro[i].products[j].price - activityPro.productsBonus.bonusProducts[h].value;
                       menuPro[i].products[j].activityPrice = price;
                     } else if (activityPro.productsBonus.bonusProducts[h].discountType == 0) {
-                      var price = menuPro.price * (activityPro.productsBonus.bonusProducts[h].value) / 10;
+                      console.log(menuPro[i].products[j].price, activityPro.productsBonus.bonusProducts[h].value)
+                      var price = menuPro[i].products[j].price * (activityPro.productsBonus.bonusProducts[h].value) / 10;
+                      console.log(price)
                       menuPro[i].products[j].activityPrice = price.toFixed(2);
                     }
                   }
@@ -1958,15 +1975,15 @@ Page({
 
   discountMenu: function (activityPro1) {
     var discountProcuts = [];
-    for (var j = 0; j < activityPro1.productsBonus.bonusProducts.length; j++) {
-      if (activityPro1.productsBonus.bonusProducts[j].price != undefined &
-        activityPro1.productsBonus.bonusProducts[j].price != null) {
-        discountProcuts.push(activityPro1.productsBonus.bonusProducts[j]);
-        console.log("1111111");
-      }
-    }
-    console.log(discountProcuts);
-    return discountProcuts;
+    for(var j = 0; j<activityPro1.productsBonus.bonusProducts.length; j++) {
+  if (activityPro1.productsBonus.bonusProducts[j].price != undefined &
+    activityPro1.productsBonus.bonusProducts[j].price != null) {
+    discountProcuts.push(activityPro1.productsBonus.bonusProducts[j]);
+    console.log("1111111");
   }
+}
+console.log(discountProcuts);
+return discountProcuts;
+              }
 
 })

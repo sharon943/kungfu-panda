@@ -16,8 +16,7 @@ Page({
     userName:'',
     wxName: '',
     toastData: '',
-    isToast: true,
-    items: []
+    isToast: true
   },  
 
   /**
@@ -80,9 +79,6 @@ Page({
   onShareAppMessage: function () {
   
   },
-  radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
-  },
   getUserInfoData: function (JSESSIONID) {
     var that = this;
 
@@ -103,21 +99,6 @@ Page({
             isLogin: 1,
             userPro: res.data.data,
           })
-          if (that.data.userPro.sex==1){
-            that.setData({
-              items: [
-                { name: '0', value: '先生', checked: 'true' },
-                { name: '1', value: '女士' },
-              ]
-            })
-          }else{
-            that.setData({
-              items: [
-                { name: '0', value: '先生'},
-                { name: '1', value: '女士', checked: 'true' },
-              ]
-            })
-          }
        } else if (res.data.status == 9) {
          wx.navigateTo({
            url: '../login/login',
@@ -137,7 +118,7 @@ Page({
       wxName = '请输入用户名'
     }
     that.setData({
-      // hiddenModal: false,
+      hiddenModal: false,
       wxName: wxName,
       title:'用户名',
       typeNum: 1
@@ -153,7 +134,7 @@ Page({
       wxName = '请输入姓名'
     }
     that.setData({
-      // hiddenModal: false,
+      hiddenModal: false,
       wxName: wxName,
       title: '姓名',
       typeNum: 2
@@ -265,7 +246,6 @@ Page({
   btn_sex:function(e){
       var that = this;
       var value = e.detail.value;
-      console.log(value)
       var JSESSIONID = app.globalData.JSESSIONID;
 
       wx.request({

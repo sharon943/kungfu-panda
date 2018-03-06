@@ -7,15 +7,15 @@
   <view style='width:100%;height:10px;float:left;background:f2f2f2;'></view>
   <view class="search">
     <view class="searchView">
-      <icon type='search' size="15" color="#FF9600" class='icon'></icon>
+      <icon type='search' size="15" color="#666" class='icon'></icon>
       <input placeholder='输入您所在的详细地址' bindinput='btn_address_input'></input>
     </view>
     <text class = "so" bindtap='btn_search_one'>搜索</text>
   </view>
   <view class="foodAddress">
-    <text class="name" style='margin-top:0;'>送餐地址库</text>
+    <text class="name">送餐地址库</text>
     <block wx:if = "{{addresObj}}">
-    <!-- <view style='width:100%;height:10px;float:left;background:white;'></view> -->
+    <view style='width:100%;height:10px;float:left;background:white;'></view>
     <block wx:if="{{isLogin}}">
     <block wx:for="{{addresObj}}">
       <view class = "adressView"  bindtap='btn_address_local' data-item = "{{item}}">
@@ -29,24 +29,22 @@
       <text class="addressName">登录</text>
       </view>
     </block>
-    <!-- <view style='width:100%;height:10px;float:left;background:white;'></view> -->
+    <view style='width:100%;height:10px;float:left;background:white;'></view>
     
     </block>
     
   </view>
   <view class="foodAddress">
-    <text class="name" style='color:#848484;font-size:14px'>您可以通过以下历史地址快速设置</text>
+    <text class="name">您可以通过以下历史地址快速设置</text>
     <block wx:if = "{{locationAddress.address}}">
-    <!-- <view style='width:100%;height:10px;float:left;background:white;'></view> -->
+    <view style='width:100%;height:10px;float:left;background:white;'></view>
     <block wx:for="{{1}}">
-      <view class = "adressView" bindtap='btn_histroy_address' style='position:relative' >
+      <view class = "adressView" bindtap='btn_histroy_address' >
       <text class="addressName">{{locationAddress.address}}</text>
-      <!-- <image src='../../images/personal/del.png' style='position:absolute;top:10px;right:10px;width:20px;height:20px;z-index:9999;' bindtap='btn_get_del'></image> -->
       </view>
       <view style="clear:both;"></view>
     </block>
-    
-    <!-- <view style='width:100%;height:10px;float:left;background:white;'></view> -->
+    <view style='width:100%;height:10px;float:left;background:white;'></view>
     </block>
   </view>
 </view>
@@ -77,7 +75,7 @@
     <text>Loading...</text>
 </view>
 
-<view class = "notAddress" style='border-radius:10px;' hidden='{{isNotAddress}}'>
+<view class = "notAddress" hidden='{{isNotAddress}}'>
     <text class = "title">提示</text>
     <view class = "content">
       <text>该地址附近没有外卖的餐厅，请重新输入地址</text>

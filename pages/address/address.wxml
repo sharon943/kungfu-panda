@@ -1,18 +1,7 @@
 <!--pages/address/address.wxml-->
-<view class = "pClass" style='background: #f0eeec;'>
+<view class = "pClass" style='background: #f2f2f2;'>
   <block wx:if = "{{addressPro.length > 0}}">
     <scroll-view scroll - y = "true" class = "scroll">
-    <block wx:if="{{Rewite}}">
-        <!-- <view style='display:block;font-size:16px;color:#3d231a;text-align:right;width:96%;height:30px;line-height:30px;'>
-                 <text style='float:right;margin-left:5px;z-index:88888;' bindtap='btn_get_cancel'>取消</text> 
-             <text bindtap='btn_get_finish' style='float:right;margin-left:5px;z-index:9999;'>完成</text>     
-        </view> -->
-        <text style='display:block;font-size:16px;color:#3d231a;text-align:right;width:96%;height:30px;line-height:30px;'  bindtap='btn_get_finish'>完成</text>
-    </block>
-    <block wx:else>
-    <text style='display:block;font-size:16px;color:#3d231a;text-align:right;width:96%;height:30px;line-height:30px;' bindtap='btn_get_write'>编辑</text>
-       
-    </block>
         <view wx:for = "{{addressPro}}" catchtap='btn_infomartion' data-info="{{item}}" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
         <view class="content">
             <view class = "address">
@@ -20,20 +9,15 @@
                 <text class = "adressName">{{item.receiverAddress+item.appendReceiverAddress}}</text>
                 <view style="clear:both;"></view>
             </view>
-        </view>
-        <view class='default' wx:if="{{item.isDefault==1&!Rewite}}">
-             <image src='../../images/address/default.png' data-index="{{index}}" data-info="{{item}}" catchtap='btn_revise'></image>
-        </view>
-        <view class="del" wx:if="{{Rewite}}">
-              <!-- <view  class='xg_v' data-index="{{index}}" data-info="{{item}}" catchtap='btn_revise'>
+            </view>
+            <view class="del"  >
+              <view  class='xg_v' data-index="{{index}}" data-info="{{item}}" catchtap='btn_revise'>
                   <text>修改</text>
               </view>
               <view class='xg_v' style='background: red' data-index="{{index}}" data-info="{{item}}" catchtap='btn_delete'>
                   <text>删除</text>
-              </view>   -->
-                 <image src='../../images/address/rewrite.png' data-index="{{index}}" data-info="{{item}}" catchtap='btn_revise'></image>
-                 <image src='../../images/address/clear.png' data-index="{{index}}" data-info="{{item}}" catchtap='btn_delete'></image>
-        </view>
+              </view>  
+            </view>
         </view>
         <view style="clear:both;"></view>
     </scroll-view>
@@ -59,7 +43,7 @@
     <text>Loading...</text>
 </view>
 
-<view class = "notAddress" style='border-radius:10px;' hidden='{{isNotAddress}}'>
+<view class = "notAddress" hidden='{{isNotAddress}}'>
     <text class = "title">提示</text>
     <view class = "content1">
       <text>该地址附近没有外卖的餐厅，请重新选择地址</text>

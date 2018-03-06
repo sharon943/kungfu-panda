@@ -2,19 +2,18 @@
 <view class="pClass" style='background: #f2f2f2;'>
   <view class="avatarViewClass" bindtap='btn_login'>
 
-    
+    <image class="nameImageClass" src="../../images/order/s.png"></image>
     <block wx:if="{{isLogin == 1}}">
-    <image class="nameImageClass" src="../../images/order/s-1.png"></image>
       <text class="text1"><text >{{userPro.nickName}}</text>
       <text class="text2">{{memberInformation.discount}}折</text></text>
     </block>
-   
     <block wx:else>
-    <image class="nameImageClass" src="../../images/order/s-2.png"></image>
       <text class="text1">登录/注册</text>
     </block>
   </view>
- <image class="headImageClass" src='../../images/personal/head.png' mode='widthFix'></image>
+  <image class="headImageClass" src='../../images/personal/head.png' mode='widthFix'></image>
+
+
 
   <view class="numDataViewClass">
     <view class="numView1">
@@ -56,6 +55,11 @@
       <text class="text1">联系我们</text>
       <image class="image2" src='../../images/personal/right.png'></image>
     </view>
+    <!-- <view class="type1" bindtap='btn_share'>
+      <image class="image1" src='../../images/personal/s.png'></image>
+      <text class="text1">分享有礼</text>
+      <image class="image2" src='../../images/personal/right.png'></image>
+    </view> -->
     <!-- <view class="type1" bindtap='btn_userKnows'>
       <image class="image1" src='../../images/personal/w.png'></image>
       <text class="text1">用户须知</text>

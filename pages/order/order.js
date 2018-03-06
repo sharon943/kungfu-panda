@@ -12,8 +12,7 @@ Page({
     openId: null,
     orderPro: [],
     isViewDisabled: true,
-    isLoading: false,
-    iconPath:''
+    isLoading: false
   },
 
   /**
@@ -23,14 +22,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '我的订单',
     })
-    this.setData({
-      iconPath: app.globalData.iconPath,
- 
-    })
-    console.log(app.globalData.iconPath)
-    console.log(this.data.iconPath)
- 
-
+    
   },
 
   /**
@@ -47,12 +39,8 @@ Page({
     this.getOpenData();
 
     this.setData({
-      isViewDisabled: true,
-      iconPath: app.globalData.iconPath,
+      isViewDisabled: true
     })
-  
-    console.log(app.globalData.iconPath)
-    console.log(this.data.iconPath)
   },
 
   /**
@@ -113,10 +101,10 @@ Page({
     }
 
   },
-  
   getOrderData: function (JSESSIONID ){
 
     var that = this;
+
     wx.request({
       url: url.getOrderLib,
       data:{},
@@ -140,8 +128,16 @@ Page({
               isLoading: true
             })
           }else{
+            // res.data.data[0].orderStatus = 100
+            // res.data.data[0].statusName = '订单完成'
+            // res.data.data[0].reviewStatus=2
+            // res.data.data[1].orderStatus = 100
+            // res.data.data[1].statusName = '订单完成'
+            // res.data.data[0].reviewStatus = 2
             that.setData({
+              
               orderPro: res.data.data,
+              
               isLoading: true
             })
           }
@@ -201,5 +197,16 @@ Page({
         }
       }
     })
+  },
+  go_comment:function(e){
+    console.log(e)
+    var row = e.currentTarget.dataset.item.orderId
+    console.log(row)
+    wx.navigateTo({
+      url: '../WebView/webview?orderId='+row 
+    })
+  }, 
+  go_seecomment:function(e){
+      
   }
 })

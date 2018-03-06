@@ -1,5 +1,4 @@
 <!--pages/homepage/homepage.wxml-->
-
 <view class ="pClass" style='background: #f0f0f0;'>
     <swiper style="width:100%;height:{{systWidth/2}}px;float:left;" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
     <block wx:for="{{dataPro.runBanner}}" wx:for-index="index">
@@ -8,12 +7,10 @@
       </swiper-item>
     </block>
   </swiper>
-
     <view class = "goodsLibViewClass">
       <block wx:for = "{{dataPro.fixedBanner}}" wx:if = "{{index < 4}}">
           <view class= "view1">
             <image src='{{item.bannerUrl}}' mode = "widthFix" bindtap='btn_shop' data-item='{{item}}' data-info = "{{1}}" data-index = "{{index}}"></image>
-            <!-- <text style='color:#3d231a'>{{item.jumpName}}</text> -->
         </view>
        
       </block>
@@ -27,18 +24,51 @@
         </block>
     </view>
     <view style='width: 100%;height:8px;background:#f0f0f0;float:left;'></view>
-    
+    <view class = "shopViewClass">
+          <view class = "nameViewClass">
+                <text>———  品牌 ———</text>
+          </view>
+          <view class = "scrollViewClass">
+              <block wx:for = "{{dataPro.fixedBanner}}" wx:if = "{{index > 7}}">
+                  <view class = "dataViewClass"  bindtap='btn_shop' data-item='{{item}}'>
+                      <image class = "image1" src='{{item.bannerUrl}}' style='height: {{(systWidth/2 - 20)/23*13}}px;' mode="aspectFill"></image>
+                      <view class = "shopNameClass">
+                          <text class = "text1">{{item.jumpName}}</text>
+                          <block wx:if = "{{isAddress == 0}}">
+                          <text class = "text2"><text>起送费<text style='color: #ff6600;'>¥ {{shopPro.startDeliveryFee}} </text></text>| <text>配送费<text style='color: #ff6600;'>¥ {{shopPro.deliveryFee}} </text></text></text>
+                          <view class = "shopFavourable">
+                            <block wx:for = "{{shopPro.icons}}">
+                                <view class = "favourable">
+                                  <image src='{{item.iconPath}}'></image>
+                                  <text>{{item.state}}</text>
+                                </view>
+                            </block> 
+                              <block wx:if = "{{actictyText != ''}}">
+                                <view class = "favourable">
+                                   <image src='../../images/jian.png'></image>
+                                   <text>{{actictyText}}</text>
+                                </view>
+                                </block>
+                          </view>
+                          </block>
+                          <block wx:else>
+                              <text class = "text2">暂无餐厅信息</text>
+                          </block>
+                          <view style="clear:both;"></view>
+                      </view>
+                  </view>
+                  <view style='width: 100%;height:8px;background:#f0f0f0;float:left;'></view>
+              </block>
+          </view>
+          <view style="clear:both;"></view>
+    </view>
 </view>
 
 
 <view class="HeaderViewClass" bindtap="btn_location">
-  <image class="imageAdressClass" src="../../images/menu/b.png"></image>
-  <view class='bgtextAdress'>
-  <image src='../../images/menu/search-icon.png' style='width: 25px;height: 25px;margin-right: 5px;float: left;'></image>
+  <image class="imageAdressClass" src="../../images/menu/a.png"></image>
   <text class="textAdressClass" >{{address}}</text>
-  
-  </view>
-  
+  <image class="imageRightClass" src="../../images/homepage/right.png" hidden="{{adressName == '' ? true : false}}"></image>
 
 </view>
 
@@ -59,7 +89,7 @@
     </view>
     </block>
 </block>
-<view class = "notAddress" style='border-radius:10px;' hidden='{{isNotAddress}}'>
+<view class = "notAddress" hidden='{{isNotAddress}}'>
     <text class = "title">提示</text>
     <view class = "content">
       <text>该地址附近没有外卖的餐厅，请重新输入地址</text>
@@ -67,3 +97,10 @@
     <text class = "confirm" bindtap='btn_addres_confirm'>确认</text>
     <view style="clear:both;"></view>
 </view>
+<!-- <view hidden='{{isShareImg}}' class='iconImg' style='position:fixed;bottom:0;right:0;'>
+     <view bindtap='hideShareImg' style='width:25px;height:25px;display:block;position:absolute;right:0;top:0;z-index:9'>
+     </view>
+    <image class = "isShareImg-clear" src='../../images/menu/cha.png' style='width:17px;height:17px;display:block;position:absolute;right:0;top:0'></image>
+    <image src='{{ShareImg}}' style='width:80px;height:80px;' bindtap='urlshare'></image>
+   
+</view>    -->

@@ -241,30 +241,6 @@ Page({
       })
     }
   },
-  btn_get_del: function () {
-    var that = this;
-
-    that.setData({
-      name: ''
-    })
-
-  },
-  btn_get_phonedel: function () {
-    var that = this;
-
-    that.setData({
-      phone: ''
-    })
-
-  },
-  btn_get_adressJdel: function () {
-    var that = this;
-
-    that.setData({
-      adressJ: ''
-    })
-
-  },
   setCacheData: function (openId, city, JSESSIONID, num = 0) {
     //that.setCacheData1(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
     /**else if(res.data.status == 9){

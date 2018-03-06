@@ -1,8 +1,11 @@
 {
   "pages": [
     "pages/homepage/homepage",
-    "pages/ForgetPwd/ForgetPwd",
+    "pages/pushNew/pushNew",
     
+    
+    "pages/WebView/webview",
+    "pages/share/share",
     "pages/payconfirm/payconfirm",
     "pages/menu/menu",
     "pages/send/send",
@@ -24,10 +27,9 @@
     "pages/contactUs/contactUs",
     "pages/detailUrl/detailUrl",
     "pages/map/map",
-    "pages/senderPosition/senderPosition",
-    "pages/pushNew/pushNew",
-    "pages/mall/mall"
     
+    "pages/senderPosition/senderPosition"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -36,10 +38,10 @@
     "navigationBarTextStyle": "#211e19"
   },
   "tabBar": {
-    "color": "#3D231A",
-    "selectedColor": "#3D231A",
+    "color": "#a9b7b7",
+    "selectedColor": "#d6be98",
     "borderStyle": "white",
-    "backgroundColor": "#fff",
+    "backgroundColor": "#211e19",
     "list": [
       {
         "selectedIconPath": "images/tabbar/home.png",

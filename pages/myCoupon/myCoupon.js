@@ -8,11 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    couponPro: [],
-    couponView:true,
-    open: '../../images/coupon/open.png',
-    close:'../../images/coupon/close.png',
-    showid:''
+    couponPro: []
   },
 
   /**
@@ -39,9 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  var that=this;
-  that.getMemberInformation(app.globalData.phone)
-  console.log(that.data.couponPro)
+  
   },
 
   /**
@@ -96,40 +90,14 @@ Page({
 
         if (res.data.code == 200) {
           for (var i = 0; i < res.data.data[0].coupons.length ; i++){
+            // res.data.data[0].coupons[i].remark='次和覅uerhgireughrei'
             res.data.data[0].coupons[i]['nextDay'] = that.getDayData(res.data.data[0].coupons[i].endTime);
+            res.data.data[0].coupons[i].beginTime = res.data.data[0].coupons[i].beginTime.substr(0, 10);
+            res.data.data[0].coupons[i].endTime = res.data.data[0].coupons[i].endTime.substr(0, 10);
           }
-          // var remark;
-          
-          res.data.data[0].coupons[0].remark = "感觉到房管局变化更符合GIF图管会提付hi图融会贯通然后他合同附件还有独特"
-          res.data.data[0].coupons[1].remark = "感觉到房管局变化更符合GI他合同附件还有独特"
-         
-          //   if (res.data.data[0].coupons[0].remark.length > 22 && that.data.couponView == true) {
-          //     console.log(true)
-          //     res.data.data[0].coupons[0].remark = res.data.data[0].coupons[0].remark.substring(0, 22) + '...'
-          //   }
-          //   if (that.data.couponView != true) {
-          //     console.log(false)
-          //     res.data.data[0].coupons[0].remark = res.data.data[0].coupons[0].remark
-          //   }
-          
-          // for (var i = 0; i < res.data.data[0].coupons.length;i++){
-          //   if (res.data.data[0].coupons[i].remark.length > 22 && that.data.couponView == true) {
-          //     console.log(true)
-          //     res.data.data[0].coupons[i].remark = res.data.data[0].coupons[i].remark.substring(0, 22) + '...'
-          //   }
-          //   if (that.data.couponView != true) {
-          //     console.log(false)
-          //     res.data.data[0].coupons[i].remark = res.data.data[0].coupons[i].remark
-          //   }
-          // }
-          
           that.setData({
             couponPro: res.data.data[0].coupons
           })
-          console.log(that.data.couponPro)
-             
-          
-          
         }
       }
     })
@@ -175,22 +143,4 @@ Page({
     console.log(dateObj);
     return new Date(dateObj)
   },
-  couponview:function(res){
-    console.log(res)
-    var that = this;
-    
-  
-      that.setData({
-        showid: res.currentTarget.dataset.item.id
-      })
-      that.getMemberInformation(app.globalData.phone)
-      console.log(that.data.showid)
-      // that.setData({
-      //   couponView: !that.data.couponView
-      // })
-
-    
-    
-    
-  }
 })

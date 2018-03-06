@@ -16,20 +16,20 @@ page{
 }
 
 .head{
-  width: 100%;height: 40px;background: #4D332B;text-align: center;
+  width: 100%;height: 40px;background: #2d2d28;text-align: center;
 }
 .head-image1{
-  width: 20px;height: 20px;margin-left: 10px;margin-top: 10px;margin-right: 10px;float: left;
+  width: 16px;height: 20px;margin-left: 10px;margin-top: 10px;margin-right: 10px;float: left;
 }
 .head-text1{
   display: block;float: left;font-size: 13px;color: white;line-height: 40px;max-width: calc(100% - 166px);overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
 }
 .head-text2{
-  display: block;float: left;font-size: 13px;color: #F18E04;line-height: 40px;max-width: 40px;margin-left: 5px;margin-right: 5px;
+  display: block;float: left;font-size: 11px;color: #b19d7d;line-height: 40px;max-width: 40px;margin-left: 5px;margin-right: 5px;
 }
 
 .head-type{
-  width: 60px;height: 24px;float: right;margin-top: 8px;background: #FF9600;border-radius: 4px;margin-right: 10px;
+  width: 60px;height: 24px;float: right;margin-top: 8px;background: #b19d7d;border-radius: 4px;margin-right: 10px;
 }
 .head-type text{
     display: block;float: left;color: white;font-size: 12px;line-height: 24px;margin-left: 10px;
@@ -42,18 +42,16 @@ page{
   width: 100%;height: 39px;background: white;border-bottom: 1px solid #f2f2f2;
 }
 .title-text1{
-  display: block;float: left;height: 38px;line-height: 38px;width: 30%;margin-left: 10%;text-align: center;font-size: 14px;color: #5F4D46;margin-right: 10%;
+  display: block;float: left;height: 38px;line-height: 38px;width: 30%;margin-left: 10%;text-align: center;font-size: 14px;color: #666;margin-right: 10%;
 }
 .title-text2{
-  display: block;float: left;height: 38px;line-height: 38px;width: 30%;margin-left: 10%;text-align: center;font-size: 14px;color: #5F4D46;margin-right: 10%;
+  display: block;float: left;height: 38px;line-height: 38px;width: 30%;margin-left: 10%;text-align: center;font-size: 14px;color: #666;margin-right: 10%;
 }
 
 .notice {
   display: block;
   width: 100%;
   height: 30px;float:left;
-  background:#F6EDE3;
-
 }
 
 .marquee_box {
@@ -61,11 +59,10 @@ page{
   position: relative;
 }
 .marquee_box image{
-  width: 18px;height: 18px;float: left;padding-left: 10px;padding-top: 6px;padding-bottom:6px;z-index:99999998;
+  width: 18px;height: 18px;float: left;padding-left: 10px;padding-top: 6px;padding-bottom:6px;
 }
 .marquee_box text{
-  width: calc(100% - 40px);margin-left: 5px;margin-right: 5px;line-height: 30px;display: block;float: left;color:#B0A497;
-font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
+  width: calc(100% - 40px);margin-left: 5px;margin-right: 5px;line-height: 30px;display: block;float: left;color: #666;font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
 }
 
 .marquee_text {
@@ -88,7 +85,7 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
   width: 100%;height: 100%;
 }
 .GoodsViewClass .GoodsScrollClass .GoodsClass{
-  width: 100%;height: 100px;border-bottom: 1px solid #f5f5f5;position: relative;color:#FF9808;
+  width: 100%;height: 100px;border-bottom: 1px solid #f5f5f5;position: relative;
 }
 .GoodsViewClass .GoodsScrollClass .GoodsClass .GoodsImageClass{
   width: 70px;height: 70px;margin-top: 15px;float: left;margin-left: 10px;border-radius: 4px;
@@ -97,13 +94,13 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
   float: left;width: calc(100% - 90px);height: calc(100% - 15px);margin-left: 10px;margin-top: 15px;
 }
 .GoodsViewClass .GoodsScrollClass .GoodsClass .GoodsSMClass .NameClass{
-  display: block;float: left;width: 100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;height: 20px;line-height: 20px;font-weight: bold;color: #533F38;font-size: 14px;
+  display: block;float: left;width: 100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;height: 20px;line-height: 20px;font-weight: bold;color: #333;font-size: 14px;
 }
 .GoodsViewClass .GoodsScrollClass .GoodsClass .GoodsSMClass .desc{
   display: block;float: left;width: 100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;height: 14px;line-height: 14px;color: #999;font-size: 10px;
 }
 .GoodsViewClass .GoodsScrollClass .GoodsClass .GoodsSMClass .buyNumber{
-  display: block;float: left;width: 100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;height: 16px;line-height: 16px;color:#FF9808;font-size: 12px;
+  display: block;float: left;width: 100%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;height: 16px;line-height: 16px;color: #999;font-size: 12px;
 }
 .GoodsViewClass .GoodsScrollClass .GoodsClass .GoodsSMClass .NameOtherClass{
   float: left;width: 100%;height: 20px;
@@ -138,17 +135,17 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
   width: 100%;height: 70px;float: left;position: absolute;bottom: 0px;background: transparent;
 }
 .BottomViewClass{
-    width: 100%;height: 50px;background: #fff;float: left;margin-top: 20px;border-top:1px solid #dad6d1;
+    width: 100%;height: 50px;background: #201f18;float: left;margin-top: 20px;
 }
 
 .BottomViewClass .ShopCarViewClass{
   width: 80px;height: 100%;float: left;
 }
 .BottomViewClass .ShopCarViewClass image{
-  width: 60px;height: 60px;margin-top: 5px;margin-left: 15px;position: absolute;top: 0;padding: 4px;border-radius: 50%;z-index:9999;
+  width: 50px;height: 50px;margin-top: 5px;margin-left: 15px;position: absolute;top: 0px;background: #201f18;padding: 4px;border-radius: 50%;z-index: 21;
 }
 .BottomViewClass .ShopCarViewClass text{
-  display: block;float: left;position: absolute;top: 8px;left: 60px;background: #FA1D00;font-size: 9px;min-height: 8px;min-width: 8px;color: white;border-radius: 50%;padding: 3px;text-align: center;line-height: 8px;z-index:99999999;
+  display: block;float: left;position: absolute;top: 8px;left: 60px;background: #ff6600;font-size: 9px;min-height: 8px;min-width: 8px;color: white;border-radius: 50%;padding: 3px;text-align: center;line-height: 8px;z-index: 22;
 }
 .BottomViewClass .PriceClass{
   height: 100%;width: calc(100% - 170px);display: block;float: left;font-weight: bold;line-height: 50px;color: white;
@@ -157,30 +154,19 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
   height: 100%;width: calc(100% - 170px);float: left;
 }
 .BottomViewClass .moneyView .money{
-  display: block;float: left;font-weight: bold;width: 100%;margin-top: 5px;color:#ff9600;margin-left:5px;
-
+  display: block;float: left;font-weight: bold;color: white;width: 100%;margin-top: 5px;
 }
-.BottomViewClass .moneyView .money1{
-  display: block;float: left;font-weight: bold;width: 100%;margin-top: 5px;color:#c5c5c5;margin-left:5px;
-
-}
-
 .BottomViewClass .moneyView .send{
-  display: block;float: left;font-size: 11px;color:#533F38;font-weight: lighter;margin-left:5px;
-
-}
-.BottomViewClass .moneyView .send1{
-  display: block;float: left;font-size: 11px;color:#c5c5c5;font-weight: lighter;margin-left:5px;
-
+  display: block;float: left;font-size: 11px;color: white;font-weight: lighter;
 }
 
 .BottomViewClass .GoOkClass{
-  width: 90px;height: 100%;background: #c5c5c5;color: white;display: block;float: right;text-align: center;line-height: 50px;font-size: 16px;
+  width: 90px;height: 100%;background: #b19d7d;color: white;display: block;float: right;text-align: center;line-height: 50px;font-size: 16px;
 }
 
 
 .TypeViewClass{
-   width: 20%;height: calc(100% - 160px);float: left;background: #f4f3f3;position: relative;
+   width: 20%;height: calc(100% - 160px);float: left;background: #eee;position: relative;
 }
 
 .TypeViewClass .TypeScrollClass{
@@ -192,13 +178,13 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
 }
 
 .TypeViewClass .TypeScrollClass .TypeClass .typeNameClass{
-      display: block;font-weight: bold;font-size: 12px;word-wrap:break-word; word-break:break-all;width: 100%;padding-top: 15px;padding-bottom: 15px;text-align: center;color: #848484;border-bottom:1px solid #e5e5e5;
+      display: block;font-weight: bold;font-size: 12px;word-wrap:break-word; word-break:break-all;width: 100%;padding-top: 15px;padding-bottom: 15px;text-align: center;color: #666666;
 }
 .TypeViewClass .TypeScrollClass .TypeClass .typeNumClass{
-   width: 18px;height: 18px;line-height:18px;border-radius: 50%;font-size: 12px;color: white;background-color: #FA1D00;position: absolute;right: 3px;text-align: center;margin-top: 2px;
+   width: 18px;height: 18px;line-height:18px;border-radius: 50%;font-size: 12px;color: white;background-color: #ff6600;position: absolute;right: 3px;text-align: center;margin-top: 2px;
 }
 .TypeViewClass .TypeScrollClass .TypeClass .typeNameRedClass{
-    display: block;font-weight: bold;font-size: 12px;word-wrap:break-word; word-break:break-all;width: 100%;padding-top: 15px;padding-bottom: 15px;text-align: center;color: #ff9600;background: white;
+    display: block;font-weight: bold;font-size: 12px;word-wrap:break-word; word-break:break-all;width: 100%;padding-top: 15px;padding-bottom: 15px;text-align: center;color: #E95304;background: white;
 }
 
    /*餐品属性块样式*/
@@ -262,11 +248,11 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
 
 /*购物车列表中说明和清空块最外层view样式*/
 .menuBuyCarListClass .menuBuyCarListExtianClass{
-    width: 100%;height: 36px;line-height: 36px;font-size: 12px;background-color: #F6EDE3;
+    width: 100%;height: 36px;line-height: 36px;font-size: 12px;background-color: #EBEEF0;border-bottom: 1px solid #ccc;
 }
 /*购物车列表中说明和清空层内的购物车文字text样式*/
 .menuBuyCarListClass .menuBuyCarListExtianClass text.menuBuyCarListExtianNameClass{
-    border-left: 2px solid #FF9600;font-size: 16px;height:20px;line-height: 20px;color: #3d231a;float: left;margin: 8px 0;margin-left: 10px;padding-left: 10px;
+    border-left: 2px solid #E95304;font-size: 16px;height:20px;line-height: 20px;color: #656565;float: left;margin: 8px 0;margin-left: 10px;padding-left: 10px;
 }
 /*购物车列表中说明和清空层内的清空块最外层view样式*/
 .menuBuyCarListClass .menuBuyCarListExtianClass view.menuBuyCarListExtianClearClass{
@@ -286,7 +272,7 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
     width: calc(100% - 30px);padding: 0 15px;overflow-y: scroll;
 }
 .menuBuyCarListClass .menuBuyCarListFoodListClass .listClass{
-    width: 100%;border-bottom: 1px solid #EDEDED;height: 40px;line-height: 40px;position: relative;
+    width: 100%;border-bottom: 1px solid #EDEDED;height: 40px;line-height: 40px;padding: 8px 0;position: relative;
 }
 .menuBuyCarListClass .menuBuyCarListFoodListClass .MenuViewClass{
     width: calc(100% - 140px);height: 40px;float: left;
@@ -295,13 +281,13 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
     font-size: 12px;float: left;width: 100%;overflow: hidden;white-space: nowrap;display: block;height: 20px;line-height: 20px;margin-top: 5px;
 }
 .menuBuyCarListClass .menuBuyCarListFoodListClass .MenuViewClass .menuNoProName{
-  font-size: 12px;float: left;width: 100%;overflow: hidden;white-space: nowrap;display: block;height: 40px;line-height: 40px;color: #56413A;
+  font-size: 12px;float: left;width: 100%;overflow: hidden;white-space: nowrap;display: block;height: 40px;line-height: 40px;
 }
 .menuBuyCarListClass .menuBuyCarListFoodListClass .menuPro {
     font-size: 10px;color:#999;display: block;height: 10px;line-height: 10px;float: left;width: 100%;position: absolute;top: 38px;white-space: nowrap;overflow: hidden;
 }
 .menuBuyCarListClass .menuBuyCarListFoodListClass text.menuMoney{
-    float: right;font-size: 14px;color: #FF9600;width: 70px;display: block;height: 40px;line-height: 40px;
+    float: right;font-size: 14px;color: #E95304;width: 70px;display: block;height: 40px;line-height: 40px;
 }
 .menuBuyCarListClass .menuBuyCarListFoodListClass text.menuMoney text{
     font-size: 14px;
@@ -319,14 +305,14 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
     float: right;display: block;height: 40px;font-size: 12px;padding: 0 3px  ;margin-bottom: 2px;line-height: 40px;
 }
 .meailFee{
-  width: 100%;height: 40px;float: left;padding-bottom:8px;
+  width: 100%;height: 40px;float: left;
 }
 .meailFee_name{
-  display: block;float: left;width:calc(100% - 140px);height:40px;color: #3d231a;font-size: 14px;line-height: 40px;
+  display: block;float: left;width:calc(100% - 140px);height:40px;color: #333;font-size: 14px;line-height: 40px;
 
 }
 .meailFee_price{
-  font-size:14px;color:#FF9600;width:57px;display:block;height:40px;line-height:40px;float: left;text-align: center;
+  font-size:14px;color:#E95304;width:70px;display:block;height:40px;line-height:40px;float: left;text-align: center;
 
 }
 
@@ -372,7 +358,7 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
 
 
 .shop{
-  width: 100%;height: calc(100% - 60px);float: left;background: #fff;position: relative;
+  width: 100%;height: calc(100% - 60px);float: left;background: #f2f2f2;position: relative;
 }
 .shop-head{
   width: 100%;
@@ -384,32 +370,28 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
   width: 100%;background: white;padding-bottom: 8px;
 }
 .shop-information-name{
-  height: 30px;font-size: 16px;font-weight: bold;margin-left: 100px;display: block;float: left;color:#3d231a;
+  height: 30px;font-size: 16px;font-weight: bold;margin-left: 100px;display: block;float: left;
 }
 .shop-information-address{
   width: 100%;float: left;padding-top: 8px;
 }
 .shop-information-address image{
-  width: 18px;height: 20px;margin-top: 1px;float: left;margin-left: 14px;
+  width: 18px;height: 18px;margin-top: 1px;float: left;margin-left: 10px;
 }
 .shop-information-address text{
-  display: block;float: left;font-size: 13px;color: #848484;line-height: 20px;width: calc(100% - 41px);margin-left: 8px;
+  display: block;float: left;font-size: 13px;color: #666;line-height: 20px;width: calc(100% - 37px);margin-left: 5px;
 }
 .shop-time{
-  width: 100%;height: 60px;background: #F4F3F3;float: left;padding: 5px 0;
+  width: 100%;height: 50px;background: #b19d7d;border-top: 2px solid #201f18;float: left;
 }
 .shop-time-order{
-  width: 33%;height: 100%;float: left;border-right:1px solid #E5E1DD;
-
-}
-.shop-time .shop-time-order:nth-of-type(3){
-  border-right:none;
+  width: 33%;height: 100%;float: left;
 }
 .shop-time-order-name{
-  display: block;float: left;font-size: 13px;color: #848484;width: 100%;height: 25px;line-height: 25px;text-align: center;
+  display: block;float: left;font-size: 13px;color: #333;width: 100%;height: 25px;line-height: 25px;text-align: center;
 }
 .shop-time-order-time{
-  display: block;float: left;font-size: 13px;color: #848484;width: 100%;height: 25px;line-height: 25px;text-align: center;
+  display: block;float: left;font-size: 13px;color: #333;width: 100%;height: 25px;line-height: 25px;text-align: center;
 }
 .shop-introduce{
   width: 100%;padding-top: 10px;padding-bottom: 10px;float: left;background: white;
@@ -421,30 +403,29 @@ font-size: 14px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;
   width: 24px;height: 24px;float: left;margin-left: 15px;margin-top: 3px;
 }
 .shop-intrduce-view1 text{
-  display: block;float: left;margin-left: 5px;font-size: 13px;color: #848484;line-height: 30px;
+  display: block;float: left;margin-left: 5px;font-size: 13px;color: #333;line-height: 30px;
 }
 
 
 
 .goodsInformation{
-  width: 80%;margin-left: 8%;position: absolute;z-index: 20;top: 15%;left: 0px;background: white;border-radius: 3px;padding: 0 8px;
+  width: 80%;margin-left: 10%;position: absolute;z-index: 20;top: 20%;left: 0px;background: white;border-radius: 3px;
 }
 .goodsInformation-title{
-  width: 100%;height: 40px;line-height: 40px;display: block;float: left;text-align: center;font-size: 13px;color: #3D231A;margin-top:8px;
-
+  width: 100%;height: 40px;line-height: 40px;display: block;float: left;text-align: center;font-size: 13px;color: #333;
 }
 .goodsInformation-image{
   width: 100%;vertical-align: middle;
 }
 .goodsInformation-desc{
-  width: calc(100% - 10px);margin-left: 10px;display: block;float: left;line-height: 20px;color: #9E9E9E;font-size: 13px;margin-top: 8px;
+  width: calc(100% - 10px);margin-left: 10px;display: block;float: left;line-height: 20px;color: #666;font-size: 13px;
 }
 
 .goodsInformation-seales{
-  width: calc(100% - 15px);margin-right: 15px;display: block;float: left;line-height: 30px;color: #9E9E9E;text-align: right;font-size: 13px;
+  width: calc(100% - 15px);margin-right: 15px;display: block;float: left;line-height: 30px;color: #666;text-align: right;font-size: 13px;
 }
 .goodsInformation-clear{
-  position: absolute;top: 12px;right: 5px;width: 25px;height: 25px;margin-top: 4px;margin-right: 4px;
+  position: absolute;top: 0px;right: 0px;width: 30px;height: 30px;margin-top: 4px;margin-right: 4px;
 }
 
 

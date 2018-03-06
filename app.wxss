@@ -1,4 +1,5 @@
 /**app.wxss**/
+
 .container {
   height: 100%;
   display: flex;
@@ -15,16 +16,24 @@ page{
 .pClass{
   width: 100%;height: 100%;
 }
+
+
+
+
+
 .commodityScreenClass {
     width: 100%;height: 100%;position: fixed;background: #000;opacity: 0.4;overflow: hidden;z-index: 10;color: #fff;top: 0px;right: 0px;bottom: 0px;left: 0px;
 
 }
 
+
+
+
 .toast{
   position: fixed;top: 80%;left: 10%;width: 80%;text-align: center;
 }
 .toast .content{
-  font-size: 14px;color: white;padding: 5px 15px;text-align: center;background: rgba(120, 108, 104, 0.8);border-radius: 10px;
+  font-size: 14px;color: white;padding: 5px;text-align: center;background: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -43,8 +52,8 @@ page{
   width: 100%;height: 100%;
 }
 .gapViewClass image{
-  width: 150px;height: 150px;position: fixed;left:0;right: 0;margin-left: auto;margin-right: auto;top:156px;
+  width: 100px;height: 100px;margin-left: calc(50% - 50px);margin-top: 50%;float: left;
 }
 .gapViewClass text{
-  width: 100%;height: 30px;font-size: 24px;color: #848484;text-align: center;line-height: 30px;position: fixed;left:0;right: 0;margin-left: auto;margin-right: auto;top:316px;
+  width: 100%;height: 30px;font-size: 14px;color: #666;text-align: center;line-height: 30px;display: block;float: left;margin-top: 10px;
 }

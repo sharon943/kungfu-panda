@@ -33,6 +33,8 @@ Page({
     actictyText: '',
     loadingIMG:'',
     loadingView:true,
+    ShareImg:'',
+    isShareImg:false,
   },
 
   /**
@@ -42,7 +44,6 @@ Page({
     var that = this;
 
     app.globalData.isAddressOne = false
-    
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -70,17 +71,13 @@ Page({
         
         console.log(that.data.loadingIMG)
       },
-      // fail:function(){
-      //   that.setData({
-        
-      //   })
-      // }
+   
     })
     that.getAuthLocation();
     // that.setCacheData();
     // that.getLocationData();
     that.getOpenIdData();
-
+    that.getActivity()
   },
 
   /**
@@ -114,11 +111,7 @@ Page({
               latitude: res.data.latitude,
               longitude: res.data.longitude
             })
-            if (that.data.address.length>15){
-              that.setData({
-                address: res.data.address.substring(0,15)+'...',
-              })
-            }
+
             that.setCacheData(app.globalData.openId, res.data.city, app.globalData.JSESSIONID, res.data.latitude, res.data.longitude);
           },
           fail: function () {
@@ -179,7 +172,6 @@ Page({
     }
 
   },
-
   getOpenIdData: function () {
     var openId;
     if (app.globalData.openId) {
@@ -207,7 +199,7 @@ Page({
 
     wx.getLocation({
       success: function (res) {
-        // console.log(res); 
+        console.log(res); 
         app.globalData.longitude = res.longitude;
         app.globalData.latitude = res.latitude;
         that.setData({
@@ -218,7 +210,8 @@ Page({
 
         that.getCityAddress(openId, res.latitude, res.longitude)
       },
-      fail:function(){
+      fail:function(res){
+        console.log(res)
         that.setData({
           isLoading2: true,
           isLoading1: true,
@@ -256,11 +249,6 @@ Page({
         longitude: wxMarkerData[0].longitude,
         address: wxMarkerData[0].address,
       });
-      if (wxMarkerData[0].address.length>15){
-        that.setData({
-          address: wxMarkerData[0].address.substring(0,15)+'...',
-        });
-      }
     }
     // 发起regeocoding检索请求   
     BMap.regeocoding({
@@ -280,7 +268,7 @@ Page({
       method: 'POST',
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
-     
+        console.log('qwdhiweufhieurrheu')
 
         app.globalData.cityName = city;
         app.globalData.JSESSIONID = JSESSIONID;
@@ -336,6 +324,10 @@ Page({
           // that.getCacheData(cookies1);
         }
         
+        // for (var i = 0; i < that.data.dataPro.runBanner.length; i++) {
+        //   that.data.dataPro.runBanner[i].num = i;
+      
+        // }
         console.log(that.data.dataPro)
       }
     })
@@ -357,6 +349,7 @@ Page({
 
   getShopData: function (JSESSIONID, latitude, longitude) {
     var that = this;
+
     wx.request({
       url: url.getStoreId,
       data: {
@@ -366,29 +359,21 @@ Page({
       method: 'POST',
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
-        console.log(res);
-      
-        
+        // console.log(res);
+
         if (res.data.status == 1) {
           // console.log('--------------------------383838838383833838383--------------');
           // console.log(res.data.data.storeId);
           app.globalData.shopId = res.data.data.storeId;
           app.globalData.extId = res.data.data.extId;
-          console.log(res.data.data.iconPath)
-          if (res.data.data.iconPath != undefined | res.data.data.iconPath != null) {
-            app.globalData.iconPath = res.data.data.iconPath;
-          } else {
-            app.globalData.iconPath = ''
-          }
-          console.log(app.globalData.iconPath)
-         
+       
           that.setData({
             shopPro: res.data.data,
             isLoading2: true,
             isAddress: 0,
-            isNotAddress: true,
-   
+            isNotAddress: true
           })
+          console.log(that.data.shopPro)
         }else{
           that.setData({
             isLoading2: true,
@@ -410,27 +395,36 @@ Page({
     that.setData({
       isViewDisabled: false
     })
+    console.log(that.data.isLogin)
     if (that.data.isLogin == 1){
-
+      console.log(isAddress)
+      var shopId = that.data.shopPro.storeId;
+      // var item = that.data.dataPro.runBanner.item
+      var item = e.currentTarget.dataset.item;
+      var info = e.currentTarget.dataset.info;
+      var address = that.data.address;
     if (isAddress == 1) {
       that.setData({
         isAddressOne: false
       })
       app.globalData.isAddressOne= false
-      wx.navigateTo({
-        url: '../menu/menu?typeNum=2',
-        // url:'../detailUrl/detailUrl?jump=that.data.dataPro.jump'
-      })
-
+      if (item.detailUrl == undefined | item.detailUrl == null | item.detailUrl == '') {
+        wx.navigateTo({
+          url: '../menu/menu?typeNum=2',
+        })
+      } else {
+        wx.navigateTo({
+          url: '../detailUrl/detailUrl?bannerUrl=' + item.bannerUrl
+        })
+      }
       return;
     }
-
-    var shopId = that.data.shopPro.storeId;
-    var item = that.data.dataPro.runBanner.item
-    var item = e.currentTarget.dataset.item;
-    var info = e.currentTarget.dataset.info;
-    var address = that.data.address;
+      console.log(that.data.dataPro.runBanner)
+    
+    console.log(e.currentTarget.dataset)
+    console.log(e)
     console.log(that.data.dataPro.runBanner)
+   
     if (e.currentTarget.dataset.info) {
       if (e.currentTarget.dataset.index == 3) {
         wx.navigateTo({
@@ -446,11 +440,14 @@ Page({
         url: '../menu/menu?typeNum=1&shopId=' + shopId + '&jump=' + item.jump + '&address=' + address + '&latitude=' + that.data.latitude + '&longitude=' + that.data.longitude,
       })
     } else {
-      wx.navigateTo({
-        url: '../detailUrl/detailUrl?jump=' + item.jump
-      })
+      
+        wx.navigateTo({
+          url: '../detailUrl/detailUrl?bannerUrl=' + item.bannerUrl
+        })
+   
+      
     }
-    console.log(item.jump)
+    console.log(item.bannerUrl)
    
     }else{
 
@@ -576,7 +573,7 @@ Page({
         storeId: app.globalData.extId
       },
       success: function (res) {
-        // console.log(res);
+        console.log(res);
 
         if (res.data.code == 200) {
           if (res.data.data.length > 0) {
@@ -584,6 +581,7 @@ Page({
             that.setData({
               actictyText: res.data.data[0].ruleDetail
             })
+            console.log(that.data.actictyText)
             if (that.data.actictyText.length > 40) {
               that.setData({
                 actictyText: res.data.data[0].ruleDetail.substring(0, 40) + '...'
@@ -597,5 +595,32 @@ Page({
         }
       }
     })
+  }, 
+  urlshare:function(){
+    wx.navigateTo({
+      url: '../share/share'
+    })
+  },
+  getActivity: function () {
+    var that = this
+    console.log(url.getActivity + constant.brandId + '/123')
+    wx.request({
+      url: url.getActivity + constant.brandId +'/123',
+      method: 'GET',
+      success: function (res) {
+        console.log(res);
+
+        that.setData({
+          ShareImg: res.data.data.titleImageUrl
+        })
+        console.log(that.data.ShareImg)
+      }
+    })
+  },
+  hideShareImg:function(){
+     var that=this;
+     that.setData({
+        isShareImg:true,
+     })
   }
 })

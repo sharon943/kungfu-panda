@@ -4,18 +4,24 @@
     <scroll-view class = "scroll" scroll-y ="true">
         <block wx:for = "{{orderPro}}">
             <view class = "orderViewClass" bindtap='btn_information' data-item = "{{item}}">
-            <block wx:if="{{iconPath.length>0}}">
-                 <image class = "image1" src='{{iconPath}}'></image>
-            </block>
-            <block wx:else>
                   <image class = "image1" src='../../images/order/s.png'></image>
-             </block>
-                  
                   <view class = "shopNamClass">
                       <text class = "text1">{{item.name_}}<text style='color: #999;font-size: 13px;'>{{item.name}}</text></text>
                       <text class = "text2">{{item.orderDate}}</text>
                       <text class = "text3">总额<text style='color: #333;font-size: 16px;'> ¥ {{item.price}}</text></text>
-                      <text class = "text4">{{item.statusName}}</text>
+                      
+                      <block wx:if="{{item.orderStatus==100}}">
+                      <text class = "text4_">{{item.statusName}}</text>
+                          <block wx:if="{{item.reviewStatus==1}}">
+                            <text class='text5' catchtap='go_comment' data-item='{{item}}' data-info = "{{1}}" data-index = "{{index}}">去评价</text>
+                          </block>
+                           <!-- <block wx:else> 
+                            <text class='text5' catchtap='go_seecomment'>查看评价</text>
+                          </block> -->
+                       </block>
+                        <block wx:else> 
+                         <text class = "text4">{{item.statusName}}</text>
+                        </block> 
                   </view>
             </view>
         </block>

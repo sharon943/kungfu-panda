@@ -16,7 +16,6 @@ Page({
     SenderView:true,
     orderlatitude: '',
     orderlongitude: '',
-    iconPath: ''
   },
 
   /**
@@ -27,12 +26,8 @@ Page({
 
     that.setData({
       id: options.id,
-      statusName: options.statusName,
-      iconPath: app.globalData.iconPath,
+      statusName: options.statusName
     })
-    
-    console.log(app.globalData.iconPath)
-    console.log(that.data.iconPath)
     console.log(that.data.statusName)
     console.log(app.globalData.shopId)
     console.log(that.data.id)
@@ -128,12 +123,12 @@ Page({
         console.log(that.data.orderInfo.progress)
         console.log(that.data.orderlatitude, that.data.orderlongitude);
         console.log(that.data.orderInfo)
-        console.log(that.data.orderInfo.progress[0].statusName)
         console.log(that.data.senderMobile)
         for (var i = 0; i < that.data.orderInfo.progress.length;i++){
           console.log(that.data.senderMobile)
-          console.log(that.data.orderInfo.progress[i].status)
-        if (that.data.orderInfo.progress[i].status != -1 & that.data.senderMobile != undefined & that.data.senderMobile != null & that.data.senderMobile != '') {
+        console.log(that.data.orderInfo.progress[i].status)
+        console.log(that.data.orderInfo.progress[i].status  +'&'+ (that.data.senderMobile  +'|'+ that.data.senderMobile + '|'+ that.data.senderMobile))
+        if (that.data.orderInfo.progress[i].status != -1 & that.data.senderMobile != undefined & that.data.senderMobile != null & that.data.senderMobile != ''){      
           that.setData({
             SenderView: false,
           })
@@ -156,6 +151,7 @@ Page({
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
         if (res.data.status == 1) {
+          // res.data.data.data[0].price=0
           var item = res.data.data;
           console.log(item)
           var itemF = item.discounts;
@@ -170,11 +166,9 @@ Page({
 
           console.log(itemF);
           that.setData({
-    
             orderMenu: item,
             orderF: itemF
           })
-          console.log(that.data.orderF)
         } else if (res.data.status == 9) {
           wx.navigateTo({
             url: '../login/login',
@@ -297,9 +291,6 @@ Page({
     wx.showModal({
       title: '提示',
       content: '是否取消该订单',
-      confirmColor:'#ffc600',
-      // cancelColor:'#3d231a',
-      confirmText:'确认',
       success:function(res){
         console.log(res);
 
@@ -367,6 +358,24 @@ Page({
       }
     })
   },
-  
+  refund:function(){
+    var that=this
+    console.log('新年好')
+    console.log(url.refund)
+    console.log(that.data.id)
+    var JSESSIONID = app.globalData.JSESSIONID;
+    wx.request({
+      url: url.refund,
+      data: {
+        orderId: that.data.id
+      },
+      method: 'POST',
+      header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
+      success: function (res) {
+        console.log(res);
+        that.getOrderInformation(that.data.id, app.globalData.JSESSIONID);
+      }
+    })
+  }
   
 })

@@ -17,7 +17,6 @@ Page({
     orderRemark: '',
     TimeInfo: [{ id: 1, text: '微信在线支付' }, { id: 2, text: '现金支付' }],
     TimeMethodIndex: 0,
-
     ZHNum: '',
     shopName: '',
     shopImg: '',
@@ -64,7 +63,10 @@ Page({
     f_p_2: '',
     invoiceId: -1,
     discountNamePro: [],
-    discountProType1: {}
+    discountProType1: {},
+    menuPro1 : [],
+    menuDataPro:[],
+    normalView:false
   },
 
   /**
@@ -72,10 +74,18 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-
+    var b = JSON.parse(options.menuDataPro)
+    console.log(b)
     console.log(app.globalData.personName);
-    console.log(app.globalData.typeValue);
+    console.log(app.globalData.menuPro)
+    // app.globalData.menuPro.menuId12098269.typeId='undefined'
+    this.getActivityData(options.shopId ? options.shopId : app.globalData.shopId, options.goodsMoney, options.money); 
+    console.log(app.globalData.menuPro)
+    
+   
+    console.log(app.globalData.menuPro)
     this.setData({
+      menuDataPro:b,
       menuPro: app.globalData.menuPro,
       allMenu: app.globalData.allpro,
       ZHNum: app.globalData.XHNum,
@@ -111,7 +121,7 @@ Page({
     console.log(this.data.shopId)
 
 
-    this.getActivityData(options.shopId ? options.shopId : app.globalData.shopId, options.goodsMoney, options.money);
+    
 
 
 
@@ -140,7 +150,7 @@ Page({
       })
 
     }
-
+    console.log(that.data.discountNamePro)
 
   },
 
@@ -225,7 +235,7 @@ Page({
 
         if (res.data.status == 1) {
           if (res.data.data) {
-            console.log('+++++++++++55555555555+++++++++++++++');
+     
             console.log(JSON.parse(JSON.stringify(res.data.data)));
             that.getDefaultData(res.data.data, JSESSIONID, shopId);
 
@@ -267,7 +277,7 @@ Page({
           }
           return;
         } else {
-          console.log('11111111111111');
+        
           console.log(res);
           if (res.data.data) {
             console.log(addressPro[addressNum - 1]);
@@ -325,13 +335,18 @@ Page({
     console.log(invoiceId);
     console.log(discountObj);
     console.log(couponObj);
+    console.log(menuPro)
+    console.log(typeValue)
+    var u=[]
+    u = that.data.menuPro1
     that.setData({
+      menuPro:u,
       isViewDisabled: false,
       isLoading: false
     })
 
     if (typeValue == 2) {
-
+  
 
       if (personName == '') {
         that.setData({
@@ -342,8 +357,6 @@ Page({
         wx.showModal({
           title: '提示',
           content: '您没有输入姓名',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
           success: function (res) {
 
           }
@@ -356,8 +369,6 @@ Page({
         wx.showModal({
           title: '提示',
           content: '您没有输入联系电话',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
         })
       } else if (!isPhone.phone(personPhone)) {
         that.setData({
@@ -367,8 +378,6 @@ Page({
         wx.showModal({
           title: '提示',
           content: '手机号格式不对',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
         })
       } else if (isJD && f_p_1 == '') {
 
@@ -379,8 +388,6 @@ Page({
         wx.showModal({
           title: '提示',
           content: '请输入个人或公司的抬头',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
         })
         return;
       } else if (f_p_2 == '' && isJD) {
@@ -391,8 +398,6 @@ Page({
         wx.showModal({
           title: '提示',
           content: '请输入税号或社会信用代码',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
         })
         return;
       } else {
@@ -409,12 +414,13 @@ Page({
         }
 
         if (discountNamePro.length > 0) {
-
-          var memberObjD = {};
-          memberObjD['prePrice'] = discountNamePro[0].value;
-          memberObjD['content'] = discountNamePro[0].pid+ '#' + 'promotions' + '#' + discountNamePro[0]['title'];
-          discountPro.push(memberObjD);
-          console.log(discountPro);
+          for (var i = 0; i < discountNamePro.length;i++){
+            var memberObjD = {};
+            memberObjD['prePrice'] =  discountNamePro[i].value;
+            // memberObjD['productName'] = discountNamePro[i].productName;
+            memberObjD['content'] = discountNamePro[i].pid + '#' + 'promotions' + '#' + discountNamePro[i].title;
+            discountPro.push(memberObjD);
+          } 
         }
 
         if (isYE) {
@@ -426,7 +432,7 @@ Page({
 
         if (discountObj.price != 0) {
           discountObj['prePrice'] = - discountObj['price'] / 100;
-            discountObj['content'] = discountObj['pid'] + '#' + 'promotions' + '#' + discountObj['title'];
+          discountObj['content'] = discountObj['pid'] + '#' + 'promotions' + '#' + discountObj['title'];
 
           discountPro.push(discountObj);
         }
@@ -436,7 +442,7 @@ Page({
           couponObj['content'] = couponObj.id + '#' + couponObj['couponType'] + '#' + couponObj.name;
 
           discountPro.push(couponObj);
-          console.log(discountPro);
+          console.log(memberObjD);
         }
 
         console.log(JSON.stringify(menuPro));
@@ -516,7 +522,32 @@ Page({
         }
 
 
-
+        console.log(requestData);
+        for (var q = 0; q < requestData.products.length; q++) {
+          if (requestData.products[q].typeId == 'undefined') {
+            app.globalData.menuPro = {};
+            app.globalData.allpro = { 'menuNum': 0, 'menuPrice': 0 };
+            app.globalData.menuProArray = {};
+            app.globalData.sendAddress = null;
+            app.globalData.specialOfferPrice = 0;
+            app.globalData.typePro = {};
+            app.globalData.meailFee = 0;
+            that.setData({
+              toastData: '系统错误，请重新下单',
+              isToast: false,
+              isViewDisabled: true,
+              isLoading: true
+            })
+            setTimeout(function () {
+              that.setData({
+                isToast: true
+              })
+              wx.switchTab({
+                url: '../homepage/homepage',
+              })
+            }, 2000)
+          }
+        }
         wx.request({
           url: url.getSendOrder,
           data: requestData,
@@ -576,6 +607,8 @@ Page({
                                 app.globalData.specialOfferPrice = 0;
                                 app.globalData.typePro = {};
                                 app.globalData.meailFee = 0;
+                                console.log(that.data.discountNamePro )
+                                console.log(1111111111111111);
                                 wx.redirectTo({
                                   url: '../information/information?id=' + orderId,
                                 })
@@ -589,6 +622,7 @@ Page({
                                 app.globalData.specialOfferPrice = 0;
                                 app.globalData.typePro = {};
                                 app.globalData.meailFee = 0;
+                                console.log(222222222);
                                 wx.redirectTo({
                                   url: '../information/information?id=' + orderId,
                                 })
@@ -609,6 +643,8 @@ Page({
                               app.globalData.specialOfferPrice = 0;
                               app.globalData.typePro = {};
                               app.globalData.meailFee = 0;
+                              console.log(that.data.discountNamePro)
+                              console.log(3333333333333333333)
                               wx.redirectTo({
                                 url: '../information/information?id=' + orderId,
                               })
@@ -616,8 +652,6 @@ Page({
                               wx.showModal({
                                 title: '提示',
                                 content: res.data.msg,
-                                confirmColor: '#ffc600',
-                                confirmText: '确认',
                                 showCancel: false,
                                 success: function (res) {
 
@@ -642,6 +676,8 @@ Page({
                       app.globalData.specialOfferPrice = 0;
                       app.globalData.typePro = {};
                       app.globalData.meailFee = 0;
+                      console.log(that.data.discountNamePro)
+                      console.log(44444444444444)
                       wx.redirectTo({
                         url: '../information/information?id=' + orderId,
                       })
@@ -669,6 +705,8 @@ Page({
                 app.globalData.specialOfferPrice = 0;
                 app.globalData.typePro = {};
                 app.globalData.meailFee = 0;
+                console.log(that.data.discountNamePro)
+                console.log(555555555555)
                 wx.redirectTo({
                   url: '../information/information?id=' + orderId,
                 })
@@ -678,8 +716,6 @@ Page({
                   title: '提示',
                   content: res.data.msg,
                   showCancel: false,
-                  confirmColor: '#ffc600',
-                  confirmText: '确认',
                   success: function (res) {
 
                   }
@@ -692,6 +728,7 @@ Page({
         })
       }
     } else {
+   
       if (!addressObj) {
         that.setData({
           toastData: '当前没有配送地址',
@@ -714,8 +751,6 @@ Page({
         wx.showModal({
           title: '提示',
           content: '请输入个人或公司的抬头',
-          confirmColor: '#ffc600',
-          confirmText: '确认',
         })
         return;
       } else if (f_p_2 == '' && isJD) {
@@ -730,8 +765,9 @@ Page({
 
         return;
       } else {
-
+        
         if (memberInformation['discount'] < 10) {
+          
           var memberObj1 = {};
           memberObj1['rate'] = memberInformation['discount'];
 
@@ -741,21 +777,21 @@ Page({
 
           discountPro.push(memberObj1);
         }
-        console.log(discountNamePro)
 
         if (discountNamePro.length > 0) {
+       
           for (var i = 0; i < discountNamePro.length;i++){
             var memberObjD = {};
-            memberObjD['prePrice'] = - discountNamePro[i].value;
-            memberObjD['productName'] = discountNamePro[i].productName;
-            memberObjD['content'] = discountNamePro[i].pid + '#' + 'promotions' + '#' + discountNamePro[i].title;
+            memberObjD['prePrice'] = - discountNamePro[0].value;
+            memberObjD['content'] = discountNamePro[0].pid + '#' + 'promotions' + '#' + discountNamePro[0].title;
             discountPro.push(memberObjD);
           }
-          console.log(discountPro);
+          console.log(discountNamePro);
         }
 
 
         if (isYE) {
+         
           var memberObj = {};
           memberObj['prePrice'] = - memberInformation['yh_price'] / 100;
           memberObj['content'] = 0 + '#' + 'card' + '#¥' + memberInformation['discountPrice'] / 100;
@@ -763,6 +799,7 @@ Page({
         }
 
         if (discountObj.price != 0) {
+         
           discountObj['prePrice'] = - discountObj['price'] / 100;
             discountObj['content'] = discountObj['pid'] + '#' + 'promotions' + '#' + discountObj['title'];
 
@@ -771,22 +808,25 @@ Page({
         }
 
         if (couponIndex > 0) {
+          
           couponObj['prePrice'] = - couponObj.couponPrice;
           couponObj['content'] = couponObj.id + '#' + couponObj['couponType'] + '#' + couponObj.name;
 
           discountPro.push(couponObj);
         }
 
-        console.log(JSON.stringify(menuPro));
+        // console.log(JSON.stringify(menuPro));
 
-        console.log(menuPro);
+        // console.log(menuPro);
         for (var i in menuPro) {
+        
           menuPro[i]['pid'] = menuPro[i].id;
 
           menuPro[i]['price'] = menuPro[i].price / 100;
           menuArray.push(menuPro[i]);
         }
         for (var z = 0; z < menuArray.length; z++) {
+          console.log('aaaaaaaaaaaaaa')
 
           if (menuArray[z].listRequirements) {
 
@@ -808,7 +848,9 @@ Page({
         console.log(addressObj);
 
         if (invoiceId == 2) {
+          console.log('bbbbbbbb')
           if (isJD) {
+            console.log('ddddddddddddddddc')
             requestData = {
               longitude: shopLng,
               latitude: shopLat,
@@ -832,7 +874,7 @@ Page({
           }
 
         } else {
-
+console.log('cccccccccccccccccc')
           requestData = {
             longitude: addressObj.longitude,
             latitude: addressObj.latitude,
@@ -853,8 +895,34 @@ Page({
             manualPreferentials: discountPro
           }
         }
-
         console.log(requestData);
+        for (var q = 0; q < requestData.products.length;q++){
+          if (requestData.products[q].typeId == 'undefined') {
+            console.log('ddddddddddd')
+            app.globalData.menuPro = {};
+            app.globalData.allpro = { 'menuNum': 0, 'menuPrice': 0 };
+            app.globalData.menuProArray = {};
+            app.globalData.sendAddress = null;
+            app.globalData.specialOfferPrice = 0;
+            app.globalData.typePro = {};
+            app.globalData.meailFee = 0;
+            that.setData({
+              toastData: '系统错误，请重新下单',
+              isToast: false,
+              isViewDisabled: true,
+              isLoading: true
+            })
+            setTimeout(function(){
+              that.setData({
+                isToast: true
+              })
+              wx.switchTab({
+                url: '../homepage/homepage',
+              })
+            }, 2000)
+          }
+        }
+        console.log('eeeeeeeeee')
         wx.request({
           url: url.getSendOrder,
           data: requestData,
@@ -864,7 +932,6 @@ Page({
             console.log(res);
             if (res.data.status == 1 && payId == 2) {
               var orderId = res.data.data.orderId;
-
               wx.request({
                 url: url.getOrderInformation,
                 data: {
@@ -911,6 +978,8 @@ Page({
                                 app.globalData.specialOfferPrice = 0;
                                 app.globalData.typePro = {};
                                 app.globalData.meailFee = 0;
+                                console.log(that.data.discountNamePro)
+                                console.log(66666666666)
                                 wx.redirectTo({
                                   url: '../information/information?id=' + orderId,
                                 })
@@ -924,6 +993,8 @@ Page({
                                 app.globalData.specialOfferPrice = 0;
                                 app.globalData.typePro = {};
                                 app.globalData.meailFee = 0;
+                                console.log(77777777777)
+                                console.log(that.data.discountNamePro)
                                 wx.redirectTo({
                                   url: '../information/information?id=' + orderId,
                                 })
@@ -944,6 +1015,8 @@ Page({
                               app.globalData.specialOfferPrice = 0;
                               app.globalData.typePro = {};
                               app.globalData.meailFee = 0;
+                              console.log(that.data.discountNamePro)
+                              console.log(8888888888)
                               wx.redirectTo({
                                 url: '../information/information?id=' + orderId,
                               })
@@ -952,8 +1025,6 @@ Page({
                                 title: '提示',
                                 content: res.data.msg,
                                 showCancel: false,
-                                confirmColor: '#ffc600',
-                                confirmText: '确认',
                                 success: function (res) {
 
                                 }
@@ -977,6 +1048,8 @@ Page({
                       app.globalData.specialOfferPrice = 0;
                       app.globalData.typePro = {};
                       app.globalData.meailFee = 0;
+                      console.log(that.data.discountNamePro)
+                      console.log(999999999999999)
                       wx.redirectTo({
                         url: '../information/information?id=' + orderId,
                       })
@@ -996,6 +1069,7 @@ Page({
 
 
               if (payId == 1) {
+                
                 var orderId = res.data.data.orderId;
                 app.globalData.menuPro = {};
                 app.globalData.allpro = { 'menuNum': 0, 'menuPrice': 0 };
@@ -1004,6 +1078,8 @@ Page({
                 app.globalData.specialOfferPrice = 0;
                 app.globalData.typePro = {};
                 app.globalData.meailFee = 0;
+                console.log(that.data.discountNamePro)
+                console.log(101010101010110)
                 wx.redirectTo({
                   url: '../information/information?id=' + orderId,
                 })
@@ -1013,10 +1089,8 @@ Page({
                   title: '提示',
                   content: res.data.msg,
                   showCancel: false,
-                  confirmColor: '#ffc600',
-                  confirmText: '确认',
                   success: function (res) {
-
+                    
                   }
                 })
               }
@@ -1065,8 +1139,9 @@ Page({
     console.log(1111);
     var that = this;
     var menuPro = app.globalData.menuPro;
-
+    var menuPro1;
     var menuProId = '';
+    var menuPro2=[]
     for (var i in menuPro) {
       if (menuPro[i].id) {
         menuProId += menuPro[i].id + ',';
@@ -1098,7 +1173,6 @@ Page({
           var PreferentialActivitiesPro = {};
           var discountProType1 = {};
           for (var i = 0; i < item.length; i++) {
-
             if (item.length > 0) {
 
               if (item[i].type == 3) {
@@ -1127,16 +1201,56 @@ Page({
                 if (money >= item[i].moneyCondition * 100){
                 
                 if (item[i].productsBonus.bonusProducts.length > 0) {
-
+                  var z = []
+                  
                   for (var j = 0; j < item[i].productsBonus.bonusProducts.length; j++) {
-                    
                     var discountObj1 = {};
                     discountObj1 = item[i].productsBonus.bonusProducts[j];
                     discountObj1['title'] = item[i].title;
                     discountObj1['pid'] = item[i].id;
                     discountObj1['moneyCondition'] = item[i].moneyCondition;
                     discountPro.push(discountObj1);
+                   
                   }
+                  console.log(discountPro)
+                  console.log(that.data.menuDataPro)
+                  //把折扣商品加入已点餐单
+                  for (var q = 0; q < that.data.menuDataPro.length; q++) {
+                    for (var w = 0; w < that.data.menuDataPro[q].products.length; w++) {
+                      for (var e = 0; e < discountPro.length;e++){
+                        if (discountPro[e].productPosId == that.data.menuDataPro[q].products[w].uid) {
+                          var h={}
+                          that.setData({
+                            normalView: true
+                          })
+                          console.log('有符合情况')
+                          h.menuName = discountPro[e].productName
+                          h.id = discountPro[e].productPosId
+                          h.pid = discountPro[e].productPosId
+                          h.num = discountPro[e].count
+                          h.price = that.data.menuDataPro[q].products[w].price*100
+                          h.typeId = that.data.menuDataPro[q].products[w].bigTypeId
+                
+                          h.costPrice = 0
+                          h.mealFee = 0
+
+                          z.push(h)
+                          menuPro1 = menuPro
+                          menuPro1[length + e] = z[e]
+                          console.log(menuPro1)
+
+                          discountPro[e].value = that.data.menuDataPro[q].products[w].price
+                          that.setData({
+                            menuPro1: menuPro1
+                          })
+                        }
+                      }
+                     
+                    }
+
+                  }
+                  console.log(menuPro1)
+                  console.log(that.data.menuPro1)
                 }
                 }
               } else if (item[i].type == 5) {
@@ -1165,7 +1279,6 @@ Page({
                     for (var k in menuPro) {
 
                       if (item[i].productsBonus.bonusProducts[a].productPosId == menuPro[k].id) {
-                        
                         zKMoney += parseInt(menuPro[k].price * menuPro[k].num - item[i].productsBonus.bonusProducts[a].value * 100 * menuPro[k].num);
                         console.log(zKMoney);
                       }
@@ -1189,7 +1302,7 @@ Page({
               }
             }
           }
-          console.log(99999999);
+       
           console.log(money);
           //清除线金额的计算
           if (app.globalData.typeValue == 2) {
@@ -1218,15 +1331,13 @@ Page({
             console.log(syGoodsPrice);
           }
           console.log(syGoodsPrice);
-          console.log(5555555);
+         
           
           console.log(discountObj);
 
           var discountProType2 = [];
           if (discountPro.length > 0){
             for (var y = 0; y < discountPro.length; y++) {
-              console.log(syGoodsPrice);
-              console.log(discountPro[y].moneyCondition);
               if (syGoodsPrice >= discountPro[y].moneyCondition * 100) {
                 discountProType2.push(discountPro[y]);
               }
@@ -1235,11 +1346,10 @@ Page({
           console.log(discountProType2);
           console.log(syGoodsPrice);
           that.getMemberInformation(syGoodsPrice, app.globalData.phone);
-         
+          
           if (discountObj != undefined && discountObj.title != undefined && discountObj.title.length>15){
             discountObj.title = discountObj.title.substring(0, 15) + '...'
           }
-          
           
           that.setData({
             PreferentialActivitiesPro: PreferentialActivitiesPro,
@@ -1247,8 +1357,9 @@ Page({
             discountNamePro: discountProType2,
             discountProType1: discountProType1
           })
-          console.log(that.data.discountProType2)
-
+          console.log(that.data.discountObj)
+          console.log(app.globalData.menuPro)
+          console.log(that.data.discountNamePro)
         } else {
           that.setData({
             PreferentialActivitiesPro: [],
@@ -1263,7 +1374,7 @@ Page({
   getMemberInformation: function (syGoodsPrice, phone) {
     var that = this;
     console.log(phone);
-    console.log(222222222);
+    
 
     wx.request({
       url: url.getMemberInformation + phone,
@@ -1611,7 +1722,7 @@ Page({
           },
           success: function (res) {
             console.log(res);
-            console.log(11111111);
+            
 
             if (res.data.code == 200) {
 
@@ -1661,7 +1772,7 @@ Page({
                 var moneyCondition1 = discountObj['moneyCondition'] * 100;
                 console.log(moneyCondition1);
                 if (syGoodsPrice >= moneyCondition1) {
-                  console.log(111111);
+                  
                   syGoodsPrice = that.accSub(syGoodsPrice, discountObj.price);
                 } else {
                   discountObj = { 'price': 0 }
@@ -1899,6 +2010,7 @@ Page({
       discountObj: discountObj,
       discountNamePro: discountNamePro
     })
+    console.log(that.data.discountNamePro)
   }
 
 })

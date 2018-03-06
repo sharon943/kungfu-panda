@@ -24,17 +24,9 @@ Page({
     var that = this;
 
     that.getIsLogin(app.globalData.JSESSIONID);
-    
+
     wx.setNavigationBarTitle({
       title: '我的',
-      
-    })
-    console.log(app.globalData.LogiN)
-    console.log(app.globalData.phone)
-    that.setData({
-      LogiN: app.globalData.LogiN,
-      setPhone:app.globalData.phone,
-      Discount:app.globalData.Discount
     })
   },
 
@@ -51,14 +43,8 @@ Page({
   onShow: function () {
     var that = this;
     that.getUserInfoData(app.globalData.JSESSIONID);
-    console.log(app.globalData.LogiN)
-    console.log(app.globalData.phone)
-    
     that.setData({
       isViewDisabled: true,
-      setPhone: app.globalData.phone,
-      LogiN: app.globalData.LogiN,
-      Discount: app.globalData.Discount
     })
   },
 
@@ -182,10 +168,6 @@ Page({
             userPro: res.data.data,
             isViewDisabled: true,
           })
-          console.log(that.data.userPro)
-          app.globalData.ForgetPhone = res.data.data.phone
-          
-          
         } else if (res.data.status == 11) {
           that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID,1);
         }
@@ -343,7 +325,13 @@ Page({
       wx.navigateTo({
         url: '../contactUs/contactUs',
       })
-    }
+    },
+  btn_share:function(){
+    var that = this;
+    wx.navigateTo({
+      url: '../share/share'
+    })
+  }
   
   
 })

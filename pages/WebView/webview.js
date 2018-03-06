@@ -1,4 +1,4 @@
-// pages/ForgetPwd/ForgetPwd.js
+// pages/WebView/webview.js
 var app = getApp();
 var url = require('../../utils/url.js');
 Page({
@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    thisphone:''
+    path:''
   },
 
   /**
@@ -15,10 +15,11 @@ Page({
    */
   onLoad: function (options) {
     var that=this
-    console.log(app.globalData.ForgetPhone)
+    console.log(options.orderId)
     that.setData({
-      thisphone: app.globalData.ForgetPhone
+      path: 'http://139.196.251.103:90/mobile/index.action?orderId=' + options.orderId
     })
+    console.log(that.data.path)
   },
 
   /**
@@ -69,24 +70,7 @@ Page({
   onShareAppMessage: function () {
   
   },
-  Getcode:function(){
-    var that = this;
-    that.getLogin(app.globalData.ForgetPhone, app.globalData.JSESSIONID);
-    
-  },
-  getLogin: function (phone, JSESSIONID) {
-    var that = this;
-
-    wx.request({
-      url: url.codeLogin,
-      data: { phone: phone },
-      method: 'POST',
-      header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
-      success: function (res) {
-        console.log(res);
-
-    
-      }
-    })
-  },
+  getUrl:function(){
+   
+  }
 })

@@ -1,17 +1,38 @@
-<view class="pClass" style='background: #f0eeec;'>
+<view class="pClass" style='background: #f2f2f2;'>
   <block wx:if = "{{couponPro.length > 0}}">
   <scroll-view class="scroll" scroll-y="true">
     <block wx:for="{{couponPro}}">
-      <view class="coupon">
-        <view class="content">
-          <view class="price">
-            <text class="cp"><text style='font-size: 26px;'>¥</text>{{item.gifts}}</text>
-            <text class="fullCut">{{item.constraint}}</text>
-            <view style="clear:both;"></view>
-          </view>
+      <view class="coupon" style='height:105px;position:relative;'>
+      <image src='../../images/coupon/discount.png'></image>
+      <!-- <text style='position:absolute;top:0;right:20%;'>1234</text> -->
+      <view class='label' style='position:absolute;right:20px;top:0;bottom:0;margin-top:auto;margin-bottom:auto;height:70%;'>
+      <block wx:if="{{item.couponType==0}}">
+            <text>现</text>
+            <text>金</text>
+            <text>券</text>
+      </block>
+      <block wx:elif="{{item.couponType==1}}">
+            <text>折</text>
+            <text>扣</text>
+            <text>券</text>
+       </block>
+       <block wx:elif="{{item.couponType==2}}">
+            <text>商</text>
+            <text>品</text>
+            <text>券</text>
+       </block>
+       <block wx:elif="{{item.couponType==3}}">
+            <text>买</text>
+            <text>即</text>
+            <text>送</text>
+       </block>
+       </view>
+          <view class="content" style='position:absolute;top:0;left:10px;'>
+       
           <view class="nameView">
             <text class="name">{{item.name}}</text>
-            <block wx:if="{{item.nextDay >= 0}}">
+            <text class="date">{{item.remark}}</text>
+            <!-- <block wx:if="{{item.nextDay >= 0}}">
               <block wx:if = "{{item.nextDay == 0}}">
                   <text class="date">今天到期</text>
               </block>
@@ -22,24 +43,21 @@
             </block>
             <block wx:else>
               <text class="date">已过期</text>
-            </block>
-          </view>
+            </block> -->
+          </view> 
           <!-- 2个圆弧 !-->
-           <!-- <view class="left_bottom_h"></view>
-          <view class="right_bottom_h"></view>  -->
-          <view style="clear:both;"></view>
-        </view>
-        <view class="present">
-          
-           <!-- <image bindtap='couponview' src='{{couponView ? open : close}}' data-item="{{item}}"></image>  -->
-           <!-- <image src='../../images/coupon/hidden.png' hidden='{{item.showid.length>0 ? flase:true}}' data-item="{{item}}"></image> -->
-             <text>{{item.remark}}</text>
-          <!-- <text>抗日根据而过后仍然竣工日竣工日额交易统计一个通融国际</text> -->
-          <view style="clear:both;"></view>
+          <!-- <view class="left_bottom_h"></view>
+          <view class="right_bottom_h"></view>
+          <view style="clear:both;"></view>-->
+         </view>   
+          <view class="present" style='position:absolute;bottom:5px;left:0;'> 
+          <text>有效期：{{item.beginTime}}至{{item.endTime}}</text>
+          <!-- <image src='../../images/address/bottom.png'></image> -->
+          <!-- <view style="clear:both;"></view> -->
           <!-- 2个圆弧 !-->
-           <!-- <view class="left_top_h"></view>
-          <view class="right_top_h"></view>  -->
-        </view>
+          <!-- <view class="left_top_h"></view>
+          <view class="right_top_h"></view> -->
+         </view>
         <view style="clear:both;"></view>
       </view>
     </block>

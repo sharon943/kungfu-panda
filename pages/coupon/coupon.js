@@ -120,10 +120,12 @@ Page({
               couponObj['status'] = item[i].status;
 
               if (item[i].coupons[j].endTime){
-               
                 couponObj['nextDay'] = that.getDayData(item[i].coupons[j].endTime);
+                couponObj.beginTime = item[i].coupons[j].endTime.substr(0, 10);
+                couponObj.endTime = item[i].coupons[j].endTime.substr(0, 10);
               }else{
-                
+                couponObj.beginTime = item[i].endTime.substr(0, 10);
+                couponObj.endTime = item[i].endTime.substr(0, 10);
                 couponObj['nextDay'] = that.getDayData(item[i].endTime);
               }
               
@@ -204,6 +206,7 @@ Page({
     that.setData({
       isViewDisabled: false
     })
+    console.log(url.getCouponQ, app.globalData.memberId, item.acId, item.id)
     wx.request({
       url: url.getCouponQ,
       data:{

@@ -6,9 +6,6 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-
-   
         //登录态过期
         wx.login({
           success: res => {
@@ -119,12 +116,8 @@ App({
     shopLat: 0,
     shopLng: 0,
     personName: '',
-    iconPath:'',
     session_key:'',
-    LogiN:1,
-    Discount:'',
     Phone:'',
-    ForgetPhone:'',
   }
   
   

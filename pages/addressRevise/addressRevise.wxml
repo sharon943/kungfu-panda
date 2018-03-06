@@ -6,13 +6,10 @@
       <view class="inputView">
         <text>订餐人</text>
         <input placeholder='请输入您的姓名' name = "name" value="{{revisePro ? revisePro.receiverName : ''}}" bindinput='input_name'></input>
-         
-          
       </view>
       <view class="inputView">
         <text>电话</text>
         <input placeholder='请输入您的电话' name = "phone" maxlength='11' type='number' value="{{revisePro ? revisePro.receiverPhone : ''}}" bindinput='input_phone'></input>
-        
       </view>
       <view class="city" bindtap='btn_location_address'>
         <text class="name">送餐地址</text>
@@ -22,7 +19,6 @@
       <view class="inputView">
         <text>具体地址</text>
         <input placeholder='地址请补充详细，如xx大楼xx室' name = "address" value="{{revisePro ? revisePro.appendReceiverAddress : ''}}" bindinput='input_address'></input>
-        
       </view>
     </view>
 

@@ -2,11 +2,11 @@
 <view class="MenuViewClass">
 <block wx:if = "{{typeNum == 1}}">
   <view class="head">
-    <image class="head-image1" src='../../images/menu/b.png'></image>
+    <image class="head-image1" src='../../images/menu/a.png'></image>
       <text class="head-text1" bindtap='btn_address_'>{{address}}</text>  
      
     <text class="head-text2" bindtap='btn_address_'>|切换|</text>
-    <picker class="head-type" value="{{index}}" range="{{typeNamePro}}" bindchange="typeChange" range-key='{{name}}' mode="multiSelector" bindcolumnchange = "bindcolumnchange" > 
+     <picker class="head-type" value="{{index}}" range="{{typeNamePro}}" bindchange="typeChange" range-key='{{name}}' mode="multiSelector" bindcolumnchange = "bindcolumnchange" >  
       <block wx:if = "{{typeValue == 1||typeValue == 0}}">
           <text>外卖</text>
       </block>
@@ -20,8 +20,8 @@
     </picker>
   </view>
   <view class="title">
-    <text class="title-text1" style="{{menuType == 1 ? 'border-bottom: 2px solid #FF9600;color:#FF9600;' : ''}}" bindtap='btn_shop_order'>订餐</text>
-    <text class="title-text2" style="{{menuType == 2 ? 'border-bottom: 2px solid #FF9600;color:#FF9600;' : ''}}" bindtap='btn_shop_information'>商家</text>
+    <text class="title-text1" style="{{menuType == 1 ? 'border-bottom: 2px solid #b19d7d;color:#b19d7d;' : ''}}" bindtap='btn_shop_order'>订餐</text>
+    <text class="title-text2" style="{{menuType == 2 ? 'border-bottom: 2px solid #b19d7d;color:#b19d7d;' : ''}}" bindtap='btn_shop_information'>商家</text>
   </view>
   </block>
 
@@ -69,11 +69,10 @@
       </block>
 
       <scroll-view scroll-y="true" class="GoodsScrollClass" style="{{!isBusiness ? 'height: calc(100% - 30px);' : ''}}">
-      
       <view wx:if="{{Discounttype==0}}">
         <block wx:for="{{menuDataPro[goodsIndex].products}}">
           <view class="GoodsClass">
-            <image class="GoodsImageClass" src="{{item.image1}}" mode="aspectFill"  bindtap='btn_image' data-item = "{{item}}"/>
+            <image class="GoodsImageClass" src="{{item.logo}}" mode="aspectFill"  bindtap='btn_image' data-item = "{{item}}"/>
             <view class="GoodsSMClass">
               <text class="NameClass">{{item.name}}</text>
               <block wx:if = "{{typeNum == 1&&isBusiness}}">
@@ -122,46 +121,8 @@
             </block>
             <block wx:else></block>
             </block>
-          </view>
-        </block>
-      </view>
 
-        <view wx:elif="{{Discounttype==1}}">
-
-        <block wx:for="{{discountMenu}}">
-          <view class="GoodsClass">
-            <image class="GoodsImageClass" src="{{item.image1}}" mode="aspectFill"  bindtap='btn_image' data-item = "{{item}}"/>
-            <view class="GoodsSMClass">
-              <text class="NameClass">{{item.name}}</text>
-              <block wx:if = "{{typeNum == 1&&isBusiness}}">
-              <text class="desc">{{item.desc}}</text>
-              <block wx:if = "{{item.sales != 0}}">
-                <text class="buyNumber">月销 {{item.sales}}</text>
-              </block>
-              <block>
-                <text class="buyNumber">   </text>
-              </block>
-              </block>
-                         
-               <block class="PriceClass" style="position:relative;">
-                         <block wx:if="{{item.value > 0}}">
-                         <view style='position:absolute;top:65px;left:93px;display:flex;height:16px;'>
-                           <text style="font-size:16px;color:red;line-height:20px;margin-right:3px;">¥</text>
-                           <text style="color:red;margin-right:2px;line-height:20px;">{{item.activityPrice}}</text>
-                         
-                                   <text style='color:#666;text-decoration: line-through;font-size: 12px;margin-top:1px;margin-left:3px;line-height:20px;'>¥{{item.Vprice}}</text>
-                            </view>
-                      <view wx:if="{{productActicty.isFirstOrder==1}}" style="display:flex;width:100%;height:14px;position:absolute;top:86px;left:93px;" > 
-                         <image style='width:12px;height:12px;margin-right:2px;margin-top:1px;' src='../../images/menu/discount.png'></image>
-                        <text style='color:#FC7C85;font-size:12px;width:80%;line-height:14px;'>新用户专享</text>                   
-                        </view>
-                        </block>
-                        <block wx:else>￥{{item.price}}
-                        </block>
-              </block>  
-            </view>
-         
-          <block wx:if = "{{typeNum == 1}}"> 
+<block wx:else> 
             <block wx:if = "{{shopPro.isServiceTime || typeValue == 2 || typeValue == 4}}">
             <view class="ImageButtonViewClass">
               <block wx:if="{{item.isInServiceTime}}">
@@ -181,8 +142,97 @@
             </block>
             <block wx:else></block>
             </block>
+
           </view>
         </block>
+      </view>
+
+        <view wx:elif="{{Discounttype==1}}">
+
+        <block wx:for="{{discountMenu}}">
+          <view class="GoodsClass">
+            <image class="GoodsImageClass" src="{{item.logo}}" mode="aspectFill"  bindtap='btn_image' data-item = "{{item}}"/>
+            <view class="GoodsSMClass">
+              <text class="NameClass">{{item.name}}</text>
+              <block wx:if = "{{typeNum == 1&&isBusiness}}">
+              <text class="desc">{{item.desc}}</text>
+              <block wx:if = "{{item.sales != 0}}">
+                <text class="buyNumber">月销 {{item.sales}}</text>
+              </block>
+              <block>
+                <text class="buyNumber">   </text>
+              </block>
+              </block> 
+
+
+               <block class="PriceClass" style="position:relative;">
+                         <block wx:if="{{item.value > 0}}">
+                         <view style='position:absolute;top:65px;left:93px;display:flex;height:16px;'>
+                           <text style="font-size:16px;color:red;line-height:20px;margin-right:3px;">¥</text>
+                           <text style="color:red;margin-right:2px;line-height:20px;">{{item.activityPrice}}</text>
+                         
+                                   <text style='color:#666;text-decoration: line-through;font-size: 12px;margin-top:1px;margin-left:3px;line-height:20px;'>¥{{item.Vprice}}</text>
+                            </view>
+                      <view wx:if="{{productActicty.isFirstOrder==1}}" style="display:flex;width:100%;height:14px;position:absolute;top:86px;left:93px;" > 
+                         <image style='width:12px;height:12px;margin-right:2px;margin-top:1px;' src='../../images/menu/discount.png'></image>
+                        <text style='color:#FC7C85;font-size:12px;width:80%;line-height:14px;'>新用户专享</text>                   
+                        </view>
+                        </block>
+                        <block wx:else>￥{{item.price}}
+                        </block>
+              </block>
+
+
+
+            </view>
+         
+          <block wx:if = "{{typeNum == 1}}"> 
+                  <block wx:if = "{{shopPro.isServiceTime || typeValue == 2 || typeValue == 4}}">
+                            <view class="ImageButtonViewClass">
+                                   <block wx:if="{{item.isInServiceTime}}">
+                                         <block wx:if="{{item.isSoldOut}}">
+                                             <text class = "text1">商品已售罄</text>
+                                         </block>
+                                         <block wx:else>
+                                               <image class="addViewClass" src="../../images/menu/add.png" bindtap="btnImageAdd" data-item="{{item}}"></image>
+                                                <text>{{menuProArray['menuId'+item.uid]['num']}}</text>
+                                                <image class="subViewClass" src="../../images/menu/sub.png" hidden="{{menuProArray['menuId'+item.uid]? false : true}}" data-item="{{item}}" bindtap="btnImageSub"></image>
+                                           </block>
+                                     </block>
+                                     <block wx:else>
+                                         <text class = "text1">餐品不在供应时间</text>
+                                     </block>
+                             </view>
+                     </block>
+                     <block wx:else></block>
+           </block>
+
+   <block wx:else> 
+                  <block wx:if = "{{shopPro.isServiceTime || typeValue == 2 || typeValue == 4}}">
+                            <view class="ImageButtonViewClass">
+                                   <block wx:if="{{item.isInServiceTime}}">
+                                         <block wx:if="{{item.isSoldOut}}">
+                                             <text class = "text1">商品已售罄</text>
+                                         </block>
+                                         <block wx:else>
+                                               <image class="addViewClass" src="../../images/menu/add.png" bindtap="btnImageAdd" data-item="{{item}}"></image>
+                                                <text>{{menuProArray['menuId'+item.uid]['num']}}</text>
+                                                <image class="subViewClass" src="../../images/menu/sub.png" hidden="{{menuProArray['menuId'+item.uid]? false : true}}" data-item="{{item}}" bindtap="btnImageSub"></image>
+                                           </block>
+                                     </block>
+                                     <block wx:else>
+                                         <text class = "text1">餐品不在供应时间</text>
+                                     </block>
+                             </view>
+                     </block>
+                     <block wx:else></block>
+           </block>
+
+
+          </view>
+        </block>
+
+
       </view>
         
       </scroll-view>
@@ -192,53 +242,27 @@
       <view class="BottomViewClass">
 
         <view class="ShopCarViewClass" bindtap="burCarClick">
-          
+          <image src="../../images/menu/car.png"></image>
           <block wx:if="{{allMenu['menuNum'] > 0}}">
-          <image src="../../images/menu/car_1.png"></image>
             <text>{{allMenu['menuNum']}}</text>
           </block>
-          <block wx:else>
-          <image src="../../images/menu/car.png"></image>
-            <text wx:if="{{allMenu['menuNum']>0}}">{{allMenu['menuNum']}}</text>
-          </block>
         </view>
-        <view class="moneyView" wx:if="{{allMenu['menuNum'] > 0}}">
-        <!-- <text>{{typeValue}}</text> -->
+        <view class="moneyView">
           <text class="money" style="{{typeValue == 2 ? 'height: 50px;line-height: 50px;margin-top:0px;' : ''}}">¥ {{allMenu['menuPrice']/100 + mealFeeMoney/100}} <block wx:if = "{{specialOfferPrice > 0 && allMenu['menuPrice'] != specialOfferPrice}}"><text style='color:#666;text-decoration: line-through;font-size: 12px;'>¥ {{specialOfferPrice/100}}</text></block></text>
           <block wx:if = "{{typeValue != 2}}">
           <text class="send">外送费¥{{shopPro.deliveryFee}}元</text>
           </block>
         </view>
-        <view class="moneyView" wx:else>
-      
-          <text class="money1" style="{{typeValue == 2 ? 'height: 50px;line-height: 50px;margin-top:0px;' : ''}}">¥ {{allMenu['menuPrice']/100 + mealFeeMoney/100}} <block wx:if = "{{specialOfferPrice > 0 && allMenu['menuPrice'] != specialOfferPrice}}"><text style='color:#c5c5c5;text-decoration: line-through;font-size: 12px;'>¥ {{specialOfferPrice/100}}</text></block></text>
-          <block wx:if = "{{typeValue != 2}}">
-          <text class="send1">外送费¥{{shopPro.deliveryFee}}元</text>
-          </block>
-        </view>
         <!-- <text class="PriceClass">¥ {{allMenu['menuPrice']/100}}</text> -->
-        
-        
-        <block wx:if="{{allMenu['menuPrice']/100 + mealFeeMoney/100 >19}}">
-            <text class="GoOkClass" bindtap="btGoSend" style='background:#FF9600;'>选好了</text>
-          </block>
-          <block wx:else>  
-            <text class="GoOkClass" bindtap="btGoSend">￥20起送</text>
-          </block>
+        <text class="GoOkClass" bindtap="btGoSend">选好了</text>
+
       </view>
     </view>
   </block>
   <block wx:else>
     <view class="shop">
       <image class='shop-head' src='../../images/menu/x.jpg' style='height: {{sw/3}}px;'></image>
-      <!-- <image class="shop-logo" src='{{shopPro.iconPath}}' style='top:{{sw/3 - 40}}px;left: 10px;'></image> -->
-      <image class="shop-logo" src='../../images/order/s.png' style='top:{{sw/3 - 40}}px;left: 10px;'></image>
-      <block wx:if="{{iconPath.length>0}}">
-                 <image class="shop-logo" src='{{iconPath}}' style='top:{{sw/3 - 40}}px;left: 10px;'></image>
-            </block>
-            <block wx:else>
-                  <image class="shop-logo" src='../../images/order/s.png' style='top:{{sw/3 - 40}}px;left: 10px;'></image>
-             </block>
+      <image class="shop-logo" src='{{shopPro.iconPath}}' style='top:{{sw/3 - 40}}px;left: 10px;'></image>
       <view class="shop-information">
         <text class='shop-information-name'>{{shopPro.fullName}}</text>
         <view class="shop-information-address">
@@ -268,7 +292,7 @@
         </view>
         <view style="clear:both;"></view>
       </view>
-      <!-- <view style='width:100%;height:15px;background: #f2f2f2;float:left;'></view> -->
+      <view style='width:100%;height:15px;background: #f2f2f2;float:left;'></view>
       <view class="shop-introduce">
         <block wx:for="{{shopPro.icons}}">
           <view class="shop-intrduce-view1">
@@ -278,8 +302,7 @@
         </block>
         <view class="shop-intrduce-view1">
             <block wx:if = "{{actictyText != ''}}">
-            <image src='../../images/jian.png'></image>
-            <text>{{actictyText}}</text>
+            <text style='margin-left: 20px;'>减：{{actictyText}}</text>
             </block>
           </view>
         <view style="clear:both;"></view>
@@ -293,7 +316,7 @@
 <view class="menuProListClass" hidden="{{isNature}}">
   <view class="menuName">
     <text class="name">{{menuName}}</text>
-      <image class = "back" src ="../../images/menu/cha.png" bindtap = "menuProBack"></image>  
+    <!-- <image class = "back" src = "../../images/menu/cha.png" bindtap = "menuProBack"></image> -->
   </view>
   <scroll-view class="proListClass" scroll-y="true">
     <view wx:for="{{naturePro}}" wx:for-item="i" wx:for-index="z">
@@ -310,11 +333,11 @@
     <text class="money"><text style='font-size: 12px;font-weight: lighter'>¥ </text>{{naturePrice / 100}}</text>
     <view class="add" bindtap="modal_image_add_click">选好了</view>
   </view>
-</view>                         
+</view>
 
 <view class="commodityScreenClass" bindtap="hideScreen" hidden="{{isHiddenScreenStatus}}"></view>
-<modal hidden="{{isHiddenModal}}" title="清空购物车" confirm-color="#ffc600" confirm-text="确认" cancel-text="取消" bindcancel="buyCarClearCancel" bindconfirm="buyCarClearConfirm">确定清空购物车？</modal>
-<modal hidden="{{isGoodsModal}}" title="提示" confirm-color="#ffc600" confirm-text="确定" cancel-text="取消" bindcancel="goodsCancel" bindconfirm="goodsCancel">请在购物车中进行属性商品的加减</modal>
+<modal hidden="{{isHiddenModal}}" title="清空购物车" confirm-text="确定" cancel-text="取消" bindcancel="buyCarClearCancel" bindconfirm="buyCarClearConfirm">确定清空购物车？</modal>
+<modal hidden="{{isGoodsModal}}" title="提示" confirm-text="确定" cancel-text="取消" bindcancel="goodsCancel" bindconfirm="goodsCancel">请在购物车中进行属性商品的加减</modal>
 
 <view class="commodityScreenShopCarClass" bindtap="hideShopCarScreen" hidden="{{isShopCarCommodity}}"></view>
 <view animation="{{animationData}}" class="menuBuyCarListClass" hidden="{{hiddenBuyCarStatus}}">
@@ -357,8 +380,6 @@
     </view>
   </view>
 </view>
-
-
 
 <view class="commodityScreenClass" bindtap="hideImageScreen" hidden="{{isHiddenImageStatus}}" style='height:100%;'></view>
 <view class = "goodsInformation" hidden='{{isGoodsInformation}}'>

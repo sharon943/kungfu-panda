@@ -44,7 +44,7 @@ Page({
         revisePro: app.globalData.revisePro
       })
     }
-    console.log(that.data.revisePro.receiverName)
+
   },
 
   /**
@@ -300,7 +300,5 @@ Page({
     this.setData({
       revisePro: revisePro
     })
-  },
- 
-
+  }
 })

@@ -1,7 +1,6 @@
 // pages/login/login.js
 var app = getApp();
 var url = require('../../utils/url.js');
-
 var isPhone = require('../../utils/isPhone.js');
 var constant = require('../../utils/constant.js');
 var md5 = require('../../utils/md5.js');
@@ -18,18 +17,33 @@ Page({
     phone: '',
     isToast: true,
     toastData: '请输入正确的手机号',
-    passSee:'flase',
     isCode: false,//验证码按钮是否可点击
+    recommendedId: '',
+    fast:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this
+    console.log(options)
+    console.log(that.data.typeNum)
+    console.log(options.recommendedId)
+    if (options.recommendedId != '' & options.recommendedId != undefined){
+      that.setData({
+        typeNum:3,
+        fast:true,
+        recommendedId: options.recommendedId
+      })
+    }
+    console.log(that.data.typeNum)
     wx.setNavigationBarTitle({
       title: '登录',
     })
-    console.log(app.globalData.session_key)
+    
+    console.log(that.data.recommendedId)
+
   },
 
   /**
@@ -89,70 +103,6 @@ Page({
       typeNum: e.currentTarget.dataset.info
     })
   },
-  getPhoneNumber: function (e) {
-    console.log(e.detail)
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
-
-    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '未授权',
-        success: function (res) { }
-      })
-    } else if (e.detail.errMsg == 'getPhoneNumber:fail 用户未绑定手机，请先在微信客户端进行绑定后重试') {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '请输入手机号',
-      })
-    } else if (e.detail.errMsg == 'getPhoneNumber:ok'){
-      console.log(e.detail.encryptedData)
-      console.log(e.detail.iv)
-      var that=this;
-      that.setphonenumber(e.detail.encryptedData, e.detail.iv)
-    }
-    else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '同意授权',
-        success: function (res) { 
-          console.log(res)
-        }
-      })
-    }
-  },
-  setphonenumber: function (encryptedData, iv){
-    console.log(app.globalData.session_key)
-    var WXBizDataCrypt = require('../../utils/WXBizDataCrypt.js');
-
-    var appId = 'wx0451681834e5d0ff'
-    var sessionKey = app.globalData.session_key
-    var encryptedData = encryptedData
-    var iv = iv
-
-    var pc = new WXBizDataCrypt(appId, sessionKey)
-
-    var data = pc.decryptData(encryptedData, iv)
-
-    console.log('解密后 data: ', data)
-    if (data.phoneNumber.length > 0 & data.phoneNumber.length!=undefined){
-      var that=this;
-      app.globalData.phone = data.phoneNumber;
-      app.globalData.LogiN=5;
-      // app.globalData.personName = data.compellation;
-      that.getMemberInformation(data.phoneNumber);
-      
-      that.setData({
-     
-        phone: data.phoneNumber
-      })
-      
-    }
-  },
   countDowm: function (that) {
     var time = that.data.timeInt;
 
@@ -180,24 +130,10 @@ Page({
       }, 1000)
     }
   },
-  btn_get_del: function () {
-    var that = this;
-
-    that.setData({
-      phone: ''
-    })
-    console.log(that.data.phone)
-  },
-  btn_pass_see:function(){
-    var that = this;
-
-    that.setData({
-      passSee: !that.data.passSee,
-    })
-  },
   btn_get_code:function(){
     var that = this;
     var phone = that.data.phone;
+
     that.setData({
       isCode: true
     })
@@ -242,7 +178,7 @@ Page({
   },
   getLogin: function (phone, JSESSIONID){
     var that = this;
-    
+    console.log(phone)
     wx.request({
       url: url.codeLogin,
       data:{phone: phone},
@@ -280,9 +216,8 @@ Page({
 
     var JSESSIONID = app.globalData.JSESSIONID;
     console.log(item);
-    console.log(that.data.phone)
 
-    if (item.phone == '' & that.data.phone=='') {
+    if (item.phone == '') {
       that.setData({
         toastData: '手机号不能为空',
         isToast: false,
@@ -322,16 +257,77 @@ Page({
 
       if (typeNum == 1){
         that.codeLoginData(item, JSESSIONID);
-      }else{
+      } else if (typeNum == 3){
+        that.fastRegister(item, JSESSIONID)
+      } else{
         that.pwdLoginData(item, JSESSIONID);
       }
-      
-   
     }
+  },
+  fastRegister: function (item, JSESSIONID) {
+    var that=this
+    console.log(JSESSIONID)
+     console.log(item)
+     console.log(item.phone);
+     console.log(that.data.recommendedId)
+     var body = {
+       mobile: item.phone,
+       activityId: 129,
+       recommendedId: that.data.recommendedId,
+       }
+     var header = {
+       clientId: constant.clientId,
+       brandId: constant.brandId,
+       } 
+     console.log(url.fastRegister)
+     console.log(body)
+     console.log(header)
+    wx.request({
+      url: url.fastRegister,
+      method: 'POST',
+      data: body,
+      header: header,
+      success: function (res) {
+        console.log(res);
+        console.log(res.data.code)
+        if (res.data.code == 200){
+          console.log(res.data.data[0].otherMobile)
+          that.getMemberInformation(res.data.data[0].otherMobile);
+          app.globalData.phone = res.data.data[0].otherMobile;
+          app.globalData.personName = res.data.data[0].name;
+          that.setData({
+            toastData: '登录成功',
+            isToast: false,
+          })
+
+          setTimeout(function () {
+            that.setData({
+              isToast: true
+            })
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 2000)
+        }else{
+          that.setData({
+            toastData: res.data.errMsg,
+            isToast: false,
+            isViewDisabled: true,
+          })
+          setTimeout(function () {
+            that.setData({
+              isToast: true
+            })
+          }, 2000)
+        }
+      }
+    })
   },
   codeLoginData: function (item, JSESSIONID){
     var that = this;
     console.log(item);
+    console.log(JSESSIONID)
+    
     wx.request({
       url: url.phoneLogin,
       data: {
@@ -431,7 +427,14 @@ Page({
     })
   },
   setCacheData: function (openId, city, JSESSIONID, num = 0) {
-  
+    //that.setCacheData1(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
+    /**else if(res.data.status == 9){
+          wx.navigateTo({
+            url: '../login/login',
+          })
+        }else if(res.data.status == 11){
+          that.setCacheData1(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
+        } */
     var that = this;
     wx.request({
       url: url.setCache,
@@ -465,11 +468,75 @@ Page({
 
         if (res.data.code == 200) {
 
-          app.globalData.Discount = res.data.data[0].discount
+
           app.globalData.memberId = res.data.data[0].id
           
         }
       }
     })
+  },
+  getPhoneNumber: function (e) {
+    console.log(e.detail)
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '未授权',
+        success: function (res) { }
+      })
+    } else if (e.detail.errMsg == 'getPhoneNumber:fail 用户未绑定手机，请先在微信客户端进行绑定后重试') {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请输入手机号',
+      })
+    } else if (e.detail.errMsg == 'getPhoneNumber:ok'){
+      console.log(e.detail.encryptedData)
+      console.log(e.detail.iv)
+      var that=this;
+      that.setphonenumber(e.detail.encryptedData, e.detail.iv)
+    }
+    else {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '同意授权',
+        success: function (res) { 
+          console.log(res)
+        }
+      })
+    }
+  },
+  setphonenumber: function (encryptedData, iv){
+    console.log(app.globalData.session_key)
+    var WXBizDataCrypt = require('../../utils/WXBizDataCrypt.js');
+
+    var appId = 'wx0451681834e5d0ff'
+    var sessionKey = app.globalData.session_key
+    var encryptedData = encryptedData
+    var iv = iv
+
+    var pc = new WXBizDataCrypt(appId, sessionKey)
+
+    var data = pc.decryptData(encryptedData, iv)
+
+    console.log('解密后 data: ', data)
+    if (data.phoneNumber.length > 0 & data.phoneNumber.length!=undefined){
+      var that=this;
+      app.globalData.phone = data.phoneNumber;
+      // app.globalData.LogiN=5;
+      // app.globalData.personName = data.compellation;
+      that.getMemberInformation(data.phoneNumber);
+      
+      that.setData({
+     
+        phone: data.phoneNumber
+      })
+      
+    }
   }
 })

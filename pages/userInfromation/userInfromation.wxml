@@ -1,34 +1,26 @@
 <!--pages/userInfromation/userInfromation.wxml-->
 <view class ="pClass" style='background: #f2f2f2;'>
     <view class ="view1">
-        <view class = "type2" bindtap='btn_user'>
-            <text class = "text1" >用户名:</text>
-             <!-- <image class = "rightClass" src='../../images/send/right.png'></image>  -->
-             <!-- <text class = "text2">{{userPro.nickName}}</text>  -->
-             <input type='text' class = "text2" value='{{userPro.nickName}}' bindblur='editRemarkConfirm' bindinput='remarkInputChange'></input> 
+        <view class = "type2" bindtap='btn_user' >
+            <text class = "text1" >用户名</text>
+            <image class = "rightClass" src='../../images/send/right.png'></image>
+            <text class = "text2">{{userPro.nickName}}</text>
         </view>
-        <view class = "type2" bindtap='btn_name'>
-            <text class = "text1" >姓名:</text>
-             <!-- <image class = "rightClass" src='../../images/send/right.png'></image>  -->
-             <!-- <text class = "text2">{{userPro.compellation}}</text>  -->
-             <input type='text' class = "text2" value='{{userPro.compellation}}' bindblur='editRemarkConfirm' bindinput='remarkInputChange'></input> 
+        <view class = "type2" bindtap='btn_name' >
+            <text class = "text1" >姓名</text>
+            <image class = "rightClass" src='../../images/send/right.png'></image>
+            <text class = "text2">{{userPro.compellation}}</text>
         </view>
-        <!-- <picker class = "type2"  range = "{{sexPro}}" bindchange='btn_sex' mode="selector" value='{{0}}'>
-            <text class = "text1">性别:</text>
-             <image class = "rightClass" src='../../images/send/right.png'></image> 
+        <picker class = "type2"  range = "{{sexPro}}" bindchange='btn_sex' mode="selector" value='{{0}}'>
+            <text class = "text1">性别</text>
+            <image class = "rightClass" src='../../images/send/right.png'></image>
             <text class = "text2">{{userPro.sex == 1 ? '男' : '女'}}</text>
-        </picker> -->
-
-        <radio-group class="radio-group" bindchange='btn_sex' style='height:40px;text-align:right;line-height:40px;margin-right:15px;'>
-            <label class="radio" wx:for="{{items}}" style='margin-left:10px;'>
-              <radio value="{{item.name}}" checked="{{item.checked}}" color="#FF9600" style='margin-right:12px;'/>{{item.value}}
-            </label>
-        </radio-group>
-        <!-- <picker class = "type2" mode='date' value = "{{date}}" bindchange='btn_date'>
-            <text class = "text1">出生日期:</text>
-             <image class = "rightClass" src='../../images/send/right.png'></image> 
+        </picker>
+        <picker class = "type2" mode='date' value = "{{date}}" bindchange='btn_date'>
+            <text class = "text1">出生日期</text>
+            <image class = "rightClass" src='../../images/send/right.png'></image>
             <text class = "text2">{{userPro.birthday}}</text>
-        </picker> -->
+        </picker>
         <view style="clear:both;"></view>
     </view>
 
@@ -49,8 +41,10 @@
     <view style="clear:both;"></view>
 </view> -->
 
+
+
 <modal hidden="{{hiddenModal}}" title="{{title}}"  confirm-text="确定" cancel-text="取消" bindcancel="editRemarkCancel" bindconfirm="editRemarkConfirm" >
-    <!-- <textarea placeholder="{{wxName}}" bindinput="remarkInputChange" value="{{wxName == '请输入用户名' ? '' : wxName}}" class="remarkInputClass" name = "info"/> -->
+    <textarea placeholder="{{wxName}}" bindinput="remarkInputChange" value="{{wxName == '请输入用户名' ? '' : wxName}}" class="remarkInputClass" name = "info"/>
 </modal>
 
 <view class= "toast" hidden='{{isToast}}'>

@@ -22,8 +22,7 @@ Page({
     timeInt: 60,
     pwd:'',
     pwd1: '',
-    i: 0,
-    Phone:'',
+    i: 0
   },
 
   /**
@@ -194,7 +193,6 @@ Page({
     this.setData({
       phone: e.detail.value
     })
-    console.log(this.data.phone)
   },
   countDowm: function (that) {
     var time = that.data.timeInt;
@@ -222,14 +220,6 @@ Page({
         that.countDowm(that);
       }, 1000)
     }
-  },
-  btn_get_del:function(){
-    var that = this;
-
-    that.setData({
-      Phone: ''
-    })
-    console.log(that.data.phone)
   },
   btn_get_code: function () {
     var that = this;
