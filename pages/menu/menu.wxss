@@ -132,10 +132,10 @@ page{
 }
 
 .bottom{
-  width: 100%;height: 70px;float: left;position: absolute;bottom: 0px;background: transparent;
+  width: 100%;float: left;position: absolute;bottom: 0px;background: transparent;
 }
 .BottomViewClass{
-    width: 100%;height: 50px;background: #201f18;float: left;margin-top: 20px;
+    width: 100%;height: 50px;background: #201f18;margin-top: 20px;
 }
 
 .BottomViewClass .ShopCarViewClass{

@@ -46,6 +46,15 @@ Page({
     app.globalData.isAddressOne = false
     wx.getSystemInfo({
       success: function (res) {
+        console.log(res.model)
+        var model = res.model.substring(0, res.model.indexOf("X")) + 'X';
+        console.log(model)
+        if (model == 'iPhone X') {
+          console.log(123)
+          console.log(app.globalData.isIpx)
+          app.globalData.isIpx = true
+          console.log(app.globalData.isIpx)
+        }
         that.setData({
           systWidth: res.screenWidth
         })

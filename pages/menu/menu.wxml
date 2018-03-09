@@ -257,6 +257,9 @@
         <text class="GoOkClass" bindtap="btGoSend">选好了</text>
 
       </view>
+      <view class="button-group {{isIpx?'fix-iphonex-button':''}}">
+        <text style='height:100%;width:90px;background:#b19d7d;display:block;float:right;'></text>
+      </view>
     </view>
   </block>
   <block wx:else>

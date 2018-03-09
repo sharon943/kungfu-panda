@@ -80,10 +80,7 @@ Page({
     console.log(app.globalData.menuPro)
     // app.globalData.menuPro.menuId12098269.typeId='undefined'
     this.getActivityData(options.shopId ? options.shopId : app.globalData.shopId, options.goodsMoney, options.money); 
-    console.log(app.globalData.menuPro)
-    
-   
-    console.log(app.globalData.menuPro)
+  
     this.setData({
       menuDataPro:b,
       menuPro: app.globalData.menuPro,
@@ -301,7 +298,19 @@ Page({
     var JSESSIONID = app.globalData.JSESSIONID;
     var addressObj = that.data.addressObj;
     var shopId = that.data.shopId;
-    var menuPro = JSON.parse(JSON.stringify(that.data.menuPro));
+
+    var u = []
+    //menupro1是整理好的折扣商品 点击发送订单按钮后执行把整理好的折扣商品放进点好的餐单中 p,u都是暂时赋值的中间值
+    var p = that.data.menuPro
+    u = that.data.menuPro1
+    for(var m=0;m<u.length;m++){
+        p[length+m]=u[m]
+    }
+    console.log(u, p) 
+    var menuPro= p;
+    //至此处结束
+    console.log(menuPro)
+    // var menuPro = JSON.parse(JSON.stringify(that.data.menuPro));
     var menuId = that.data.menuId;
     var menuArray = [];
     var timeValue = that.data.timeValue;
@@ -337,10 +346,9 @@ Page({
     console.log(couponObj);
     console.log(menuPro)
     console.log(typeValue)
-    var u=[]
-    u = that.data.menuPro1
+    console.log('zzzzzzzzzzzzzzzzzzzzzzz')
+    console.log(discountPro);
     that.setData({
-      menuPro:u,
       isViewDisabled: false,
       isLoading: false
     })
@@ -779,11 +787,11 @@ Page({
         }
 
         if (discountNamePro.length > 0) {
-       
+          console.log(discountNamePro)
           for (var i = 0; i < discountNamePro.length;i++){
             var memberObjD = {};
-            memberObjD['prePrice'] = - discountNamePro[0].value;
-            memberObjD['content'] = discountNamePro[0].pid + '#' + 'promotions' + '#' + discountNamePro[0].title;
+            memberObjD['prePrice'] = - discountNamePro[i].value;
+            memberObjD['content'] = discountNamePro[i].pid + '#' + 'promotions' + '#' + discountNamePro[i].title;
             discountPro.push(memberObjD);
           }
           console.log(discountNamePro);
@@ -844,6 +852,7 @@ Page({
 
 
         var requestData = {};
+        console.log('zzzzzzzzzzzzzzzzzzzzzzz')
         console.log(discountPro);
         console.log(addressObj);
 
@@ -1150,7 +1159,7 @@ console.log('cccccccccccccccccc')
 
     }
     menuProId = menuProId.substring(0, menuProId.length - 1);
-
+    console.log(url.getActivityLib + '/' + app.globalData.memberId)
     wx.request({
       url: url.getActivityLib + '/' + app.globalData.memberId,
       data: {},
@@ -1212,34 +1221,38 @@ console.log('cccccccccccccccccc')
                     discountPro.push(discountObj1);
                    
                   }
+                  // discountPro = [{ categoryId: 570, count: 1, discountType: 2, id: 12893, moneyCondition: 20, pid: 438, productName: "皮蛋粥", productPosId: "12098033", title: "满送2", value: 12 },{ categoryId: 571, count: 2, discountType: 2, id: 12893, moneyCondition: 20, pid: 438, productName: "冻奶茶", productPosId: "12098265", title: "满送2", value: 20 }]
                   console.log(discountPro)
                   console.log(that.data.menuDataPro)
                   //把折扣商品加入已点餐单
+                  console.log(app.globalData.menuPro)
                   for (var q = 0; q < that.data.menuDataPro.length; q++) {
                     for (var w = 0; w < that.data.menuDataPro[q].products.length; w++) {
                       for (var e = 0; e < discountPro.length;e++){
-                        if (discountPro[e].productPosId == that.data.menuDataPro[q].products[w].uid) {
+                        if (that.data.menuDataPro[q].products[w].uid == discountPro[e].productPosId) {
+                          console.log(discountPro[e].productPosId, that.data.menuDataPro[q].products[w].uid)
+                          console.log(e)
                           var h={}
                           that.setData({
                             normalView: true
                           })
                           console.log('有符合情况')
-                          h.menuName = discountPro[e].productName
-                          h.id = discountPro[e].productPosId
-                          h.pid = discountPro[e].productPosId
-                          h.num = discountPro[e].count
-                          h.price = that.data.menuDataPro[q].products[w].price*100
-                          h.typeId = that.data.menuDataPro[q].products[w].bigTypeId
-                
-                          h.costPrice = 0
-                          h.mealFee = 0
-
+                          h['menuName'] = discountPro[e].productName
+                          h['id'] = discountPro[e].productPosId
+                          h['pid'] = discountPro[e].productPosId
+                          h['num'] = discountPro[e].count
+                          h['price'] = that.data.menuDataPro[q].products[w].price*100
+                          h['typeId'] = that.data.menuDataPro[q].products[w].bigTypeId
+                          h['costPrice'] = 0
+                          h['mealFee'] = 0
                           z.push(h)
-                          menuPro1 = menuPro
-                          menuPro1[length + e] = z[e]
+                          menuPro1=z
+                          menuPro1[e] = z[e]
+                          console.log(menuPro1.length)
                           console.log(menuPro1)
 
-                          discountPro[e].value = that.data.menuDataPro[q].products[w].price
+                          discountPro[e].value = that.data.menuDataPro[q].products[w].price*discountPro[e].count
+                          console.log(discountPro[e].productName+'value:' + discountPro[e].value)
                           that.setData({
                             menuPro1: menuPro1
                           })
@@ -1249,8 +1262,11 @@ console.log('cccccccccccccccccc')
                     }
 
                   }
+                  
                   console.log(menuPro1)
                   console.log(that.data.menuPro1)
+                  console.log('zzzzzzzzzzzzzzzzzzzzzzz')
+                  console.log(discountPro);
                 }
                 }
               } else if (item[i].type == 5) {

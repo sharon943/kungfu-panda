@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isIpx: false,
     Discounttype:0,
     menuDataPro: [],
     discountMenu:[],
@@ -107,6 +108,12 @@ Page({
     //   console.log(openId)
 
     // })
+    console.log(app.globalData.isIpx)
+    if (app.globalData.isIpx){
+      that.setData({
+        isIpx:true
+      })
+    }
     if (options.jump==undefined | options.jump==null | options.jump==""){
       app.globalData.typeValue = null;
       app.globalData.timeValue = null;

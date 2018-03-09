@@ -118,6 +118,7 @@ App({
     personName: '',
     session_key:'',
     Phone:'',
+    isIpx: false,
   }
   
   

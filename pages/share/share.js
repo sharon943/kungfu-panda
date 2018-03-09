@@ -68,6 +68,7 @@ Page({
     var that=this
     console.log(that.data.RulesView)
     that.getActivityList()
+ 
   },
 
   /**
