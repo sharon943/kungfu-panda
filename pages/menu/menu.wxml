@@ -59,13 +59,13 @@
     <view class="GoodsViewClass" style="{{typeNum == 2 ? 'height: calc(100% - 50px);' : ''}}">
       <block wx:if = "{{!shopPro.isServiceTime &typeValue == 1&!isNotAddress}}">
       <view class = "business" >
-          <text>商家休息中</text> 
+          <text>可接受预约</text> 
       </view>
       </block>
        <block wx:elif = "{{isNotAddress}}">
-      <view class = "business" >
+        <view class = "business" >
           <text>附近没有门店</text>
-      </view>
+        </view>
       </block>
 
       <scroll-view scroll-y="true" class="GoodsScrollClass" style="{{!isBusiness ? 'height: calc(100% - 30px);' : ''}}">
