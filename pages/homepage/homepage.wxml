@@ -24,7 +24,7 @@
         </block>
     </view>
     <view style='width: 100%;height:8px;background:#f0f0f0;float:left;'></view>
-    <view class = "shopViewClass">
+    <!-- <view class = "shopViewClass">
           <view class = "nameViewClass">
                 <text>———  品牌 ———</text>
           </view>
@@ -61,7 +61,7 @@
               </block>
           </view>
           <view style="clear:both;"></view>
-    </view>
+    </view> -->
 </view>
 
 
@@ -97,10 +97,10 @@
     <text class = "confirm" bindtap='btn_addres_confirm'>确认</text>
     <view style="clear:both;"></view>
 </view>
- <view hidden='{{isShareImg}}' class='iconImg' style='position:fixed;bottom:0;right:0;'>
+  <!-- <view hidden='{{isShareImg}}' class='iconImg' style='position:fixed;bottom:0;right:0;'>
      <view bindtap='hideShareImg' style='width:25px;height:25px;display:block;position:absolute;right:0;top:0;z-index:9'>
      </view>
     <image class = "isShareImg-clear" src='../../images/menu/cha.png' style='width:17px;height:17px;display:block;position:absolute;right:0;top:0'></image>
     <image src='{{ShareImg}}' style='width:80px;height:80px;' bindtap='urlshare'></image>
    
-</view>    
+</view>      -->

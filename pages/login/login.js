@@ -310,7 +310,7 @@ Page({
           }, 2000)
         }else{
           that.setData({
-            toastData: res.data.errMsg,
+            toastData: res.data.message,
             isToast: false,
             isViewDisabled: true,
           })

@@ -16,6 +16,7 @@ Page({
     SenderView:true,
     orderlatitude: '',
     orderlongitude: '',
+    subview:false,
   },
 
   /**
@@ -141,7 +142,9 @@ Page({
   getMenuInformation: function (orderId, JSESSIONID){
     var that = this;
 
-
+    console.log(url.getOrderMenuInformation)
+    console.log(orderId)
+    console.log('Cookie'+':'+ 'JSESSIONID=' + JSESSIONID)
     wx.request({
       url: url.getOrderMenuInformation,
       data: {
@@ -150,6 +153,7 @@ Page({
       method: 'POST',
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
+        console.log(res)
         if (res.data.status == 1) {
           // res.data.data.data[0].price=0
           var item = res.data.data;
@@ -158,12 +162,36 @@ Page({
           for (var i = 0; i < itemF.length; i++) {
             var index = itemF[i].preferentialContent.indexOf('#');
             itemF[i].preferentialContent = itemF[i].preferentialContent.substring(index + 1, itemF[i].preferentialContent.length);
+            
             var index1 = itemF[i].preferentialContent.indexOf('#');
+            if (itemF[i].preferentialContent.includes('￥') == '' | itemF[i].preferentialContent.indexOf('￥') == undefined) {
+              that.setData({
+                subview: true
+              })
+              console.log(235364375643785643785)
+              itemF[i].sub = itemF[i].preferentialContent.substring(index1+1);
+              console.log(itemF[i].sub)
+            }else if (itemF[i].preferentialContent.indexOf('￥') != '' | itemF[i].preferentialContent.indexOf('￥') != undefined ){
+              that.setData({
+                subview:true
+              })
+              var index2 = itemF[i].preferentialContent.indexOf('￥');
+              itemF[i].sub = itemF[i].preferentialContent.substring(index1+1,index2);
+              console.log(itemF[i].sub)
+                
+                console.log(index2);
+                itemF[i].sub = itemF[i].preferentialContent.substring(index1 + 1, index2);
+                if (itemF[i].sub.length>20){
+                  itemF[i].sub = itemF[i].sub.substring(0,20)+'...'
+                }
+                console.log(itemF[i].sub)    
+            } 
+                        
+            console.log(itemF[i].sub) 
             itemF[i].preferentialContent = itemF[i].preferentialContent.substring(0, index1);
             console.log(index);
             console.log(itemF[i].preferentialContent);
           }
-
           console.log(itemF);
           that.setData({
             orderMenu: item,
@@ -177,8 +205,6 @@ Page({
           that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID,1);
         }
         console.log(res);
-
-
 
       }
     })

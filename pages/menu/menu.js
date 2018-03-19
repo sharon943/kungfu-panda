@@ -1904,7 +1904,8 @@ console.log(options)
                         
                         activityPro1.productsBonus.bonusProducts[h].Vprice = menuPro1[i].products[j].price;
                         activityPro1.productsBonus.bonusProducts[h].price = menuPro1[i].products[j].price;
-                        activityPro1.productsBonus.bonusProducts[h].image1 = menuPro1[i].products[j].image1;
+                        activityPro1.productsBonus.bonusProducts[h].logo = menuPro1[i].products[j].logo;
+                        activityPro1.productsBonus.bonusProducts[h].image2 = menuPro1[i].products[j].image2;
                         activityPro1.productsBonus.bonusProducts[h].num = menuPro1[i].products[j].num;
                         activityPro1.productsBonus.bonusProducts[h].uid = menuPro1[i].products[j].uid;
                         activityPro1.productsBonus.bonusProducts[h].name = menuPro1[i].products[j].name;

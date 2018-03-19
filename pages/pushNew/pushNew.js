@@ -29,12 +29,14 @@ Page({
     // console.log(options)
     // 
     // console.log(app.globalData.memberId)
+    
     console.log(url.GetSharepersoninfo + constant.brandId)
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
           systWidth: res.screenWidth,
-          recommendedId: options.recommendedId
+          recommendedId: options.recommendedId,
+          // recommendedId: 10000000046,
         })
         // console.log(that.data.recommendedId)
       },

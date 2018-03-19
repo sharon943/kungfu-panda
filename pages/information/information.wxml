@@ -53,8 +53,14 @@
     <block wx:for = "{{orderF}}">
     <view class="view1">
       <block wx:if = "{{item.preferentialContent == 'promotions'}}">
-          <text class="text1" style='width:calc(100% - 15px);'>{{'优惠活动 ¥ '+item.preferentialPrice}}</text>
+           <block wx:if="{{subview&&item.sub!='undefined'}}">
+                <text class="text1" style='width:calc(100% - 15px);'>{{item.sub+'  ￥'+item.preferentialPrice}}</text>
+          </block>
+          <block wx:else> 
+              <text class="text1" style='width:calc(100% - 15px);'>{{'优惠活动 ¥ '+item.preferentialPrice}}</text>
+           </block> 
       </block>
+    
       <block wx:elif = "{{item.preferentialContent == 'levelDiscount'}}">
           <text class="text1" style='width:calc(100% - 15px);'>{{'会员等级折扣 ¥ '+item.preferentialPrice}}</text>
       </block>

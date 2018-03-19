@@ -883,7 +883,7 @@ Page({
           }
 
         } else {
-console.log('cccccccccccccccccc')
+
           requestData = {
             longitude: addressObj.longitude,
             latitude: addressObj.latitude,
@@ -931,7 +931,7 @@ console.log('cccccccccccccccccc')
             }, 2000)
           }
         }
-        console.log('eeeeeeeeee')
+     
         wx.request({
           url: url.getSendOrder,
           data: requestData,

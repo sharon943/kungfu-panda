@@ -112,7 +112,7 @@ Page({
         wx.getStorage({
           key: 'LocationAddress',
           success: function (res) {
-            // console.log(res)
+            console.log(res)
 
             that.setData({
               addressStorage: res.data,
