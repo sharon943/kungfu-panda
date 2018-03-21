@@ -7,7 +7,8 @@
        <view style='position:absolute;top:15px;right:0;width:50px;height:40px' bindtap='get_rules'></view>
        <view class='rule' hidden='{{RulesView}}'>
         <view style='position:relative;width:100%;height:100%;'>
-              <image src='../../images/pushNew/cha.png' style='width:25px;height:25px;position:absolute;top:-30px;right:-15px;z-index:100' catchtap='dis_rules'></image> 
+        
+              <image src='../../images/pushNew/cha.png' style='width:25px;height:25px;position:absolute;top:-21px;right:-15px;z-index:100' catchtap='dis_rules'></image> 
              <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
               <!-- <text>{{ShareInfo.remark}}</text> -->
         </view> 

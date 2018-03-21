@@ -216,7 +216,7 @@ Page({
 
     var JSESSIONID = app.globalData.JSESSIONID;
     console.log(item);
-
+    console.log(JSESSIONID)
     if (item.phone == '') {
       that.setData({
         toastData: '手机号不能为空',
@@ -256,22 +256,20 @@ Page({
     } else {
 
       if (typeNum == 1){
-        that.codeLoginData(item, JSESSIONID);
+        that.codeLoginData(item, JSESSIONID, typeNum);
       } else if (typeNum == 3){
-        that.fastRegister(item, JSESSIONID)
+        that.codeLoginData(item, JSESSIONID, typeNum)
       } else{
         that.pwdLoginData(item, JSESSIONID);
       }
     }
   },
-  fastRegister: function (item, JSESSIONID) {
+  fastRegister: function (phone) {
     var that=this
-    console.log(JSESSIONID)
-     console.log(item)
-     console.log(item.phone);
+    console.log(phone)
      console.log(that.data.recommendedId)
      var body = {
-       mobile: item.phone,
+       mobile: phone,
        activityId: 129,
        recommendedId: that.data.recommendedId,
        }
@@ -291,43 +289,16 @@ Page({
         console.log(res);
         console.log(res.data.code)
         if (res.data.code == 200){
-          console.log(res.data.data[0].otherMobile)
-          that.getMemberInformation(res.data.data[0].otherMobile);
-          app.globalData.phone = res.data.data[0].otherMobile;
-          app.globalData.personName = res.data.data[0].name;
-          that.setData({
-            toastData: '登录成功',
-            isToast: false,
-          })
-
-          setTimeout(function () {
-            that.setData({
-              isToast: true
-            })
-            wx.navigateBack({
-              delta: 1
-            })
-          }, 2000)
-        }else{
-          that.setData({
-            toastData: res.data.message,
-            isToast: false,
-            isViewDisabled: true,
-          })
-          setTimeout(function () {
-            that.setData({
-              isToast: true
-            })
-          }, 2000)
+          app.globalData.memberId = res.data.data[0].id
         }
       }
     })
   },
-  codeLoginData: function (item, JSESSIONID){
+  codeLoginData: function (item, JSESSIONID, typeNum){
     var that = this;
     console.log(item);
     console.log(JSESSIONID)
-    
+    console.log(typeNum)
     wx.request({
       url: url.phoneLogin,
       data: {
@@ -340,14 +311,18 @@ Page({
         console.log(res);
 
         if (res.data.status == 1) {
-          that.getMemberInformation(res.data.data.phone);
+          if (typeNum==1){
+            that.getMemberInformation(res.data.data.phone);
+          } else if (typeNum == 3){
+            that.fastRegister(res.data.data.phone);
+          }
           app.globalData.phone = res.data.data.phone;
           app.globalData.personName = res.data.data.compellation;
           that.setData({
             toastData: '登录成功',
             isToast: false,
           })
-          
+
           setTimeout(function () {
             that.setData({
               isToast: true

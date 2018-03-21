@@ -42,7 +42,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
+    console.log(app.globalData.openId)
     app.globalData.isAddressOne = false
     wx.getSystemInfo({
       success: function (res) {
@@ -183,6 +183,7 @@ Page({
   },
   getOpenIdData: function () {
     var openId;
+    console.log(app.globalData.openId)
     if (app.globalData.openId) {
       openId = app.globalData.openId;
       this.setData({
@@ -197,7 +198,7 @@ Page({
         this.setData({
           openId: res.openId
         })
-
+        console.log(openId)
         this.getLocationData(openId);
       }
 

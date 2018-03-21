@@ -19,6 +19,7 @@ Page({
     timeAgoPro:'',
     percent:'',
     dataView:false,
+    isToast: true,
   },
 
   /**
@@ -175,5 +176,60 @@ Page({
       }
     })
   },
+  cash:function(){
+    var that = this
+    console.log(url.cash)
+    console.log(app.globalData.memberId)
+    wx.request({
+      url: url.cash,
+      method:'post',
+      header: {
+        activityId: 129,
+        recommendedId: app.globalData.memberId,
+        brandId: constant.brandId
+      },
+      success: function (res) {
+        console.log(res);
+        console.log(res.data.code)
+        console.log(res.data.message)
+  if(res.data.code==200){
+    console.log(res.data.message)
+    that.setData({
+      toastData: '提现成功',
+      isToast: false,
+      isCode: false
+    })
+    setTimeout(function () {
+      that.setData({
+        isToast: true
+      })
+
+    }, 2000)
+  }else{
+    console.log(res.data.message)
+    that.setData({
+      toastData: res.data.message,
+      isToast: false,
+      isCode: false
+    })
+    setTimeout(function () {
+      that.setData({
+        isToast: true
+      })
+   
+    }, 2000)
+  }
+        that.setData({
+         
+        })
+        
+     
+        that.setData({
+       
+        })
+       
+      }
+    })
+  }
   
 })

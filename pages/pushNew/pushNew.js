@@ -20,7 +20,6 @@ Page({
     recommendedId:'',
     dataView: false,
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -41,9 +40,7 @@ Page({
         // console.log(that.data.recommendedId)
       },
     })
-   
     that.GetSharepersoninfo();
-  
   },
 
   /**

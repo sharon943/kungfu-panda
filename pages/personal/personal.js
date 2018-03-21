@@ -22,7 +22,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
+    console.log(app.globalData.JSESSIONID)
     that.getIsLogin(app.globalData.JSESSIONID);
 
     wx.setNavigationBarTitle({
@@ -138,7 +138,7 @@ Page({
   },
   getUserInfoData: function (JSESSIONID){
     var that = this;
-
+    console.log(url.getUserInformation)
     wx.request({
       url: url.getUserInformation,
       data:{

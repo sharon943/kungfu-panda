@@ -5,13 +5,17 @@
     <view class='topImg' style='width:100%;height:{{systWidth*0.6}}px;position:relative;margin-bottom:20px;'>
        <image src='{{ActivityListPro.shareImageUrl}}' style='width:100%;height:100%'></image>
        <view style='position:absolute;top:15px;right:0;width:50px;height:40px' bindtap='get_rules'>
-       <view class='rule' hidden='{{RulesView}}'>
+       <view hidden='{{RulesView}}'>
+       <view style='position:fixed;z-index:80;width:100%;height:100%;top:0;left:0;'></view>
+       <view class='rule'>
        <view style='position:relative;width:100%;height:100%;'>
-              <image src='../../images/pushNew/cha.png' style='width:25px;height:25px;position:absolute;top:-31px;right:-15px;z-index:100' catchtap='dis_rules'></image> 
+              <image src='../../images/pushNew/cha.png' style='width:25px;height:25px;position:absolute;top:-21px;right:-15px;z-index:100' catchtap='dis_rules'></image> 
               <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
               <!-- <text>{{ActivityListPro.remark}}</text> -->
         </view> 
       </view>
+      </view>
+
        </view>
     </view> 
      <view class='coupon' style='width:85%;margin:0 auto;box-shadow:0 0 6px rgba(0,0,0,0.2);padding:40px 10px;position:relative;'>   
@@ -54,7 +58,7 @@
            <view class='real'>
                  <text>预计收益</text>           
                  <text>{{earnings.money}}</text>
-                 <button style='height:20px;background:transparent;font-size:14px;line-height:20px;margin-top:5px;border:1px soild #2B2B2B'>提现</button>   
+                 <button bindtap='cash' style='height:20px;background:transparent;font-size:14px;line-height:20px;margin-top:5px;border:1px soild #2B2B2B'>提现</button>   
            </view>
            <view class='success'>
                  <text>成功邀请</text>           
@@ -71,3 +75,7 @@
        <text>Loading...</text> 
     </view> 
 </block>
+<view class= "toast" hidden='{{isToast}}'>
+    <text class = "content">{{toastData}}</text>
+    <view style="clear:both;"></view>
+</view>

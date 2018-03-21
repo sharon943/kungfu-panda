@@ -1,16 +1,16 @@
 /**餐道 */
 // var url = 'https://beta-wxa.can-dao.com/';
-// var url ='https://qc.can-dao.com:7770/';//测试
-var url = "https://open-wxa.can-dao.com/";//正式
+var url ='https://qc.can-dao.com:7770/';//测试
+// var url = "https://open-wxa.can-dao.com/";//正式
 // var key = '&key=ea38129a996bff2b';
-// var key ='&key=b8396b24f70ae5c3'//测试
-var key ='&key=a9f85ab25784886b';//正式
+var key ='&key=b8396b24f70ae5c3'//测试
+// var key ='&key=a9f85ab25784886b';//正式
 
 /**VKA */
-// var urlk = 'https://api.vi-ni.com/';
-var urlk = 'https://api.v-ka.com/';//正式
-// var storeID='376'
-var storeID='5771';//正式
+var urlk = 'https://api.vi-ni.com/';
+// var urlk = 'https://api.v-ka.com/';//正式
+var storeID='376'
+// var storeID='5771';//正式
 module.exports = {
   getSenderPosition: url +'Action?actionId=1&serviceId=17'+key,
   getShopPosition: url +'Action?actionId=1&serviceId=3'+key,
@@ -70,8 +70,6 @@ module.exports = {
   getCouponLib: urlk + 'openapi/v4_2/pickUpCoupon/list/',
 
   getCouponQ: urlk + 'openapi/v4_2/pickUpCoupon/pickUp',
-
-
   useCoupon: urlk + 'openapi/v4_2/coupon/verification',
 
   cancelOrderVk: urlk + 'openapi/v4_2/order/cancel/',
@@ -84,4 +82,5 @@ module.exports = {
   getUseIt: urlk +'webapi/v4_1/activity/participate',
   fastRegister: urlk +'openapi/v4_2/card/fastRegister',
   refund: url + 'SecretAction?actionId=14&serviceId=7' + key,
+  cash: urlk + 'webapi/v4_1/activity/rewardMoneyConvertCardBalance',
 }
