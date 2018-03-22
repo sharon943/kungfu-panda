@@ -765,7 +765,7 @@ console.log(options)
     }
 
     // console.log(this.data.isLogin)
-    // console.log(this.data.shopPro.isServiceTime)
+    console.log(this.data.shopPro.isServiceTime)
     if (this.data.isLogin == 1) {
       console.log(this.data.shopPro.isServiceTime)
       if (allMenu['menuNum'] > 0) {
@@ -1165,7 +1165,7 @@ console.log(options)
           // if (res.data.data.isServiceTime=true){
           //   res.data.data.isServiceTime = false
           // }
-          // res.data.data.isServiceTime=false
+          // res.data.data.isServiceTime=true
           that.setData({      
             shopPro: res.data.data,
             typeNamePro: typeNamePro,

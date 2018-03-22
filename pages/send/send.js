@@ -1160,6 +1160,7 @@ Page({
     }
     menuProId = menuProId.substring(0, menuProId.length - 1);
     console.log(url.getActivityLib + '/' + app.globalData.memberId)
+    console.log(constant.clientId, app.globalData.extId, menuProId)
     wx.request({
       url: url.getActivityLib + '/' + app.globalData.memberId,
       data: {},
@@ -1256,6 +1257,8 @@ Page({
                           that.setData({
                             menuPro1: menuPro1
                           })
+                        }else{
+                          discountPro[e].value=0
                         }
                       }
                      
@@ -1350,7 +1353,7 @@ Page({
          
           
           console.log(discountObj);
-
+          console.log(discountPro)
           var discountProType2 = [];
           if (discountPro.length > 0){
             for (var y = 0; y < discountPro.length; y++) {

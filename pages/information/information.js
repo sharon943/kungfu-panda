@@ -164,11 +164,12 @@ Page({
             itemF[i].preferentialContent = itemF[i].preferentialContent.substring(index + 1, itemF[i].preferentialContent.length);
             
             var index1 = itemF[i].preferentialContent.indexOf('#');
+
+            
             if (itemF[i].preferentialContent.includes('￥') == '' | itemF[i].preferentialContent.indexOf('￥') == undefined) {
               that.setData({
                 subview: true
               })
-              console.log(235364375643785643785)
               itemF[i].sub = itemF[i].preferentialContent.substring(index1+1);
               console.log(itemF[i].sub)
             }else if (itemF[i].preferentialContent.indexOf('￥') != '' | itemF[i].preferentialContent.indexOf('￥') != undefined ){
@@ -193,6 +194,7 @@ Page({
             console.log(itemF[i].preferentialContent);
           }
           console.log(itemF);
+          console.log(item);
           that.setData({
             orderMenu: item,
             orderF: itemF

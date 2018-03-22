@@ -59,7 +59,6 @@
            <text class="couponPrice" style='margin-right: 15px;color:red;float:left;'>赠:{{item.productName}}X{{item.count}}</text>
            <text class="name" style='float:right;position:absolute;right:10px;bottom:0;'>{{item.title}}</text>
         </view>
-       
       </block>
        <!-- </block>    -->
     <view style="clear:both;"></view>
