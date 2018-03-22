@@ -97,6 +97,7 @@
     <text class = "confirm" bindtap='btn_addres_confirm'>确认</text>
     <view style="clear:both;"></view>
 </view>
+<!--裂变通道  -->
    <view hidden='{{isShareImg}}' class='iconImg' style='position:fixed;bottom:0;right:0;'>
      <view bindtap='hideShareImg' style='width:25px;height:25px;display:block;position:absolute;right:0;top:0;z-index:9'>
      </view>

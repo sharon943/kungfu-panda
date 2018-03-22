@@ -55,11 +55,13 @@
       <text class="text1">联系我们</text>
       <image class="image2" src='../../images/personal/right.png'></image>
     </view>
-    <!-- <view class="type1" bindtap='btn_share'>
+    <!-- 裂变通道 -->
+     <view class="type1" bindtap='btn_share'>
       <image class="image1" src='../../images/personal/s.png'></image>
       <text class="text1">分享有礼</text>
       <image class="image2" src='../../images/personal/right.png'></image>
-    </view> -->
+    </view> 
+    <!--裂变通道完  -->
     <!-- <view class="type1" bindtap='btn_userKnows'>
       <image class="image1" src='../../images/personal/w.png'></image>
       <text class="text1">用户须知</text>
