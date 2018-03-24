@@ -298,19 +298,33 @@ Page({
     var JSESSIONID = app.globalData.JSESSIONID;
     var addressObj = that.data.addressObj;
     var shopId = that.data.shopId;
-
-    var u = []
     //menupro1是整理好的折扣商品 点击发送订单按钮后执行把整理好的折扣商品放进点好的餐单中 p,u都是暂时赋值的中间值
-    var p = that.data.menuPro
-    u = that.data.menuPro1
-    for(var m=0;m<u.length;m++){
-        p[length+m]=u[m]
+    if (that.data.menuPro1.length>0){
+      var u = []
+      var p = JSON.parse(JSON.stringify(that.data.menuPro))
+      u = that.data.menuPro1
+      console.log(p, p[0])
+      console.log(u.length)
+      if (u.length == 0) {
+        p = u
+      } else {
+        console.log('u.lebnedfaes')
+        for (var m = 0; m < u.length; m++) {
+          console.log('p[length+m]')
+          var length = u.length
+          p[length + m] = u[m]
+          console.log(p)
+        }
+      }
+      console.log(u, p)
+      var menuPro = p;
+      //至此处结束
+      console.log(menuPro)
+    }else{
+       var menuPro = JSON.parse(JSON.stringify(that.data.menuPro));
     }
-    console.log(u, p) 
-    var menuPro= p;
-    //至此处结束
-    console.log(menuPro)
-    // var menuPro = JSON.parse(JSON.stringify(that.data.menuPro));
+  
+    
     var menuId = that.data.menuId;
     var menuArray = [];
     var timeValue = that.data.timeValue;
@@ -424,7 +438,12 @@ Page({
         if (discountNamePro.length > 0) {
           for (var i = 0; i < discountNamePro.length;i++){
             var memberObjD = {};
-            memberObjD['prePrice'] =  discountNamePro[i].value;
+            if (discountNamePro[i].value<0){
+              memberObjD['prePrice'] = discountNamePro[i].value;
+            }else{
+              memberObjD['prePrice'] = -discountNamePro[i].value;
+            }
+            
             // memberObjD['productName'] = discountNamePro[i].productName;
             memberObjD['content'] = discountNamePro[i].pid + '#' + 'promotions' + '#' + discountNamePro[i].title;
             discountPro.push(memberObjD);
@@ -1253,12 +1272,16 @@ Page({
                           console.log(menuPro1)
 
                           discountPro[e].value = that.data.menuDataPro[q].products[w].price*discountPro[e].count
+                          discountPro[e].setdiscount=true
                           console.log(discountPro[e].productName+'value:' + discountPro[e].value)
                           that.setData({
                             menuPro1: menuPro1
                           })
                         }else{
-                          discountPro[e].value=0
+                          if (discountPro[e].setdiscount == undefined | !discountPro[e].setdiscount){
+                            discountPro[e].value = 0
+                          }
+                          
                         }
                       }
                      
