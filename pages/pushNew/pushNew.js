@@ -10,6 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    newview:false,
+    newview1:false,
     systWidth:0,
     RulesView: true,
     sharePeopleistList:{},
@@ -19,6 +21,7 @@ Page({
     toastData: '您已领取过该券',
     recommendedId:'',
     dataView: false,
+    Otoast:'',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -26,8 +29,7 @@ Page({
   onLoad: function (options) {
     var that=this;
     // console.log(options)
-    // 
-    // console.log(app.globalData.memberId)
+    console.log(app.globalData.memberId)
     
     console.log(url.GetSharepersoninfo + constant.brandId)
     wx.getSystemInfo({
@@ -41,6 +43,8 @@ Page({
       },
     })
     that.GetSharepersoninfo();
+    
+    
   },
 
   /**
@@ -54,7 +58,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.setData({
+      dataView:false,
+      newview: false,
+    })
+    console.log(app.globalData.memberId)
+    if (app.globalData.memberId != null & app.globalData.memberId != '' & app.globalData.memberId != undefined) {
+      this.getcoupon()
+    }
+    if (app.globalData.memberId == null | app.globalData.memberId == undefined){
+      this.setData({
+        newview: true,
+      })
+     this.GetSharepersoninfo();
+    }
   },
 
   /**
@@ -134,10 +151,9 @@ Page({
   useIt:function(){
     var that = this;
     console.log(that.data.recommendedId)
-    // console.log(app.globalData.memberId)
-    if (app.globalData.memberId == null | app.globalData.memberId==undefined){
+    console.log(app.globalData.memberId)
       that.setData({
-        toastData: '您未登录',
+        toastData: '领取成功',
         isToast: false,
         isCode: false
       })
@@ -145,59 +161,89 @@ Page({
         that.setData({
           isToast: true
         }),
-        wx.navigateTo({
-          url: '../login/login?recommendedId=' + that.data.recommendedId,
-        })
+          wx.switchTab({
+            url: '../homepage/homepage',
+          })
       }, 2000)
-      return;
-    }
-    var header={
+    
+  },
+  OuseIt: function () {
+    wx.switchTab({
+      url: '../homepage/homepage',
+    })
+    // var that = this;
+    // console.log(that.data.recommendedId)
+    // console.log(app.globalData.memberId)
+    // if (app.globalData.memberId == null | app.globalData.memberId == undefined) {
+    //   that.setData({
+    //     toastData: '您未登录',
+    //     isToast: false,
+    //     isCode: false
+    //   })
+    //   setTimeout(function () {
+    //     that.setData({
+    //       isToast: true
+    //     }),
+    //       wx.navigateTo({
+    //         url: '../login/login?recommendedId=' + that.data.recommendedId,
+    //       })
+    //   }, 2000)
+    //   return;
+    // }else{
+    //   var a = that.data.Otoast
+    //   console.log(a)
+    //   that.setData({
+    //     toastData: a,
+    //     isToast: false,
+    //     isCode: false
+    //   })
+    //   setTimeout(function () {
+    //     that.setData({
+    //       isToast: true
+    //     }),
+    //       wx.switchTab({
+    //         url: '../homepage/homepage',
+    //     })
+    //   }, 2000)
+    //   return;
+    // }
+
+
+  },
+  getcoupon:function(){
+    var that=this
+    var header = {
       recommendedId: that.data.recommendedId,
       activityId: 129,
       cardId: app.globalData.memberId,
       brandId: constant.brandId,
     };
-    console.log(url.getUseIt)
-    // console.log(that.data.recommendedId, app.globalData.memberId, constant.brandId)
-    console.log(header)
-    wx.request({    
+    wx.request({
       url: url.getUseIt,
       method: 'POST',
       header: header,
       success: function (res) {
         console.log(res);
-        if(res.data.code==200){
+        if (res.data.code == 200) {
           that.setData({
-            toastData: '领取成功',
-            isToast: false,
-            isCode: false
+             newview1: true,
+             dataView: true,
           })
-          setTimeout(function () {
-            that.setData({
-              isToast: true
-            }),
-              wx.switchTab({
-                url: '../homepage/homepage',
-              })
-          }, 2000)
         } else {
           that.setData({
-            toastData: res.data.message,
-            isToast: false,
-            isCode: false
+            Otoast: res.data.message,
+            dataView: true,
           })
-          setTimeout(function () {
-            that.setData({
-              isToast: true
-            }),
-              wx.switchTab({
-                url: '../homepage/homepage',
-              })
-          }, 2000)
         }
-        
+
       }
     })
+  },
+  useItnew:function(){
+    var that=this
+    console.log(that.data.recommendedId)
+    wx.navigateTo({
+      url: '../login/login?recommendedId=' + that.data.recommendedId,
+    })
   }
- 
 })

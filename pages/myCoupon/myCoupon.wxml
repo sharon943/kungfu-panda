@@ -2,7 +2,7 @@
   <block wx:if = "{{couponPro.length > 0}}">
   <scroll-view class="scroll" scroll-y="true">
     <block wx:for="{{couponPro}}">
-      <view class="coupon" style='height:105px;position:relative;'>
+      <view class="coupon" style='height:105px;position:relative;' bindtap='urltomenu'>
       <image src='../../images/coupon/discount.png'></image>
       <!-- <text style='position:absolute;top:0;right:20%;'>1234</text> -->
       <view class='label' style='position:absolute;right:20px;top:0;bottom:0;margin-top:auto;margin-bottom:auto;height:70%;'>
@@ -31,7 +31,7 @@
        
           <view class="nameView">
             <text class="name">{{item.name}}</text>
-            <text class="date">{{item.remark}}</text>
+            <text class="date" style='overflow:hidden;text-overflow:ellipsis;height:4px;width:100%;' catchtap='descview' data-item='{{item}}'>{{item.remark}}</text>
             <!-- <block wx:if="{{item.nextDay >= 0}}">
               <block wx:if = "{{item.nextDay == 0}}">
                   <text class="date">今天到期</text>
@@ -50,7 +50,7 @@
           <view class="right_bottom_h"></view>
           <view style="clear:both;"></view>-->
          </view>   
-          <view class="present" style='position:absolute;bottom:5px;left:0;'> 
+          <view class="present" style='position:absolute;bottom:-3px;left:0;'> 
           <text>有效期：{{item.beginTime}}至{{item.endTime}}</text>
           <!-- <image src='../../images/address/bottom.png'></image> -->
           <!-- <view style="clear:both;"></view> -->
@@ -69,6 +69,5 @@
               <image src='../../images/gap/gap1.png'></image>
               <text>暂无数据</text>
             </view>
-          </block>
-
+    </block>
 </view>

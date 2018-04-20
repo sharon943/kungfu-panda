@@ -66,7 +66,8 @@ Page({
     discountProType1: {},
     menuPro1 : [],
     menuDataPro:[],
-    normalView:false
+    normalView:false,
+    discountProType22:[]
   },
 
   /**
@@ -299,7 +300,8 @@ Page({
     var addressObj = that.data.addressObj;
     var shopId = that.data.shopId;
     //menupro1是整理好的折扣商品 点击发送订单按钮后执行把整理好的折扣商品放进点好的餐单中 p,u都是暂时赋值的中间值
-    if (that.data.menuPro1.length>0){
+    console.log(that.data.discountProType22);
+    if (that.data.menuPro1.length > 0 & that.data.discountProType22.length>0){
       var u = []
       var p = JSON.parse(JSON.stringify(that.data.menuPro))
       u = that.data.menuPro1
@@ -1386,6 +1388,9 @@ Page({
             }
           }
           console.log(discountProType2);
+          that.setData({
+            discountProType22: discountProType2,
+          })
           console.log(syGoodsPrice);
           that.getMemberInformation(syGoodsPrice, app.globalData.phone);
           

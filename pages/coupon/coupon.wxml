@@ -3,7 +3,6 @@
   <block wx:if = "{{couponPro.length > 0}}">
   <scroll-view class="scroll" scroll-y="true">
 
-
     <block wx:for="{{couponPro}}">
       <view class="coupon" style='height:105px;position:relative;'>
        <image src='../../images/coupon/discount.png'></image>
@@ -33,8 +32,7 @@
          
           <view class="nameView">
             <text class="name">{{item.name}}</text>
-            <text class="date">{{item.remark}}</text>
-            
+            <text class="date" style='overflow:hidden;text-overflow:ellipsis;height:4px;width:100%;'>{{item.remark}}</text>
             <!-- <block wx:if="{{item.nextDay > 0}}">
               <text class="date">还有{{item.nextDay}}天到期</text>
             </block>
@@ -56,7 +54,7 @@
           <view class="right_bottom_h"></view>
           <view style="clear:both;"></view>-->
         </view>
-        <view class="present" style='position:absolute;bottom:5px;left:0;'>
+        <view class="present" style='position:absolute;bottom:-3px;left:0;'>
           <text>有效期：{{item.beginTime}}至{{item.endTime}}</text>
          <!-- <image src='../../images/address/bottom.png'></image>
           <view style="clear:both;"></view>-->

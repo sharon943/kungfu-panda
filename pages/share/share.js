@@ -18,8 +18,10 @@ Page({
     earnings:'',
     timeAgoPro:'',
     percent:'',
-    dataView:false,
+    dataView:true,
     isToast: true,
+    systWidth:'',
+    systHeight:''
   },
 
   /**
@@ -46,8 +48,10 @@ Page({
     }
     wx.getSystemInfo({
       success: function (res) {
+        console.log(res)
         that.setData({
-          systWidth: res.screenWidth
+          systWidth: res.screenWidth,
+          systHeight: res.screenHeight
         })
       },
     })
@@ -169,8 +173,10 @@ Page({
         WxParse.wxParse('article', 'html', article, that, 0);
         console.log(that.data.wxActivityReward)
         console.log(that.data.wxActivityReward.shareGiftTicketList[0].phase + '/' + that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase + '*' + that.data.earnings.invitationCount)
+        console.log(that.data.earnings.invitationCount +'/'+ that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase)
         that.setData({
-          percent: that.data.wxActivityReward.shareGiftTicketList[0].phase / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase * that.data.earnings.invitationCount
+          // percent: that.data.wxActivityReward.shareGiftTicketList[0].phase / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase * that.data.earnings.invitationCount
+          percent: that.data.earnings.invitationCount / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase
         })
         console.log(that.data.percent)
       }

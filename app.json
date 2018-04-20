@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/homepage/homepage",
-    "pages/pushNew/pushNew",
-   
+    
+   "pages/homepage/homepage",
+  "pages/pushNew/pushNew",
     "pages/WebView/webview",
     "pages/share/share",
     "pages/payconfirm/payconfirm",
@@ -26,9 +26,8 @@
     "pages/contactUs/contactUs",
     "pages/detailUrl/detailUrl",
     "pages/map/map",
-    
-    "pages/senderPosition/senderPosition"
-
+    "pages/senderPosition/senderPosition",
+    "pages/coupondesc/coupondesc"
   ],
   "window": {
     "backgroundTextStyle": "light",

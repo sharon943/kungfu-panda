@@ -5,29 +5,38 @@
     <view class='topImg' style='width:100%;height:{{systWidth*0.7}}px;position:relative;margin-bottom:20px;'>
        <image src='{{ShareInfo.participateImageUrl}}' style='width:100%;height:100%'></image>
        <view style='position:absolute;top:15px;right:0;width:50px;height:40px' bindtap='get_rules'></view>
-       <view class='rule' hidden='{{RulesView}}'>
-        <view style='position:relative;width:100%;height:100%;'>
-        
-              <image src='../../images/pushNew/cha.png' style='width:25px;height:25px;position:absolute;top:-21px;right:-15px;z-index:100' catchtap='dis_rules'></image> 
-             <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+       <view class='rule' hidden='{{RulesView}}' style='overflow:hidden'>
+         <view style='position:relative;width:100%;height:100%;'>
+             <view class='inner' style='width:100%;height:calc(100% - 25px);overflow:scroll;'>
+                <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
               <!-- <text>{{ShareInfo.remark}}</text> -->
+              </view>
+              <image src='../../images/pushNew/cha.png' style='display:block;width:25px;height:25px;position:absolute;top:-1px;right:-15px;z-index:100' catchtap='dis_rules'></image>
         </view> 
       </view>
     </view>
-    
+  
+       <view wx:if="{{newview}}" style='width:80%;height:20px;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>登录会员即获得以下奖励</view>
+       <view wx:elif="{{newview1}}" style='width:80%;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>恭喜您已获得以下奖励
+       <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去使用</view>
+       </view>
+        <view wx:else style='width:80%;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>{{Otoast}}
+        <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去使用</view>
+        </view>
      <view class='coupon' style='width:85%;margin:0 auto;box-shadow:0 0 6px rgba(0,0,0,0.2);padding:10px;position:relative;margin-bottom:15px;' wx:for='{{ShareInfo.ticketTemplatesList}}'>
        <text style='color:#000;font-weight:bold;font-size: 14px;'>{{item.name}}</text> 
        <text>· 有效期至{{item.endTime}}</text>
        <text>· 全场满30元可用，不闲任何菜品以及及喝牛奶</text>
-       <view bindtap='useIt'>立即使用</view>
+       <!-- <view bindtap='OuseIt' wx:if="{{!newview}}">立即使用</view> -->
      </view> 
-    
-       <view class='fengexian'>
+   
+       <view wx:if="{{newview}}" style='width:40%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;' bindtap='useItnew'>立即领取</view>
+       <view class='fengexian' wx:if="{{!newview}}">
            <view></view>
            <text style='font-size:16px;color:#000;'>领取名单</text>  
            <view></view> 
        </view>
-       <view class='list' style='width:85%;height:50px;margin:0 auto;padding:10px;display:flex;justify-content:space-between;font-size:18px;line-height:50px;' wx:for="{{sharePeopleistList}}">
+       <view class='list' wx:if="{{!newview}}" style='width:85%;height:50px;margin:0 auto;padding:10px;display:flex;justify-content:space-between;font-size:18px;line-height:50px;' wx:for="{{sharePeopleistList}}">
           <view style='display:flex;justify-content:space-between;width:30%;'>
             <image src='{{item.headUrl}}' style='width:50px;height:50px;'></image>
             <text style='font-size:16px;'>{{item.name}}</text>
@@ -37,7 +46,7 @@
 </view>
 </block>
 <block wx:else>
-    <view class = "loading" hidden='{{isLoading1&isLoading2}}'>
+    <view class = "loading">
        <text>Loading...</text> 
     </view> 
 </block>

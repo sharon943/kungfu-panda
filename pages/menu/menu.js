@@ -61,8 +61,6 @@ Page({
     size: 14,
     orientation: 'left',//滚动方向
     interval: 20, // 时间间隔,
-
-
     shopId: null,
     menuId: null,
     noticePro: null,
@@ -94,7 +92,14 @@ Page({
     isLogin: 0,
     typeName: '',
     typePro_: [],
-    nameHH:''
+    nameHH:'',
+    fastloginView:true,
+    phone:'',
+    timeData: '60s',
+    isCode: false,//验证码按钮是否可点击
+    timeInt: 60,
+    isToast:true,
+    shopdataId:'',
   },
 
   /**
@@ -146,7 +151,7 @@ console.log(options)
           })
         }
       })
-      that.getActivityData();
+      
       that.GetData(app.globalData.JSESSIONID, that, options.shopId, options.jump,that.data.typeValue,that.data.timeValue);
       that.getShopData(app.globalData.JSESSIONID, options.latitude, options.longitude);
       that.getNoticeData(app.globalData.JSESSIONID, options.shopId);
@@ -161,7 +166,7 @@ console.log(options)
         }
       })
 
-      that.getActivityData();
+      
       that.getMenuIdData(app.globalData.JSESSIONID, that.data.typeValue);
     }
 
@@ -714,7 +719,7 @@ console.log(options)
       hiddenMenuPro: true
     })
   },
-  btGoSend: function () {
+  btGoSend: function (e) {
 
     var menuPro = this.data.menuPro;
     var allMenu = this.data.allMenu;
@@ -792,7 +797,223 @@ console.log(options)
         url: '../login/login',
       })
     }
+  },
+  getPhoneNumber: function (e) {
+    console.log(e.detail)
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
 
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '未授权',
+        success: function (res) { }
+      })
+    } else if (e.detail.errMsg == 'getPhoneNumber:fail 用户未绑定手机，请先在微信客户端进行绑定后重试') {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请输入手机号',
+      })
+    } else if (e.detail.errMsg == 'getPhoneNumber:ok') {
+      console.log(e.detail.encryptedData)
+      console.log(e.detail.iv)
+      var that = this;
+      that.setphonenumber(e.detail.encryptedData, e.detail.iv)
+    }
+    else {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '授权失败',
+        success: function (res) {
+          console.log(res)
+        }
+      })
+    }
+  },
+  setphonenumber: function (encryptedData, iv) {
+    console.log(app.globalData.session_key)
+    var WXBizDataCrypt = require('../../utils/WXBizDataCrypt.js');
+
+    var appId = 'wx0451681834e5d0ff'
+    var sessionKey = app.globalData.session_key
+    var encryptedData = encryptedData
+    var iv = iv
+
+    var pc = new WXBizDataCrypt(appId, sessionKey)
+
+    var data = pc.decryptData(encryptedData, iv)
+
+    console.log('解密后 data: ', data)
+    if (data.phoneNumber.length > 0 & data.phoneNumber.length != undefined) {
+      var that = this;
+      app.globalData.phone = data.phoneNumber;
+      // app.globalData.LogiN=5;
+      // app.globalData.personName = data.compellation;
+      // that.getMemberInformation(data.phoneNumber);
+
+      that.setData({
+        fastloginView:false,
+        phone: data.phoneNumber
+      })
+      that.getLogin(data.phoneNumber, app.globalData.JSESSIONID);
+    }
+  },
+  getLogin: function (phone, JSESSIONID){
+    var that = this;
+    console.log(phone, JSESSIONID)
+    wx.request({
+      url: url.codeLogin,
+      data:{phone: phone},
+      method:'POST',
+      header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
+      success:function(res){
+        console.log(res);
+        
+        if(res.data.status == 1){
+          that.countDowm(that);
+        } else if (res.data.status == 11) {
+          that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
+        }
+      }
+    })
+  },
+  countDowm: function (that) {
+    var time = that.data.timeInt;
+
+    if (time == 0) {
+      that.setData({
+        timeInt: 60,
+        timeData: '60s',
+        isCode: false
+      })
+    } else {
+      if (time == 60) {
+        that.setData({
+          timeInt: time,
+          timeData: time + 's'
+        })
+      }
+
+      setTimeout(function () {
+        that.setData({
+          timeInt: time - 1,
+          timeData: (time - 1) + 's'
+        })
+
+        that.countDowm(that);
+      }, 1000)
+    }
+  },
+  //隐藏快捷登录
+  cancelFast:function(){
+   this.setData({
+     fastloginView:true
+   })
+  },
+  //登录
+  codeLoginData: function (item,JSESSIONID, typeNum) {
+    var that = this; 
+    console.log(item, that.data.phone);
+    console.log(JSESSIONID)
+    console.log(typeNum)
+    wx.request({
+      url: url.phoneLogin,
+      data: {
+        phone: that.data.phone,
+        verificCode: item.code
+      },
+      method: 'POST',
+      header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
+      success: function (res) {
+        console.log(res);
+
+        if (res.data.status == 1) {
+          if (typeNum == 1) {
+            that.getMemberInformation(res.data.data.phone);
+          }
+          app.globalData.phone = res.data.data.phone;
+          app.globalData.personName = res.data.data.compellation;
+          that.setData({
+            toastData: '登录成功',
+            isToast: false,
+            isLogin:1,
+            fastloginView:true
+          })
+
+          setTimeout(function () {
+            that.setData({
+              isToast: true
+            })
+            // wx.navigateBack({
+            //   delta: 1
+            // })
+          }, 2000)
+
+        } else if (res.data.status == 11) {
+          that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
+        } else {
+
+          that.setData({
+            toastData: res.data.msg,
+            isToast: false,
+            isViewDisabled: true,
+          })
+
+          setTimeout(function () {
+            that.setData({
+              isToast: true
+            })
+          }, 2000)
+        }
+      }
+    })
+  },
+  getMemberInformation: function (phone) {
+    var that = this;
+    console.log(phone);
+    wx.request({
+      url: url.getMemberInformation + phone,
+      data: {
+
+      },
+      header: {
+        clientId: constant.clientId,
+        brandId: constant.brandId,
+        // openId: app.globalData.openId
+      },
+      success: function (res) {
+        console.log('++++++++++++++');
+        console.log(res);
+
+        if (res.data.code == 200) {
+
+
+          app.globalData.memberId = res.data.data[0].id
+
+        }
+      }
+    })
+  },
+  confirmFast:function(e){
+    var item = e.detail.value;
+    var JSESSIONID = app.globalData.JSESSIONID
+    var typeNum=1
+    this.codeLoginData(item, JSESSIONID, typeNum);
+  },
+  btn_get_code: function () {
+    var that = this;
+    var phone = that.data.phone;
+
+    that.setData({
+      isCode: true
+    })
+
+      that.getLogin(phone, app.globalData.JSESSIONID);
+    
   },
   buyCarClear: function () {
 
@@ -990,7 +1211,7 @@ console.log(options)
           app.globalData.shopLat = res.data.data.latitude;
           app.globalData.shopLng = res.data.data.longitude;
           var timeValue = 0;
-
+          that.getActivityData();
           var typeObj1 = null;
           var typeObj2 = null;
           var typeObj3 = null;
@@ -1371,7 +1592,6 @@ console.log(options)
       isHiddenImageStatus: true,
       isNoticeShop: true
     })
-
   },
   /** 文字滚动 */
   // getNoticeScrollData: function () {
@@ -1726,14 +1946,14 @@ console.log(options)
     // console.log(tIndex);
     // console.log(oIndex);
     if (typePro_[oIndex].id == 2) {
-      // that.getActivityData();
+    
       timeValue = takeSelfTimes[tIndex].date + ' ' + takeSelfTimes[tIndex].times[sIndex];
       console.log(timeValue)
       that.setData({
         typeValue: 2
       })
     } else if (typePro_[oIndex].id == 4) {
-      // that.getActivityData();
+
       var item = appointTimes[tIndex]
       timeValue = appointTimes[tIndex].date + ' ' + appointTimes[tIndex].times[sIndex];
       console.log(timeValue)
@@ -1813,7 +2033,6 @@ console.log(options)
         if (num == 1) {
           that.getMenuIdData(app.globalData.JSESSIONID, TYPEVALUE);
         } else if (num == 2) {
-          // that.getActivityData();
           that.GetData(app.globalData.JSESSIONID, that, shopId, jump);
           that.getShopData(app.globalData.JSESSIONID, latitude, longitude);
           that.getNoticeData(app.globalData.JSESSIONID, shopId);
@@ -1859,7 +2078,10 @@ console.log(options)
 
     var that = this;
     console.log("app.globalData");
-    console.log(app.globalData);
+    
+    if (app.globalData.memberId == '' | app.globalData.memberId == null) {
+      app.globalData.memberId = 0
+    }
     wx.request({
       url: url.getActivityLib + '/' + app.globalData.memberId,
       data: {},

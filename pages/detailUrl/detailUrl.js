@@ -368,7 +368,9 @@ Page({
   getActivityData: function (memberId) {
 
     var that = this;
-
+    if (memberId == '' | memberId == null) {
+      memberId = 0
+    }
     wx.request({
       url: url.getActivityLib + '/' + memberId,
       data: {},

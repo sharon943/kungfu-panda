@@ -181,18 +181,12 @@ Page({
 
     var that =this;
     console.log(e);
-    
-
-
-
     var longitude = that.data.longitude;
     var latitude = that.data.latitude;
     var jump = that.data.jump;
     var address = that.data.address;
     var typeNum = that.data.typeNum;
-    var shopId = that.data.shopId;
-
-    
+    var shopId = that.data.shopId; 
     wx.redirectTo({
       url: '../menu/menu?typeNum=1&shopId=' + shopId + '&jump=' + jump + '&address=' + address + '&latitude=' + latitude + '&longitude=' + longitude,
     })

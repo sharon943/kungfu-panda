@@ -14,7 +14,10 @@ Page({
     isLogin: 1,
     isViewDisabled: true,
     userPro: {},
-    memberInformation: {}
+    memberInformation: {},
+    wxNick:'',
+    wxnickImg:'',
+    wxnickview:false
   },
 
   /**
@@ -23,8 +26,17 @@ Page({
   onLoad: function (options) {
     var that = this;
     console.log(app.globalData.JSESSIONID)
+      console.log(app.globalData.wxnick)
     that.getIsLogin(app.globalData.JSESSIONID);
-
+    if (app.globalData.wxnick != '' & app.globalData.wxnick != undefined){
+      console.log(app.globalData.wxnick)
+      that.setData({
+        wxNick:app.globalData.wxnick,
+        wxnickview:true,
+        wxnickImg: app.globalData.wxnickimg
+      })
+    }
+    console.log(that.data.wxNick, that.data.wxnickview)
     wx.setNavigationBarTitle({
       title: '我的',
     })
@@ -42,7 +54,7 @@ Page({
    */
   onShow: function () {
     var that = this;
-    that.getUserInfoData(app.globalData.JSESSIONID);
+    // that.getUserInfoData(app.globalData.JSESSIONID);
     that.setData({
       isViewDisabled: true,
     })
@@ -222,6 +234,7 @@ Page({
           
           that.getUserInfoData(app.globalData.JSESSIONID);
           that.getIsLogin(app.globalData.JSESSIONID);
+          // app.globalData.JSESSIONID=''
         } else if (res.data.status == 11) {
           that.setCacheData1(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
         }
@@ -280,7 +293,7 @@ Page({
     })
   },
   btn_coupon:function(){
-
+    console.log(this.data.longitude, this.data.latitude, this.data.jump, this.data.address, this.data.typeNum, this.data.shopId)
     this.setData({
       isViewDisabled: false
     })
@@ -294,8 +307,6 @@ Page({
         url: '../myCoupon/myCoupon',
       })
     }
-
-   
   },
   btn_revise:function(){
     var that = this;

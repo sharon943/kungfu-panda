@@ -1,0 +1,2 @@
+<!--pages/coupondesc/coupondesc.wxml-->
+<text style='font-size:14px;color:#5c5c5c;width:90%;display:block;margin:0 auto;padding-top:20px;'>{{desc}}</text>

@@ -254,8 +254,12 @@
           </block>
         </view>
         <!-- <text class="PriceClass">¥ {{allMenu['menuPrice']/100}}</text> -->
-        <text class="GoOkClass" bindtap="btGoSend">选好了</text>
-
+        <block wx:if="{{isLogin==1}}">
+           <text class="GoOkClass" bindtap='btGoSend'>选好了</text>
+        </block>
+       <block wx:else>
+        <button class="GoOkClass" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" style='border-radius:0;'>选好了</button>
+       </block>
       </view>
       <view class="button-group {{isIpx?'fix-iphonex-button':''}}">
         <text style='height:100%;width:90px;background:#b19d7d;display:block;float:right;'></text>
@@ -415,5 +419,25 @@
 <view class = "loading" hidden='{{isLoading1&isLoading2}}'>
     <text>Loading...</text>
 </view>
-
+<form bindsubmit='confirmFast' class='fastlogin' hidden='{{fastloginView}}'>
+       <view class='boxlogin'>
+           <text style='color:#333333;font-size:18px;'>快捷登录</text>
+           <view style='margin-top:10px;'><text style='margin-top:25px;margin-left:30px;font-size:16px;'>手机号：{{phone}}</text></view>
+           <view style='display:flex'>
+           <text style='margin-top:15px;margin-left:30px;font-size:16px;margin-right:13px;'> 验证码:</text>
+           <input style='font-size:16px;border-bottom:1px solid #E5E5E5;margin-right:10px;width:90px;margin-top:9px;' maxlength='6' type='number' name = "code"></input>
+           <button bindtap='btn_get_code' disabled='{{isCode}}' style='padding:0 6px;height:30px;line-height:28px;background:transparent;font-size:16px;margin-top:5px;'>重新发送</button>
+          <text style='border:1px solid #E5E5E5;border-radius:5px;padding:0 8px;height:28px;line-height:30px;font-size:16px;margin-top:5px;'>{{timeData}}</text>
+           </view>
+          <view style='display:flex;width:35%;justify-content:space-between;position:absolute;right:35px;bottom:50px;font-size:16px;'>
+              <text bindtap='cancelFast'>取消</text>
+              <button style='color:#33CC00;background-color:transparent;font-size:16px;margin-top:-9px;' form-type='submit' class='confirm'>确定</button>
+          </view>
+</view>
+      
+</form>
 <view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>
+<view class= "toast" hidden='{{isToast}}'>
+    <text class = "content">{{toastData}}</text>
+    <view style="clear:both;"></view>
+</view>

@@ -1,5 +1,17 @@
 <!--pages/personal/personal.wxml-->
 <view class="pClass" style='background: #f2f2f2;'>
+<block wx:if="{{wxnickview}}">
+  <view class="avatarViewClass">
+
+    <image class="nameImageClass" src='{{wxnickImg}}'></image>
+
+      <text class="text1"><text >{{wxNick}}</text>
+      <!-- <text class="text2">{{memberInformation.discount}}折</text> -->
+      </text>
+    
+  </view>
+  </block>
+<block wx:else>
   <view class="avatarViewClass" bindtap='btn_login'>
 
     <image class="nameImageClass" src="../../images/order/s.png"></image>
@@ -11,9 +23,8 @@
       <text class="text1">登录/注册</text>
     </block>
   </view>
+  </block>
   <image class="headImageClass" src='../../images/personal/head.png' mode='widthFix'></image>
-
-
 
   <view class="numDataViewClass">
     <view class="numView1">
@@ -45,11 +56,11 @@
       <text class="text1">送餐地址库</text>
       <image class="image2" src='../../images/personal/right.png'></image>
     </view>
-    <view class="type1" bindtap='btn_revise'>
+    <!-- <view class="type1" bindtap='btn_revise'>
       <image class="image1" src='../../images/personal/x.png'></image>
       <text class="text1">修改密码</text>
       <image class="image2" src='../../images/personal/right.png'></image>
-    </view>
+    </view> -->
     <view class="type1" bindtap='btn_contact'>
       <image class="image1" src='../../images/personal/w.png'></image>
       <text class="text1">联系我们</text>
@@ -69,9 +80,9 @@
     </view> -->
     <view style="clear:both;"></view>
   </view>
-  <block wx:if = "{{isLogin == 1}}">
-  <button class="button1" bindtap='btn_exit'>退出登录</button>
-  </block>
+  <!-- <block wx:if = "{{isLogin == 1}}"> -->
+  <!-- <button class="button1" bindtap='btn_exit'>退出登录</button> -->
+  <!-- </block> -->
 </view>
 
 <view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>

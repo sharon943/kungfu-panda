@@ -51,9 +51,13 @@ App({
           wx.getUserInfo({
             success: res => {
               console.log(res);
+              console.log(JSON.parse(res.rawData))
+              var RES = JSON.parse(res.rawData)
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              this.globalData.wxnick = RES.nickName
+              this.globalData.wxnickimg = RES.avatarUrl
+              
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -61,8 +65,8 @@ App({
                 this.userInfoReadyCallback(res)
               }
 
-              if (!res.authSetting['scope.userLocation']) {
-              }
+              // if (!res.authSetting['scope.userLocation']) {
+              // }
             }
           })
         }
@@ -119,6 +123,8 @@ App({
     session_key:'',
     Phone:'',
     isIpx: false,
+    wxnick:'',
+    wxnickimg:'',
   }
   
   

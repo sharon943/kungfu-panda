@@ -8,7 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    couponPro: []
+    couponPro: [],
+    Isdescview:true,
+    isHiddenImageStatus:true,
+    shopId: '',
+    typeNum: '',
+    address: '',
+    jump: '',
+    latitude: '',
+    longitude: '',
   },
 
   /**
@@ -16,9 +24,16 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-
+      console.log(options);
       that.getMemberInformation(app.globalData.phone);
-
+    this.setData({
+      shopId: options.shopId,
+      typeNum: options.typeNum,
+      address: options.address,
+      jump: options.jump,
+      latitude: options.latitude,
+      longitude: options.longitude,
+    })
       wx.setNavigationBarTitle({
         title: '我的优惠券',
       })
@@ -90,7 +105,7 @@ Page({
 
         if (res.data.code == 200) {
           for (var i = 0; i < res.data.data[0].coupons.length ; i++){
-            // res.data.data[0].coupons[i].remark='次和覅uerhgireughrei'
+            res.data.data[0].coupons[i].remark='不能与其他抵用券同时用'
             res.data.data[0].coupons[i]['nextDay'] = that.getDayData(res.data.data[0].coupons[i].endTime);
             res.data.data[0].coupons[i].beginTime = res.data.data[0].coupons[i].beginTime.substr(0, 10);
             res.data.data[0].coupons[i].endTime = res.data.data[0].coupons[i].endTime.substr(0, 10);
@@ -143,4 +158,22 @@ Page({
     console.log(dateObj);
     return new Date(dateObj)
   },
+  descview:function(e){
+    console.log(e)
+    var desc = e.target.dataset.item.remark
+    wx.navigateTo({
+      url: '../coupondesc/coupondesc?desc='+desc,
+    })
+  },
+  urltomenu:function(){
+    var longitude = that.data.longitude;
+    var latitude = that.data.latitude;
+    var jump = that.data.jump;
+    var address = that.data.address;
+    var typeNum = that.data.typeNum;
+    var shopId = that.data.shopId;
+    wx.redirectTo({
+      url: '../menu/menu?typeNum=1&shopId=' + shopId + '&jump=' + jump + '&address=' + address + '&latitude=' + latitude + '&longitude=' + longitude,
+    })
+  }
 })

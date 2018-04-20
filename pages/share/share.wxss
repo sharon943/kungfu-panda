@@ -127,10 +127,12 @@
   width: 80%;
   height:80%;
   z-index: 99;
-  box-shadow: 0 0 200px 200px rgba(0,0,0,0.5);
-  padding: 20px 15px;
+  padding: 0 15px;
   overflow: scroll;
 }
 .profit view text{
   display: block;
+}
+.inner::-webkit-scrollbar {
+    display: none;
 }

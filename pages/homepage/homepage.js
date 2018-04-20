@@ -35,12 +35,14 @@ Page({
     loadingView:true,
     ShareImg:'',
     isShareImg:false,
+    isShareImg1:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(app.globalData.memberId)
     var that = this;
     console.log(app.globalData.openId)
     app.globalData.isAddressOne = false
@@ -82,7 +84,8 @@ Page({
       },
    
     })
-    that.getAuthLocation();
+    // that.getAuthLocation();
+    that.getAuthinfo();
     // that.setCacheData();
     // that.getLocationData();
     that.getOpenIdData();
@@ -113,7 +116,6 @@ Page({
           key: 'LocationAddress',
           success: function (res) {
             console.log(res)
-
             that.setData({
               addressStorage: res.data,
               address: res.data.address,
@@ -500,7 +502,7 @@ Page({
       method: 'POST',
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
-        // console.log(res);
+        console.log(res);
 
        if (res.data.status == 1) {
           //   res.data.data.nickName = res.data.data.nickName.replace(/(.{3}).*(.{4})/, "$1****$2");
@@ -533,12 +535,12 @@ Page({
         // openId: app.globalData.openId
       },
       success: function (res) {
-        // console.log(res);
+        console.log(res);
 
         if (res.data.code == 200) {
 
             app.globalData.memberId = res.data.data[0].id;
-
+          console.log(app.globalData.memberId)
             that.getActivityData(app.globalData.memberId);
         }
       }
@@ -570,11 +572,60 @@ Page({
       }
     })
   },
+  getAuthinfo:function(){
+    var that = this;
+    wx.authorize({
+      scope: 'scope.userInfo',
+      success: function (res) {
+        console.log(res)
+        // console.log('+++成功+++++');
+        //wx.startRecord()
+        wx.getSetting({
+          success: res => {
+
+            console.log(res);
+            if (res.authSetting['scope.userInfo']) {
+              // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+              wx.getUserInfo({
+                success: res => {
+                  console.log(res);
+                  console.log(JSON.parse(res.rawData))
+                  var RES = JSON.parse(res.rawData)
+                  // 可以将 res 发送给后台解码出 unionId
+                  app.globalData.userInfo = res.userInfo
+                  app.globalData.wxnick = RES.nickName
+                  app.globalData.wxnickimg = RES.avatarUrl
+                }
+              })
+            }
+          }
+        })
+      },
+      fail: function () {
+        // console.log('+++++++55555555+');
+        wx.openSetting({
+          success: function (res) {
+            console.log(res);
+            if (res.authSetting['scope.userInfo']) {
+              console.log(res);
+            } else {
+              that.getAuthinfo();
+            }
+          },
+          fail: function () {
+            // console.log(1111);
+          }
+        })
+      }
+    })
+  },
   //获取满减活动
   getActivityData: function (memberId) {
 
     var that = this;
-
+    if (memberId == '' | memberId == null){
+        memberId=0
+    }
     wx.request({
       url: url.getActivityLib + '/' + memberId,
       data: {},
@@ -619,10 +670,15 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log(res);
-
-        that.setData({
-          ShareImg: res.data.data.titleImageUrl
-        })
+if(res.data.code==200){
+  console.log('chenggong')
+  that.setData({
+    isShareImg1:true,
+    ShareImg: res.data.data.titleImageUrl
+  })
+  
+}
+        
         console.log(that.data.ShareImg)
       }
     })
