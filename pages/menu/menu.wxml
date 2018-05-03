@@ -421,15 +421,17 @@
 </view>
 <form bindsubmit='confirmFast' class='fastlogin' hidden='{{fastloginView}}'>
        <view class='boxlogin'>
-           <text style='color:#333333;font-size:18px;'>快捷登录</text>
-           <view style='margin-top:10px;'><text style='margin-top:25px;margin-left:30px;font-size:16px;'>手机号：{{phone}}</text></view>
-           <view style='display:flex'>
-           <text style='margin-top:15px;margin-left:30px;font-size:16px;margin-right:13px;'> 验证码:</text>
-           <input style='font-size:16px;border-bottom:1px solid #E5E5E5;margin-right:10px;width:90px;margin-top:9px;' maxlength='6' type='number' name = "code"></input>
-           <button bindtap='btn_get_code' disabled='{{isCode}}' style='padding:0 6px;height:30px;line-height:28px;background:transparent;font-size:16px;margin-top:5px;'>重新发送</button>
-          <text style='border:1px solid #E5E5E5;border-radius:5px;padding:0 8px;height:28px;line-height:30px;font-size:16px;margin-top:5px;'>{{timeData}}</text>
+           <text style='color:#333333;font-size:16px;'>快捷登录</text>
+           <view style='width:80%;height:40%;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;padding-left:5px;'>
+                <view><text style='font-size:12px;'>手机号：{{phonedata}}</text></view>
+                <view style='display:flex;'>
+                <text style='margin-top:15px;font-size:12px;margin-right:13px;'> 验证码:</text>
+                <input style='font-size:12px;border-bottom:1px solid #E5E5E5;margin-right:10px;width:80px;margin-top:9px;' maxlength='6' type='number' name = "code"></input>
+                <text bindtap='btn_get_code' disabled='{{isCode}}' style='padding:0 6px;height:28px;line-height:28px;background:transparent;font-size:12px;margin-top:5px;border:1px solid #E5E5E5;border-radius:5px;margin-left:5px;'>重新发送{{timeData}}</text>
+                <!-- <text style='border:1px solid #E5E5E5;border-radius:5px;padding:0 8px;height:28px;line-height:30px;font-size:12px;margin-top:5px;'>{{timeData}}</text> -->
+                </view>
            </view>
-          <view style='display:flex;width:35%;justify-content:space-between;position:absolute;right:35px;bottom:50px;font-size:16px;'>
+          <view style='display:flex;width:35%;justify-content:space-between;position:absolute;right:10px;bottom:20px;font-size:16px;'>
               <text bindtap='cancelFast'>取消</text>
               <button style='color:#33CC00;background-color:transparent;font-size:16px;margin-top:-9px;' form-type='submit' class='confirm'>确定</button>
           </view>

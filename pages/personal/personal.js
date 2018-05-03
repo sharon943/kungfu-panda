@@ -17,7 +17,11 @@ Page({
     memberInformation: {},
     wxNick:'',
     wxnickImg:'',
-    wxnickview:false
+    wxnickview:false,
+    appBalance:'',
+    appPoint:'',
+    appLevelName:'',
+    appview:false,
   },
 
   /**
@@ -40,6 +44,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '我的',
     })
+   
   },
 
   /**
@@ -54,10 +59,21 @@ Page({
    */
   onShow: function () {
     var that = this;
-    // that.getUserInfoData(app.globalData.JSESSIONID);
+    that.getUserInfoData(app.globalData.JSESSIONID);
     that.setData({
       isViewDisabled: true,
     })
+    // console.log(app.globalData.balance)
+    // if (app.globalData.balance != '' & app.globalData.balance != undefined) {
+    //   appview = true
+    //   that.setData({
+    //     appBalance: app.globalData.balance,
+    //     appPoint: app.globalData.point,
+    //     appLevelName: app.globalData.levelName
+    //   })
+    //   console.log(12323)
+    //   console.log(that.data.appBalance, that.data.appPoint, that.data.appLevelName)
+    // }
   },
 
   /**

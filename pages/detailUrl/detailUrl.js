@@ -58,7 +58,6 @@ Page({
   },
   imageLoad: function (e) {
     console.log(e.detail)
-
     this.setData({
       width: e.detail.width,
       height: e.detail.height

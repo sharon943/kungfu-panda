@@ -125,6 +125,9 @@ App({
     isIpx: false,
     wxnick:'',
     wxnickimg:'',
+    balance:'',
+    point:'',
+    levelName:'',
   }
   
   

@@ -100,6 +100,7 @@ Page({
     timeInt: 60,
     isToast:true,
     shopdataId:'',
+    phonedata:'',
   },
 
   /**
@@ -151,7 +152,6 @@ console.log(options)
           })
         }
       })
-      
       that.GetData(app.globalData.JSESSIONID, that, options.shopId, options.jump,that.data.typeValue,that.data.timeValue);
       that.getShopData(app.globalData.JSESSIONID, options.latitude, options.longitude);
       that.getNoticeData(app.globalData.JSESSIONID, options.shopId);
@@ -859,6 +859,13 @@ console.log(options)
         fastloginView:false,
         phone: data.phoneNumber
       })
+      var phone1 = that.data.phone.substring(0,3)
+      var phone2 = that.data.phone.substring(7, 11)
+      var phone3=phone1+'****'+phone2
+      console.log(phone1, phone2, phone3)
+      that.setData({
+        phonedata:phone3
+      })
       that.getLogin(data.phoneNumber, app.globalData.JSESSIONID);
     }
   },
@@ -990,11 +997,12 @@ console.log(options)
         console.log(res);
 
         if (res.data.code == 200) {
-
-
           app.globalData.memberId = res.data.data[0].id
-
+          // app.globalData.balance = res.data.data[0].balance
+          // app.globalData.point = res.data.data[0].point
+          // app.globalData.levelName = res.data.data[0].levelName
         }
+        // console.log(app.globalData.balance, app.globalData.point, app.globalData.levelName)
       }
     })
   },
@@ -2206,14 +2214,14 @@ console.log(options)
   discountMenu: function (activityPro1) {
     var discountProcuts = [];
     for(var j = 0; j<activityPro1.productsBonus.bonusProducts.length; j++) {
-  if (activityPro1.productsBonus.bonusProducts[j].price != undefined &
-    activityPro1.productsBonus.bonusProducts[j].price != null) {
-    discountProcuts.push(activityPro1.productsBonus.bonusProducts[j]);
-    console.log("1111111");
+      if (activityPro1.productsBonus.bonusProducts[j].price != undefined &
+        activityPro1.productsBonus.bonusProducts[j].price != null) {
+        discountProcuts.push(activityPro1.productsBonus.bonusProducts[j]);
+        console.log("1111111");
+      }
+    }
+    console.log(discountProcuts);
+    return discountProcuts;
   }
-}
-console.log(discountProcuts);
-return discountProcuts;
-              }
 
 })
