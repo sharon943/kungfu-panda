@@ -94,7 +94,6 @@
     </view>
     <view class="view3">
       <text>联系人：{{orderInfo.name}}</text>
-      <!-- <text style='margin-left:20px;background:#fff' bindtap='refund'>退款</text> -->
     </view>
     <view class="view3">
       <text>电话: {{orderInfo.phone}}</text>
@@ -118,8 +117,11 @@
       </view>
      
     </block>
-    <view class="view3">
+    <view class="view3" wx:if = "{{orderInfo.sendType != 2}}">
       <text>预送达时间: {{orderInfo.sendTime}}</text>
+    </view>
+    <view class="view3" wx:if = "{{orderInfo.sendType == 2}}">
+      <text style='color:red;'>[取餐指引]到店后告知门店员工订餐手机号后四位即可取餐</text>
     </view>
      <view class="view3" wx:if="{{senderName}}">
       <text>骑手姓名: {{senderName}}</text>
@@ -143,24 +145,37 @@
           <image class='headImage' src='../../images/order/s.png'></image>
           <view class="order_in">
             <view class="order_title">
-              <text class="order_n">{{item.statusName}}</text>
+            <block wx:if="{{item.status ==7 & orderInfo.payType==2}}">
+              <text class="order_n">订单已支付</text>            
+            </block>
+            <block wx:elif="{{item.status ==7 & orderInfo.payType==1}}">
+              <text class="order_n">订单待确认</text>            
+            </block>
+            <block wx:else>
+              <text class="order_n">{{item.statusName}}</text>            
+            </block>
               <text class="order_time">{{item.time}}</text>
             </view>
             <text class="order_content">{{item.tips}}</text>
             <block wx:if="{{item.status == 1 && index == 0}}">
-            <text class='order_btn1' bindtap='btn_go_pay'>立即支付</text>
+              <text class='order_btn1' bindtap='btn_go_pay'>立即支付</text>
               <text class='order_btn1' bindtap='btn_go_cancel' >取消订单</text>
               
             </block>
-            <block wx:if = "{{item.status == 7 && index == 0}}">
-            <text class='order_btn' bindtap='btn_go_cancel'>取消订单</text>
+             <block wx:if ="{{item.status == 7 && index == 0}}">
+              <text class='order_btn' bindtap='btn_go_cancel'>取消订单</text>
+            </block> 
+             <!-- <block wx:if ="{{item.status != 1&&item.status != 7&&item.status != 16&&item.status != 100 && item.status != -1&& orderInfo.payType==2&&index == 0}}">
+               <text class='order_btn1' bindtap='refund'>申请退款</text> 
+            </block>  -->
+            <block wx:if ="{{item.status == 16 && index == 0}}">
+              <text class='order_btn' bindtap='btn_go_confirm'>订单完成</text>
             </block>
-            <block wx:if = "{{item.status == 16 && index == 0}}">
-            <text class='order_btn' bindtap='btn_go_confirm'>订单完成</text>
-            </block>
-            <!-- <block wx:if = "{{item.status == 7}}">
+          
+             <!-- <block wx:if = "{{item.status == -1&& index == 0}}">
                 <text class='order_btn'>取消订单</text>
-            </block> -->
+              <text>{{item.status}}{{index}}{{orderInfo.payType}}</text>                
+            </block>  -->
             <view style="clear:both;"></view>
           </view>
           <view class="order_h"></view>
@@ -174,3 +189,7 @@
   </view>
   <view style="clear:both;"></view>
 </scroll-view>
+<view class= "toast" hidden='{{isToast}}'>
+    <text class = "content">{{toastData}}</text>
+    <view style="clear:both;"></view>
+</view>

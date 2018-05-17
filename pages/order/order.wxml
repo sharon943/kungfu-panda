@@ -9,7 +9,6 @@
                       <text class = "text1">{{item.name_}}<text style='color: #999;font-size: 13px;'>{{item.name}}</text></text>
                       <text class = "text2">{{item.orderDate}}</text>
                       <text class = "text3">总额<text style='color: #333;font-size: 16px;'> ¥ {{item.price}}</text></text>
-                      
                       <block wx:if="{{item.orderStatus==100}}">
                       <text class = "text4_">{{item.statusName}}</text>
                           <block wx:if="{{item.reviewStatus==1}}">
@@ -20,7 +19,9 @@
                           </block> -->
                        </block>
                         <block wx:else> 
-                         <text class = "text4">{{item.statusName}}</text>
+                         <text class = "text4" wx:if="{{item.orderStatus==7&item.payType==2|item.orderStatus==7&item.payType==undefined}}">订单已支付</text>
+                         <text class = "text4" wx:elif="{{item.orderStatus==7&item.payType==1}}">订单待确认</text>
+                         <text class = "text4" wx:else>{{item.statusName}}</text>
                         </block> 
                   </view>
             </view>

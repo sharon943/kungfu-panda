@@ -33,11 +33,6 @@ App({
             })
           }
         })
-      
-    
-
-    
-
 
     // 登录
 
@@ -64,7 +59,6 @@ App({
                 console.log(2222);
                 this.userInfoReadyCallback(res)
               }
-
               // if (!res.authSetting['scope.userLocation']) {
               // }
             }
@@ -128,6 +122,7 @@ App({
     balance:'',
     point:'',
     levelName:'',
+    payway:'',
   }
   
   

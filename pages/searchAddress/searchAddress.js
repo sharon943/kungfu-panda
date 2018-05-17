@@ -33,7 +33,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
+    console.log(app.globalData.address)
     that.setData({
       longitude: app.globalData.longitude,
       latitude: app.globalData.latitude,

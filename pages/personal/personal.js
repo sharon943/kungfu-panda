@@ -176,7 +176,6 @@ Page({
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success:function(res){
         console.log(res);
-
         if(res.data.status == 9){
          
 

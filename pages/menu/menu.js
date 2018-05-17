@@ -101,6 +101,7 @@ Page({
     isToast:true,
     shopdataId:'',
     phonedata:'',
+    toastData:''
   },
 
   /**

@@ -143,9 +143,11 @@ Page({
           }
           
         }else if(res.data.status == 9){
-
-          wx.navigateTo({
-            url: '../login/login',
+          // wx.navigateTo({
+          //   url: '../login/login',
+          // })
+          that.setData({
+            isLoading: true
           })
         } else if (res.data.status == 11) {
           that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID,1);

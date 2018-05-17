@@ -17,6 +17,8 @@ Page({
     orderlatitude: '',
     orderlongitude: '',
     subview:false,
+    isToast: true,
+    toastData:''
   },
 
   /**
@@ -200,9 +202,9 @@ Page({
             orderF: itemF
           })
         } else if (res.data.status == 9) {
-          wx.navigateTo({
-            url: '../login/login',
-          })
+          // wx.navigateTo({
+          //   url: '../login/login',
+          // })
         } else if (res.data.status == 11) {
           that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID,1);
         }
@@ -401,6 +403,30 @@ Page({
       header: JSESSIONID ? { 'Cookie': 'JSESSIONID=' + JSESSIONID } : {},
       success: function (res) {
         console.log(res);
+        if(res.data.status==1){
+          that.setData({
+            toastData: '申请成功',
+            isToast: false,
+          })
+          setTimeout(function () {
+            that.setData({
+              isToast: true
+            })
+
+          }, 2000)
+        }else{
+          that.setData({
+            toastData: res.data.msg,
+            isToast: false,
+          })
+          setTimeout(function () {
+            that.setData({
+              isToast: true
+            })
+
+          }, 2000)
+        }
+        
         that.getOrderInformation(that.data.id, app.globalData.JSESSIONID);
       }
     })

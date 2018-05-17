@@ -172,9 +172,9 @@ Page({
               isLoading: true
             })
         } else if (res.data.status == 9) {
-          wx.navigateTo({
-            url: '../login/login',
-          })
+          // wx.navigateTo({
+          //   url: '../login/login',
+          // })
         } else if (res.data.status == 11) {
           that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID,1);
         }else{
@@ -220,9 +220,9 @@ Page({
           console.log('+++++++++++++++++++++++++++++++');
           that.getAllAdress(JSESSIONID);
         } else if (res.data.status == 9) {
-          wx.navigateTo({
-            url: '../login/login',
-          })
+          // wx.navigateTo({
+          //   url: '../login/login',
+          // })
         } else if (res.data.status == 11) {
           that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
         }

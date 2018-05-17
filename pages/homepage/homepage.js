@@ -122,6 +122,7 @@ Page({
               latitude: res.data.latitude,
               longitude: res.data.longitude
             })
+         
 
             that.setCacheData(app.globalData.openId, res.data.city, app.globalData.JSESSIONID, res.data.latitude, res.data.longitude);
           },
@@ -261,6 +262,9 @@ Page({
         longitude: wxMarkerData[0].longitude,
         address: wxMarkerData[0].address,
       });
+      app.globalData.address = that.data.address
+      console.log(that.data.address)
+      console.log(app.globalData.address)
     }
     // 发起regeocoding检索请求   
     BMap.regeocoding({
@@ -463,9 +467,9 @@ Page({
    
     }else{
 
-      wx.navigateTo({
-        url: '../login/login',
-      })
+      // wx.navigateTo({
+      //   url: '../login/login',
+      // })
     }
 
   },
@@ -670,15 +674,14 @@ Page({
       method: 'GET',
       success: function (res) {
         console.log(res);
-if(res.data.code==200){
-  console.log('chenggong')
-  that.setData({
-    isShareImg1:true,
-    ShareImg: res.data.data.titleImageUrl
-  })
-  
-}
+      if(res.data.code==200){
+        console.log('chenggong')
+        that.setData({
+          isShareImg1:true,
+          ShareImg: res.data.data.titleImageUrl
+        })
         
+      }
         console.log(that.data.ShareImg)
       }
     })

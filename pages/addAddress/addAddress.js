@@ -219,9 +219,9 @@ Page({
               })
             }, 2000)
           } else if (res.data.status == 9) {
-            wx.navigateTo({
-              url: '../login/login',
-            })
+            // wx.navigateTo({
+            //   url: '../login/login',
+            // })
           } else if (res.data.status == 11) {
             that.setCacheData(app.globalData.openId, app.globalData.cityName, app.globalData.JSESSIONID);
           } else {
