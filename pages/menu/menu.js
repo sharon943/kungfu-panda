@@ -1317,17 +1317,14 @@ console.log(options)
               var takeSelfTimes2 = [];
               for (var i = 0; i < takeSelfTimes.length; i++) {
                 var takeObj = {};
-
                 takeObj['name'] = takeSelfTimes[i].date
                 takeSelfTimes1.push(takeObj);
               }
               for (var j = 0; j < takeSelfTimes[0].times.length; j++) {
                 var takeObj = {};
-
                 takeObj['name'] = takeSelfTimes[0].times[j]
                 takeSelfTimes2.push(takeObj);
               }
-
               typeNamePro[1] = takeSelfTimes1;
               typeNamePro[2] = takeSelfTimes2;
 
