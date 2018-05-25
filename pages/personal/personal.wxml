@@ -67,11 +67,11 @@
       <image class="image2" src='../../images/personal/right.png'></image>
     </view>
     <!-- 裂变通道 -->
-     <!-- <view class="type1" bindtap='btn_share'>
+      <view class="type1" bindtap='btn_share' wx:if="{{isShareImg1}}">
       <image class="image1" src='../../images/personal/s.png'></image>
       <text class="text1">分享有礼</text>
       <image class="image2" src='../../images/personal/right.png'></image>
-    </view>  -->
+    </view>  
     <!--裂变通道完  -->
     <!-- <view class="type1" bindtap='btn_userKnows'>
       <image class="image1" src='../../images/personal/w.png'></image>

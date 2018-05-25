@@ -21,7 +21,7 @@ Page({
     appBalance:'',
     appPoint:'',
     appLevelName:'',
-    appview:false,
+    appview: false, activeId: '',isShareImg1:false,
   },
 
   /**
@@ -29,6 +29,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    that.getActivity()
     console.log(app.globalData.JSESSIONID)
       console.log(app.globalData.wxnick)
     that.getIsLogin(app.globalData.JSESSIONID);
@@ -60,6 +61,7 @@ Page({
   onShow: function () {
     var that = this;
     that.getUserInfoData(app.globalData.JSESSIONID);
+    that.getActivity()
     that.setData({
       isViewDisabled: true,
     })
@@ -355,9 +357,27 @@ Page({
   btn_share:function(){
     var that = this;
     wx.navigateTo({
-      url: '../share/share'
+      url: '../share/share?activityId=' + this.data.activeId
     })
-  }
+  },
+  getActivity: function () {
+    var that = this
+    console.log(url.getActivity + constant.brandId + '/123')
+    wx.request({
+      url: url.getActivity + constant.brandId + '/123',
+      method: 'GET',
+      success: function (res) {
+        console.log(res);
+        if (res.data.code == 200) {
+          console.log('chenggong')
+          that.setData({
+            activeId: res.data.data.id,
+            isShareImg1: true,
+          })
+        }
+      }
+    })
+  },
   
   
 })

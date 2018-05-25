@@ -28,16 +28,17 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    // console.log(options)
+    console.log(options)
     console.log(app.globalData.memberId)
-    
     console.log(url.GetSharepersoninfo + constant.brandId)
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
           systWidth: res.screenWidth,
           recommendedId: options.recommendedId,
-          // recommendedId: 10000000046,
+          activityId: options.activityId,
+          // activityId: 212,
+          // recommendedId: 10802863,
         })
         // console.log(that.data.recommendedId)
       },
@@ -115,20 +116,21 @@ Page({
       url: url.GetSharepersoninfo + constant.brandId,
       header: {
         recommendedId: that.data.recommendedId,
-        activityId: 129
+        activityId: that.data.activityId
       },
       success: function (res) {
         console.log(res);
-        that.setData({
-          sharePeopleistList: res.data.data.sharePeopleistList,
-          ShareInfo:res.data.data,
-          timeAgoPro: res.data.data.sharePeopleistList,
-          dataView: true,
-        })
-        var article = that.data.ShareInfo.remark;
-        WxParse.wxParse('article', 'html', article, that, 0);
-        console.log(that.data.timeAgoPro)
-          
+        if(res.data.code==200){
+          that.setData({
+            sharePeopleistList: res.data.data.sharePeopleistList,
+            ShareInfo: res.data.data,
+            timeAgoPro: res.data.data.sharePeopleistList,
+            dataView: true,
+          })
+          var article = that.data.ShareInfo.remark;
+          WxParse.wxParse('article', 'html', article, that, 0);
+          console.log(that.data.timeAgoPro)
+        }
       }
     })
   },
@@ -214,7 +216,7 @@ Page({
     var that=this
     var header = {
       recommendedId: that.data.recommendedId,
-      activityId: 129,
+      activityId: that.data.activityId,
       cardId: app.globalData.memberId,
       brandId: constant.brandId,
     };

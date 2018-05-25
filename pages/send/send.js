@@ -848,12 +848,13 @@ Page({
 
         // console.log(menuPro);
         for (var i in menuPro) {
-        
+        if (menuPro[i]!=undefined){
           menuPro[i]['pid'] = menuPro[i].id;
 
           menuPro[i]['price'] = menuPro[i].price / 100;
           menuArray.push(menuPro[i]);
         }
+      }
         for (var z = 0; z < menuArray.length; z++) {
           console.log('aaaaaaaaaaaaaa')
 

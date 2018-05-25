@@ -13,7 +13,8 @@ var urlk = 'https://api.v-ka.com/';//正式
 var storeID='5771';//正式
 module.exports = {
   getSenderPosition: url +'Action?actionId=1&serviceId=17'+key,
-  getShopPosition: url +'Action?actionId=1&serviceId=3'+key,
+  getShopPosition: url + 'Action?actionId=1&serviceId=3' + key,
+  // getShopPosition: url +'Action?actionId=1&serviceId=3'+key,
   getOpenId: url + 'LocalAction?method=getOpenId' + key,
   getShopData: url + 'Action',
   getBanner: url + 'Action?actionId=103&serviceId=3' + key,

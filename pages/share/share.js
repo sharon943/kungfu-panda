@@ -21,7 +21,7 @@ Page({
     dataView:true,
     isToast: true,
     systWidth:'',
-    systHeight:''
+    systHeight:'',
   },
 
   /**
@@ -29,7 +29,14 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log(options)
     console.log(app.globalData.memberId)
+    
+    that.setData({
+      activityId: options.activityId,
+    })
+    console.log(that.data.activityId)
+    
     if (app.globalData.memberId == null | app.globalData.memberId == undefined) {
       that.setData({
         toastData: '您未登录',
@@ -70,6 +77,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+   
     var that=this
     console.log(that.data.RulesView)
     that.getActivityList()
@@ -118,7 +126,6 @@ Page({
       title: this.data.title,
       path: '/pages/pushNew/pushNew?recommendedId=' + app.globalData.memberId,
       imageUrl: this.data.imageUrl,
-
       success: function (res) {
         // 转发成功
         console.log('成功')
@@ -155,30 +162,31 @@ Page({
     wx.request({
       url: url.getActivityList + constant.brandId,
       header: {
-        activityId: 129,
+        activityId: that.data.activityId,
         recommendedId: app.globalData.memberId,
       },
       success: function (res) {
         console.log(res);
-        
-        that.setData({
-          ActivityListPro: res.data.data,
-          earnings: res.data.data.earnings,
-          wxActivityReward: res.data.data.wxActivityReward,
-          imageUrl: res.data.data.imageUrl,
-          title: res.data.data.title,
-          dataView:true,
-        })
-        var article = that.data.ActivityListPro.remark;
-        WxParse.wxParse('article', 'html', article, that, 0);
-        console.log(that.data.wxActivityReward)
-        console.log(that.data.wxActivityReward.shareGiftTicketList[0].phase + '/' + that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase + '*' + that.data.earnings.invitationCount)
-        console.log(that.data.earnings.invitationCount +'/'+ that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase)
-        that.setData({
-          // percent: that.data.wxActivityReward.shareGiftTicketList[0].phase / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase * that.data.earnings.invitationCount
-          percent: that.data.earnings.invitationCount / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase
-        })
-        console.log(that.data.percent)
+        if(res.data.code==200){
+          that.setData({
+            ActivityListPro: res.data.data,
+            earnings: res.data.data.earnings,
+            wxActivityReward: res.data.data.wxActivityReward,
+            imageUrl: res.data.data.imageUrl,
+            title: res.data.data.title,
+            dataView: true,
+          })
+          var article = that.data.ActivityListPro.remark;
+          WxParse.wxParse('article', 'html', article, that, 0);
+          console.log(that.data.wxActivityReward)
+          console.log(that.data.wxActivityReward.shareGiftTicketList[0].phase + '/' + that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase + '*' + that.data.earnings.invitationCount)
+          console.log(that.data.earnings.invitationCount + '/' + that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase)
+          that.setData({
+            // percent: that.data.wxActivityReward.shareGiftTicketList[0].phase / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase * that.data.earnings.invitationCount
+            percent: that.data.earnings.invitationCount / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase
+          })
+          console.log(that.data.percent)
+        }
       }
     })
   },
@@ -190,7 +198,7 @@ Page({
       url: url.cash,
       method:'post',
       header: {
-        activityId: 129,
+        activityId: that.data.activityId,
         recommendedId: app.globalData.memberId,
         brandId: constant.brandId
       },
@@ -198,42 +206,33 @@ Page({
         console.log(res);
         console.log(res.data.code)
         console.log(res.data.message)
-  if(res.data.code==200){
-    console.log(res.data.message)
-    that.setData({
-      toastData: '提现成功',
-      isToast: false,
-      isCode: false
-    })
-    setTimeout(function () {
-      that.setData({
-        isToast: true
-      })
+          if(res.data.code==200){
+            console.log(res.data.message)
+            that.setData({
+              toastData: '提现成功',
+              isToast: false,
+              isCode: false
+            })
+            setTimeout(function () {
+              that.setData({
+                isToast: true
+              })
 
-    }, 2000)
-  }else{
-    console.log(res.data.message)
-    that.setData({
-      toastData: res.data.message,
-      isToast: false,
-      isCode: false
-    })
-    setTimeout(function () {
-      that.setData({
-        isToast: true
-      })
-   
-    }, 2000)
-  }
-        that.setData({
-         
-        })
-        
-     
-        that.setData({
-       
-        })
-       
+            }, 2000)
+          }else{
+            console.log(res.data.message)
+            that.setData({
+              toastData: res.data.message,
+              isToast: false,
+              isCode: false
+            })
+            setTimeout(function () {
+              that.setData({
+                isToast: true
+              })
+          
+            }, 2000)
+          }
       }
     })
   }

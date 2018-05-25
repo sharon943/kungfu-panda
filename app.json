@@ -2,7 +2,7 @@
   "pages": [
     
    "pages/homepage/homepage",
-  "pages/pushNew/pushNew",
+    "pages/pushNew/pushNew",
     "pages/WebView/webview",
     "pages/share/share",
     "pages/payconfirm/payconfirm",

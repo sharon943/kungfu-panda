@@ -35,7 +35,8 @@ Page({
     loadingView:true,
     ShareImg:'',
     isShareImg:false,
-    isShareImg1:false
+    isShareImg1:false,
+    activeId:'',
   },
 
   /**
@@ -663,7 +664,7 @@ Page({
   }, 
   urlshare:function(){
     wx.navigateTo({
-      url: '../share/share'
+      url: '../share/share?activityId=' + this.data.activeId
     })
   },
   getActivity: function () {
@@ -677,10 +678,10 @@ Page({
       if(res.data.code==200){
         console.log('chenggong')
         that.setData({
+          activeId: res.data.data.id,
           isShareImg1:true,
           ShareImg: res.data.data.titleImageUrl
         })
-        
       }
         console.log(that.data.ShareImg)
       }
