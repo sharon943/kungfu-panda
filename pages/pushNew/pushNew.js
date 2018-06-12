@@ -37,17 +37,15 @@ Page({
           systWidth: res.screenWidth,
           recommendedId: options.recommendedId,
           activityId: options.activityId,
-          // activityId: 212,
-          // recommendedId: 10802863,
+          // activityId: 238,
+          // recommendedId: 10802863,//正式
+          // recommendedId:10000000046
         })
         // console.log(that.data.recommendedId)
       },
     })
     that.GetSharepersoninfo();
-    
-    
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -140,7 +138,6 @@ Page({
       RulesView: false
     })
     console.log(that.data.RulesView)
-
   },
   dis_rules: function (e) {
     console.log(9)
@@ -232,6 +229,9 @@ Page({
              dataView: true,
           })
         } else {
+          // wx.navigateTo({
+          //   url: '../share/share?activityId=' + that.data.activityId
+          // })
           that.setData({
             Otoast: res.data.message,
             dataView: true,

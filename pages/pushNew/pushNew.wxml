@@ -18,18 +18,17 @@
   
        <view wx:if="{{newview}}" style='width:80%;height:20px;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>登录会员即获得以下奖励</view>
        <view wx:elif="{{newview1}}" style='width:80%;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>恭喜您已获得以下奖励
-       <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去使用</view>
+             <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去点单</view>
        </view>
         <view wx:else style='width:80%;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>{{Otoast}}
-        <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去使用</view>
+              <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去点单</view>
         </view>
      <view class='coupon' style='width:85%;margin:0 auto;box-shadow:0 0 6px rgba(0,0,0,0.2);padding:10px;position:relative;margin-bottom:15px;' wx:for='{{ShareInfo.ticketTemplatesList}}'>
        <text style='color:#000;font-weight:bold;font-size: 14px;'>{{item.name}}</text> 
        <text>· 有效期至{{item.endTime}}</text>
-       <text>· 全场满30元可用，不闲任何菜品以及及喝牛奶</text>
+       <text>· {{item.remark}}</text>
        <!-- <view bindtap='OuseIt' wx:if="{{!newview}}">立即使用</view> -->
      </view> 
-   
        <view wx:if="{{newview}}" style='width:40%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;' bindtap='useItnew'>立即领取</view>
        <view class='fengexian' wx:if="{{!newview}}">
            <view></view>

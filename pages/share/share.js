@@ -5,7 +5,6 @@ var QQMapWX = require('../../map/qqmap-wx-jssdk.js');
 var constant = require('../../utils/constant.js');
 var WxParse = require('../../wxParse/wxParse.js');
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -124,7 +123,7 @@ Page({
     }
     return {
       title: this.data.title,
-      path: '/pages/pushNew/pushNew?recommendedId=' + app.globalData.memberId,
+      path: '/pages/pushNew/pushNew?recommendedId=' + app.globalData.memberId + '&activityId=' + this.data.activityId,
       imageUrl: this.data.imageUrl,
       success: function (res) {
         // 转发成功
