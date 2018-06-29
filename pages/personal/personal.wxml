@@ -79,10 +79,10 @@
       <image class="image2" src='../../images/personal/right.png'></image>
     </view> -->
     <view style="clear:both;"></view>
-  </view>
-  <!-- <block wx:if = "{{isLogin == 1}}"> -->
-  <!-- <button class="button1" bindtap='btn_exit'>退出登录</button> -->
-  <!-- </block> -->
-</view>
+    </view>
+      <block wx:if = "{{isLogin == 1}}"> 
+      <button class="button1" bindtap='btn_exit'>退出登录</button> 
+      </block> 
+    </view>
 
 <view class = "commodityScreenClass" hidden='{{isViewDisabled}}' style='opacity: 0' ></view>

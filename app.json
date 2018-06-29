@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/homepage/homepage",
     "pages/pushNew/pushNew",
     "pages/WebView/webview",

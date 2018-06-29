@@ -7,61 +7,19 @@
       </swiper-item>
     </block>
   </swiper>
-    <view class = "goodsLibViewClass">
+   <!-- <view class = "goodsLibViewClass">
       <block wx:for = "{{dataPro.fixedBanner}}" wx:if = "{{index < 4}}">
-          <view class= "view1">
+        <view class= "view1">
             <image src='{{item.bannerUrl}}' mode = "widthFix" bindtap='btn_shop' data-item='{{item}}' data-info = "{{1}}" data-index = "{{index}}"></image>
         </view>
-       
       </block>
-        
-    </view>
+    </view>   -->
     <view style='width: 100%;height:8px;background:#f0f0f0;float:left;'></view>
-    <view class = "goodsLibView1Class" style='calc(height: {{(systWidth/2 - 12)}}px + 16px);'>
-        <block wx:for = "{{dataPro.fixedBanner}}" wx:if = "{{index > 3 & index < 8}}">
-        
-            <image src='{{item.bannerUrl}}' mode = "widthFix" class = "view2" style='height: calc({{(systWidth/2 - 12)/2}}px);'  bindtap='btn_shop' data-item='{{item}}'></image>
+    <view class = "goodsLibView1Class" style='calc(height: {{( systWidth - 120)}}px);'>
+        <block wx:for = "{{dataPro.fixedBanner}}" wx:if = "{{index < 4}}">
+            <image src='{{item.bannerUrl}}' class = "view2" style='height: calc({{(systWidth - 60)/2}}px);'  bindtap='btn_shop' data-item='{{item}}' data-info = "{{index+1}}" data-index = "{{index}}"></image>
         </block>
     </view>
-    <view style='width: 100%;height:8px;background:#f0f0f0;float:left;'></view>
-    <!-- <view class = "shopViewClass">
-          <view class = "nameViewClass">
-                <text>———  品牌 ———</text>
-          </view>
-          <view class = "scrollViewClass">
-              <block wx:for = "{{dataPro.fixedBanner}}" wx:if = "{{index > 7}}">
-                  <view class = "dataViewClass"  bindtap='btn_shop' data-item='{{item}}'>
-                      <image class = "image1" src='{{item.bannerUrl}}' style='height: {{(systWidth/2 - 20)/23*13}}px;' mode="aspectFill"></image>
-                      <view class = "shopNameClass">
-                          <text class = "text1">{{item.jumpName}}</text>
-                          <block wx:if = "{{isAddress == 0}}">
-                          <text class = "text2"><text>起送费<text style='color: #ff6600;'>¥ {{shopPro.startDeliveryFee}} </text></text>| <text>配送费<text style='color: #ff6600;'>¥ {{shopPro.deliveryFee}} </text></text></text>
-                          <view class = "shopFavourable">
-                            <block wx:for = "{{shopPro.icons}}">
-                                <view class = "favourable">
-                                  <image src='{{item.iconPath}}'></image>
-                                  <text>{{item.state}}</text>
-                                </view>
-                            </block> 
-                              <block wx:if = "{{actictyText != ''}}">
-                                <view class = "favourable">
-                                   <image src='../../images/jian.png'></image>
-                                   <text>{{actictyText}}</text>
-                                </view>
-                                </block>
-                          </view>
-                          </block>
-                          <block wx:else>
-                              <text class = "text2">暂无餐厅信息</text>
-                          </block>
-                          <view style="clear:both;"></view>
-                      </view>
-                  </view>
-                  <view style='width: 100%;height:8px;background:#f0f0f0;float:left;'></view>
-              </block>
-          </view>
-          <view style="clear:both;"></view>
-    </view> -->
 </view>
 
 

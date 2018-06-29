@@ -136,7 +136,7 @@ Page({
         timeValue: app.globalData.timeValue
       })
     }
-console.log(options)
+   console.log(options)
    console.log(options.typeNum)
     if (options.typeNum == 1) {
       wx.getSystemInfo({

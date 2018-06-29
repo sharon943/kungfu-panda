@@ -11,7 +11,8 @@ Page({
    */
   data: {
     newview:false,
-    newview1:false,
+    newview1: false,
+    oldview:false,
     systWidth:0,
     RulesView: true,
     sharePeopleistList:{},
@@ -22,6 +23,9 @@ Page({
     recommendedId:'',
     dataView: false,
     Otoast:'',
+    ActivityListPro:[],
+    imageUrl:'',
+    wxActivityReward: { shareGiftTicketList: [{ 'phase': 1, 'ticketTemplateNameList': '优惠券' }, { 'phase': 2, 'ticketTemplateNameList': '优惠券2' }, { 'phase': 3, 'ticketTemplateNameList': '优惠券3' }], 'orderMoneyRatio': true, 'orderTypeReward': 1},
   },
   /**
    * 生命周期函数--监听页面加载
@@ -39,12 +43,13 @@ Page({
           activityId: options.activityId,
           // activityId: 238,
           // recommendedId: 10802863,//正式
-          // recommendedId:10000000046
+          // recommendedId: 1718878526
         })
         // console.log(that.data.recommendedId)
       },
     })
     that.GetSharepersoninfo();
+    that.getActivityList()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -64,6 +69,7 @@ Page({
     console.log(app.globalData.memberId)
     if (app.globalData.memberId != null & app.globalData.memberId != '' & app.globalData.memberId != undefined) {
       this.getcoupon()
+      this.getActivityList()
     }
     if (app.globalData.memberId == null | app.globalData.memberId == undefined){
       this.setData({
@@ -105,7 +111,25 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+
+    }
+    return {
+      title: this.data.title,
+      path: '/pages/pushNew/pushNew?recommendedId=' + app.globalData.memberId + '&activityId=' + this.data.activityId,
+      imageUrl: this.data.imageUrl,
+      success: function (res) {
+        // 转发成功
+        console.log('成功')
+        console.log(res)
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log(res)
+      }
+    }
   },
   GetSharepersoninfo:function(){
     var that=this;
@@ -128,6 +152,41 @@ Page({
           var article = that.data.ShareInfo.remark;
           WxParse.wxParse('article', 'html', article, that, 0);
           console.log(that.data.timeAgoPro)
+        }
+      }
+    })
+  },
+  getActivityList: function () {
+    var that = this
+    console.log(url.getActivityList + constant.brandId)
+    console.log(app.globalData.memberId)
+    wx.request({
+      url: url.getActivityList + constant.brandId,
+      header: {
+        activityId: that.data.activityId,
+        recommendedId: app.globalData.memberId,
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.data.code == 200) {
+          that.setData({
+            ActivityListPro: res.data.data,
+            earnings: res.data.data.earnings,
+            wxActivityReward: res.data.data.wxActivityReward,
+            imageUrl: res.data.data.imageUrl,
+            title: res.data.data.title,
+            dataView: true,
+          })
+          var article = that.data.ActivityListPro.remark;
+          WxParse.wxParse('article', 'html', article, that, 0);
+          console.log(that.data.wxActivityReward)
+          console.log(that.data.wxActivityReward.shareGiftTicketList[0].phase + '/' + that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase + '*' + that.data.earnings.invitationCount)
+          console.log(that.data.earnings.invitationCount + '/' + that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase)
+          that.setData({
+            // percent: that.data.wxActivityReward.shareGiftTicketList[0].phase / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase * that.data.earnings.invitationCount
+            percent: that.data.earnings.invitationCount / that.data.wxActivityReward.shareGiftTicketList[that.data.wxActivityReward.shareGiftTicketList.length - 1].phase
+          })
+          console.log(that.data.percent)
         }
       }
     })
@@ -235,6 +294,7 @@ Page({
           that.setData({
             Otoast: res.data.message,
             dataView: true,
+            oldview:true
           })
         }
 

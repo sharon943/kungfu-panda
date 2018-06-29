@@ -16,32 +16,81 @@
       </view>
     </view>
   
-       <view wx:if="{{newview}}" style='width:80%;height:20px;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>登录会员即获得以下奖励</view>
-       <view wx:elif="{{newview1}}" style='width:80%;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>恭喜您已获得以下奖励
-             <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去点单</view>
-       </view>
-        <view wx:else style='width:80%;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>{{Otoast}}
+       <!-- <view wx:if="{{newview}}" style='width:80%;height:20px;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>登录会员即获得以下奖励</view> -->
+       <!-- <view wx:elif="{{newview1}}" style='width:80%;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>恭喜您已获得以下奖励 -->
+             <!-- <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去点单</view>
+       </view> -->
+        <!-- <view wx:else style='width:80%;margin:0 auto;text-align:center;margin-bottom:10px;font-size:12px;'>{{Otoast}}
               <view bindtap='OuseIt' style='width:20%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;margin-top:10px;'>去点单</view>
-        </view>
+        </view> -->
      <view class='coupon' style='width:85%;margin:0 auto;box-shadow:0 0 6px rgba(0,0,0,0.2);padding:10px;position:relative;margin-bottom:15px;' wx:for='{{ShareInfo.ticketTemplatesList}}'>
        <text style='color:#000;font-weight:bold;font-size: 14px;'>{{item.name}}</text> 
        <text>· 有效期至{{item.endTime}}</text>
        <text>· {{item.remark}}</text>
        <!-- <view bindtap='OuseIt' wx:if="{{!newview}}">立即使用</view> -->
+       <text wx:if="{{newview1}}" class='getornot' style='margin-bottom:auto;line-height:60px'>已领取</text>
+       <text wx:else class='getornot' style='margin-bottom:auto;line-height:60px'>未领取</text>
      </view> 
-       <view wx:if="{{newview}}" style='width:40%;height:20px;margin:0 auto;border:1px solid #888;border-radius:10px;text-align:center;line-height:20px;font-size:12px;' bindtap='useItnew'>立即领取</view>
+     <block wx:if="{{!oldview}}">
+       <view wx:if="{{newview}}" style='width:60%;height:30px;margin:0 auto;background:#000000;border-radius:20px;text-align:center;line-height:30px;font-size:12px;color:#fff' bindtap='useItnew'>立即领取</view>
        <view class='fengexian' wx:if="{{!newview}}">
            <view></view>
            <text style='font-size:16px;color:#000;'>领取名单</text>  
            <view></view> 
        </view>
-       <view class='list' wx:if="{{!newview}}" style='width:85%;height:50px;margin:0 auto;padding:10px;display:flex;justify-content:space-between;font-size:18px;line-height:50px;' wx:for="{{sharePeopleistList}}">
-          <view style='display:flex;justify-content:space-between;width:30%;'>
-            <image src='{{item.headUrl}}' style='width:50px;height:50px;'></image>
-            <text style='font-size:16px;'>{{item.name}}</text>
-          </view>
-          <text style='color:#a0a0a0;font-size:14px;'>{{item.createdString}}</text>
-       </view>
+        <view class='list' wx:if="{{!newview}}" style='width:85%;height:50px;margin:0 auto;padding:10px;display:flex;justify-content:space-between;font-size:18px;line-height:50px;' wx:for="{{sharePeopleistList}}">
+            <view style='display:flex;justify-content:space-between;width:30%;'>
+              <image src='{{item.headUrl}}' style='width:50px;height:50px;'></image>
+              <text style='font-size:16px;'>{{item.name}}</text>
+            </view>
+            <text style='color:#a0a0a0;font-size:14px;'>{{item.createdString}}</text>
+        </view>
+       </block>
+       <block wx:else>
+          <button open-type="share" style='width:70%;height:30px;margin:0 auto;background:#000000;border-radius:20px;text-align:center;line-height:30px;font-size:12px;color:#fff' bindtap='useItnew'>分享后领取以下奖励</button>
+           
+
+
+
+     <view class='coupon_' style='margin-top:50px'> 
+        <view class='progress'>
+              <view>0<text style='display:inline-block'>人</text></view>
+              <view style='width:15px;height:15px;border-radius:50%;background:#535353;'></view>              
+        </view>
+        <view wx:for='{{wxActivityReward.shareGiftTicketList}}' wx:key='{{item}}' class='progress'>
+              <view style='font-weight:bold;font-size:18px;color:#535353'>{{item.phase}}<text style='display:inline-block;font-size:12px;'>人</text></view>
+              <view style='width:15px;height:15px;border-radius:50%;background:#535353;'></view>
+              <text wx:for="{{item.ticketTemplateNameList}}" wx:for-item='r' style='font-size:12px;color:#535353'>{{r}}</text>
+        </view>
+        <view class='position'>/ 邀请好友奖励 /</view>
+        <view class='xuxian'></view>
+     </view> 
+    <block wx:if='{{wxActivityReward.orderMoneyRatio>=0}}'>
+          <block wx:if='{{wxActivityReward.orderTypeReward==1}}'>
+            <view class='coupon1'>
+              <text style='width:100%;height:10px;text-align:center;'>订单实际支付金额</text>
+              <text style='width:100%;height:40px;font-size:30px;text-align:center;font-weight:bold;margin-top:18px;'>{{wxActivityReward.orderMoneyRatio*100}}%</text>
+              <text style='margin-left:8px;'>单笔订单最高可获得：{{wxActivityReward.orderMoneyMax}}元</text>
+              <text style='margin-left:8px;'>单个新会员产生最高可获得：{{wxActivityReward.orderCountMax}}元</text>
+              <view class='position'>/ 订单奖励 /</view>
+            </view> 
+          </block>
+              <block wx:else>
+                  <view class='coupon1'>
+                <text style='width:100%;height:10px;text-align:center;display:block;'>每个新用户首笔订单成功后，即奖励</text>
+                <view style='width:100%;height:40px;font-size:30px;text-align:center;font-weight:bold;margin-top:18px;color: #808080;display:inline-block;margin-bottom:20px;'>{{wxActivityReward.orderMoneyRatio}} <text style='font-size:14px;display:inline-block;'>元</text>  </view>
+                <view class='position'>订单奖励</view>
+              </view>
+              </block>
+   </block>
+      
+
+
+
+
+
+
+       </block>
 </view>
 </block>
 <block wx:else>

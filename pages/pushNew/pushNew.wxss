@@ -6,8 +6,43 @@
    font-size: 12px;
    margin-bottom: 5px;
 }
+.getornot{
+  position:absolute;width:100px;height:60px;border-left:1px solid #F5F5F5;display:block;right:0;top:0;bottom:0;margin-top:auto;text-align:center;
+} 
+.xuxian{
+  position:absolute;top:105px;right:0;width:95%;height:1px;border-top:2px dotted #535353;
+}
 .coupon > view{
   position:absolute;width:70px;height:25px;top:25%;right:10px;font-size:14px;border-radius:20px;border:1px solid #888;text-align: center;line-height: 25px;
+}
+.coupon_{
+  display:flex;
+  justify-content:space-between;width:85%;margin:0 auto;box-shadow:0 0 6px rgba(0,0,0,0.2);padding:40px 10px;position:relative;
+}
+.position{
+  position:absolute;top:-15px;left:0;right:0;margin-left:auto;margin-right:auto;background:#fff;color:#EAEAEA;width:43%;height:30px;font-size:16px;line-height:30px;text-align:center;
+}
+.hengx{
+  position: absolute;top:85px;right: 0;left:0;margin-left:auto;margin-right:auto;width: 90%;
+}
+.coupon1 text{
+  display: block;
+  margin-top:8px;
+  color: #808080;
+  font-size: 14px;
+}
+.coupon1 text:nth-of-type(4){
+  margin-top: 2px;
+}
+.coupon1{
+  width:85%;margin:0 auto;box-shadow:0 0 6px rgba(0,0,0,0.2);padding:30px 10px 15px;position:relative;margin-top:70px;
+}
+ .progress view{
+ margin-bottom: 30px;
+} 
+ .progress text{
+  margin-bottom: 10px;
+  display: block;
 }
 .fengexian{
   width:85%;margin:0 auto;padding:10px;display:flex;justify-content: space-between; 

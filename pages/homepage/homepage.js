@@ -403,12 +403,10 @@ Page({
     })
   },
   btn_shop: function (e) {
-    
     var that = this;
     // that.getPageData(JSESSIONID);
     // console.log(that.data.dataPro + '123123123')
     var isAddress = that.data.isAddress;
-
     that.setData({
       isViewDisabled: false
     })
@@ -420,6 +418,9 @@ Page({
       var item = e.currentTarget.dataset.item;
       var info = e.currentTarget.dataset.info;
       var address = that.data.address;
+      console.log(info)
+      console.log(isAddress)
+      console.log(e)
     if (isAddress == 1) {
       that.setData({
         isAddressOne: false
@@ -436,13 +437,9 @@ Page({
       }
       return;
     }
-      console.log(that.data.dataPro.runBanner)
-    
     console.log(e.currentTarget.dataset)
     console.log(e)
-    console.log(that.data.dataPro.runBanner)
-   
-    if (e.currentTarget.dataset.info) {
+    if (e.currentTarget.dataset.info){
       if (e.currentTarget.dataset.index == 3) {
         wx.navigateTo({
           url: '../coupon/coupon?typeNum=1&shopId=' + shopId + '&jump='+ '&address=' + address + '&latitude=' + that.data.latitude + '&longitude=' + that.data.longitude,
@@ -450,27 +447,31 @@ Page({
         return;
       }
     }
-    
-    
     if (item.detailUrl == undefined | item.detailUrl == null | item.detailUrl == '') {
+      //首页 
+      console.log(info)
+      if (info==3){
+        app.globalData.typeValue = 4
+      }else{
+        app.globalData.typeValue = info
+      }
+      console.log(app.globalData.typeValue)
       wx.navigateTo({
         url: '../menu/menu?typeNum=1&shopId=' + shopId + '&jump=' + item.jump + '&address=' + address + '&latitude=' + that.data.latitude + '&longitude=' + that.data.longitude,
       })
     } else {
-      
-        wx.navigateTo({
-          url: '../detailUrl/detailUrl?bannerUrl=' + item.bannerUrl
-        })
-   
-      
+      wx.navigateTo({
+        url: '../detailUrl/detailUrl?bannerUrl=' + item.bannerUrl
+      })
     }
     console.log(item.bannerUrl)
    
     }else{
-
+      
       // wx.navigateTo({
       //   url: '../login/login',
       // })
+      
     }
 
   },

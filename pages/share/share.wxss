@@ -56,7 +56,6 @@
 .coupon{
   display:flex;
   justify-content:space-between;
-
 }
 .coupon1 text{
  display: block;
